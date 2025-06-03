@@ -10,7 +10,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 
 | Dossier       | Contenu                                                                                                    | Status        |
 | ------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
-| `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`hardware/README`](hardware/README_Hardware_FR.md)) | ✅ v1 en cours |
+| `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`HARDWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware)) | ✅ v1 en cours |
 | `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.)                                              | 🚧 à démarrer |
 | `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux                                                        | 🚧 à démarrer   |
 ---
