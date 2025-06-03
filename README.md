@@ -1,1 +1,65 @@
-# 2025-CGS-ESP32-IoT
+# 🎶 Projet d’automatisation des salles de musique
+
+Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, firmware et mécano — pour rendre une salle de répétition entièrement connectée.
+
+> **But :** concevoir trois cartes électroniques + leurs supports imprimés 3D et le code ESP32 associé pour piloter l’alimentation, l’affichage et la connectique d’un studio.
+
+---
+
+## 🗂️ Arborescence du dépôt
+
+| Dossier       | Contenu                                                                                                    | Status        |
+| ------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
+| `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`hardware/README`](hardware/README_Hardware_FR.md)) | ✅ v1 en cours |
+| `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.)                                              | 🚧 à démarrer |
+| `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux                                                        | 🚧 à démarrer   |
+---
+
+## 🛠️ Les trois cartes principales
+
+### 1️⃣ **Rack Power Controller (RPC‑01)**
+
+* Format **rack 19″ 1 U** ; se visse directement dans le châssis.
+* **ESP32‑C3 SuperMini** connecté au LAN (Wi‑Fi ou Ethernet‑PHY en option).
+* 8 sorties secteur sur relais bistables **RT34F05** (zéro consommation à l’état stable).
+* Bouton **ON/OFF** en façade : enclenche / coupe l’alim avec séquençage chronométré (ex. : table ➜ +3 s ➜ ampli).
+* LED status et anneau **NeoPixel** pour retour visuel.
+
+### 2️⃣ **Wall Display & Timer (WDT‑01)**
+
+* Plaque murale 120 × 80 mm imprimée 3D.
+* Écran TFT 2,4″ + barre **NeoPixel 24 LED**.
+* ESP32‑C3 : récupère l’heure (NTP/API Google) et l’info de réservation ; affiche le temps restant.
+* Mode veille auto + capteur de présence (option).
+
+### 3️⃣ **Stage Patch Hub (SPH‑01)**
+
+* Module 2 U destiné à la scène : rassemble console, multipaire et amplis.
+* Relais audio / DRV8428E pour commuter les retours, + prises XLR/TRS en face avant.
+* ESP32‑C3 pour mise sous / hors tension et télémétrie température & courant.
+
+---
+
+
+## 📅 Feuille de route détaillée (6 semaines – 2 juin → 11 juillet 2025)
+
+
+
+**Récapitulatif – Semaine 1**
+
+| Jour        | Tâche principale                   |
+| ----------- | ---------------------------------- |
+| Lun 02 (J1) | Kick‑off, revue cahier des charges, listing des composants et début projet Kicad |
+| Mar 03 (J2) | Finalisation composants PCB, Rédaction README du GitHub et planning du projet |
+| Mer 04 (J3) | --  |
+| Jeu 05 (J4) | --  |
+| Ven 06 (J5) | --  |
+
+
+---
+
+
+
+
+
+rédigé le 03/06/2025 -- Capodagli Janus
