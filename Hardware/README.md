@@ -32,17 +32,7 @@ Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques 
 
 * Toutes les lignes de commande haute‑puissance sont isolées de la logique 3,3 V via les relais bistables et/ou le DRV8428E.
 * Le PCF8575 étend le nombre de GPIO disponibles : il commande à la fois les relais et les canaux d’affichage lumineux.
-* Les PCB seront empilables afin de faciliter la maintenance et l’évolutivité.
 * Les boîtiers 3D prévoient la circulation d’air et des points de fixation normalisés type rack 19″.
-
----
-
-## 🔄 Prochaines étapes
-
-1. Finaliser le schéma électronique de la carte « Power » (relais + DRV8428E).
-2. Déterminer la consommation totale pour choisir la bonne section des pistes et le dissipateur du MP‑LDE‑20B05.
-3. Prototyper l’ensemble avec un banc d’essai (ESP32 + breadboard) pour valider le firmware de base.
-4. Concevoir les boîtiers et guides‑câbles en impression 3D (PET‑G ou ASA).
 
 ---
 
