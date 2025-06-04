@@ -1114,6 +1114,143 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:Earth"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "Earth"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"Earth\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global ground gnd"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Earth_0_1"
+				(polyline
+					(pts
+						(xy -0.635 -1.905) (xy 0.635 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.127 -2.54) (xy 0.127 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Earth_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers
@@ -1675,23 +1812,23 @@
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "R306")
+					(reference "R14")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "R304")
+					(reference "R12")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "R302")
+					(reference "R10")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "R308")
+					(reference "R16")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "R702")
+					(reference "R18")
 					(unit 1)
 				)
 			)
@@ -1707,7 +1844,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2d6b665b-18fb-4a80-abb9-9e168308e63d")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR036"
 			(at 138.43 97.79 0)
 			(effects
 				(font
@@ -1758,27 +1895,27 @@
 		(instances
 			(project "PCB_Rack"
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR022")
+					(reference "#PWR036")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR0313")
+					(reference "#PWR054")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR0307")
+					(reference "#PWR048")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR0301")
+					(reference "#PWR042")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR0319")
+					(reference "#PWR060")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR0701")
+					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -1855,23 +1992,23 @@
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "J303")
+					(reference "J5")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "J302")
+					(reference "J4")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "J301")
+					(reference "J3")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "J304")
+					(reference "J6")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "J701")
+					(reference "J7")
 					(unit 1)
 				)
 			)
@@ -1887,7 +2024,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "40bb1810-f230-4e2a-bb4d-77c070cf2c98")
-		(property "Reference" "#PWR038"
+		(property "Reference" "#PWR040"
 			(at 181.61 59.69 0)
 			(effects
 				(font
@@ -1938,27 +2075,27 @@
 		(instances
 			(project "PCB_Rack"
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR038")
+					(reference "#PWR040")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR0317")
+					(reference "#PWR058")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR0311")
+					(reference "#PWR052")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR0305")
+					(reference "#PWR046")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR0323")
+					(reference "#PWR064")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR0705")
+					(reference "#PWR070")
 					(unit 1)
 				)
 			)
@@ -2037,23 +2174,23 @@
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "Q306")
+					(reference "Q8")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "Q304")
+					(reference "Q6")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "Q302")
+					(reference "Q4")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "Q308")
+					(reference "Q10")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "Q702")
+					(reference "Q12")
 					(unit 1)
 				)
 			)
@@ -2125,109 +2262,23 @@
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "R305")
+					(reference "R13")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "R303")
+					(reference "R11")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "R301")
+					(reference "R9")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "R307")
+					(reference "R15")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "R701")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 177.8 62.23 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "85263b23-308a-45c1-86a4-d3c4fdb34a50")
-		(property "Reference" "#PWR039"
-			(at 177.8 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 177.8 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 177.8 62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 177.8 62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 177.8 62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "cea2109f-7af4-4ef2-b18e-8aacbddd29d2")
-		)
-		(instances
-			(project "PCB_Rack"
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR039")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR0318")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR0312")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR0306")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR0324")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR0706")
+					(reference "R17")
 					(unit 1)
 				)
 			)
@@ -2304,23 +2355,23 @@
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "Q305")
+					(reference "Q7")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "Q303")
+					(reference "Q5")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "Q301")
+					(reference "Q3")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "Q307")
+					(reference "Q9")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "Q701")
+					(reference "Q11")
 					(unit 1)
 				)
 			)
@@ -2336,7 +2387,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9715c454-1179-4d73-b19e-8d06d3ccca7f")
-		(property "Reference" "#PWR01"
+		(property "Reference" "#PWR039"
 			(at 158.75 78.74 0)
 			(effects
 				(font
@@ -2386,27 +2437,113 @@
 		(instances
 			(project "PCB_Rack"
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR01")
+					(reference "#PWR039")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR030")
+					(reference "#PWR057")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR029")
+					(reference "#PWR051")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR028")
+					(reference "#PWR045")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR031")
+					(reference "#PWR063")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR032")
+					(reference "#PWR069")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:Earth")
+		(at 177.8 62.23 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "b9d5a15c-fa13-4a47-b51d-fe1bf4d0a977")
+		(property "Reference" "#PWR041"
+			(at 177.8 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Earth"
+			(at 177.8 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 177.8 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 177.8 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"Earth\""
+			(at 177.8 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e7210997-70a5-4c5f-8f4b-944177491f33")
+		)
+		(instances
+			(project ""
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
+					(reference "#PWR041")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
+					(reference "#PWR059")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
+					(reference "#PWR053")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
+					(reference "#PWR047")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
+					(reference "#PWR065")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
@@ -2422,7 +2559,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c41eeb6d-f4ec-47b6-a55b-5748304592b5")
-		(property "Reference" "U3"
+		(property "Reference" "U4"
 			(at 165.1 70.4849 0)
 			(effects
 				(font
@@ -2500,27 +2637,27 @@
 		(instances
 			(project "PCB_Rack"
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "U3")
+					(reference "U4")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "U303")
+					(reference "U7")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "U302")
+					(reference "U6")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "U301")
+					(reference "U5")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "U304")
+					(reference "U8")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "U701")
+					(reference "U9")
 					(unit 1)
 				)
 			)
@@ -2536,7 +2673,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c8f7591d-feb8-4fe9-bac6-ec82bd2aab7c")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR038"
 			(at 148.59 115.57 0)
 			(effects
 				(font
@@ -2587,27 +2724,27 @@
 		(instances
 			(project "PCB_Rack"
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR024")
+					(reference "#PWR038")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR0315")
+					(reference "#PWR056")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR0309")
+					(reference "#PWR050")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR0303")
+					(reference "#PWR044")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR0321")
+					(reference "#PWR062")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR0703")
+					(reference "#PWR068")
 					(unit 1)
 				)
 			)
@@ -2623,7 +2760,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e12d6ecc-972b-4f21-bb88-e688c26a8f26")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR037"
 			(at 143.51 64.77 0)
 			(effects
 				(font
@@ -2673,27 +2810,27 @@
 		(instances
 			(project "PCB_Rack"
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR023")
+					(reference "#PWR037")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR0314")
+					(reference "#PWR055")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR0308")
+					(reference "#PWR049")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR0302")
+					(reference "#PWR043")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR0320")
+					(reference "#PWR061")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR0702")
+					(reference "#PWR067")
 					(unit 1)
 				)
 			)
