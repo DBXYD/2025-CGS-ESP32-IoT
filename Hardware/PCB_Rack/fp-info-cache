@@ -1,4 +1,4 @@
-25623426858723265
+25659882057602770
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -2663,13 +2663,6 @@ Buzzer_Beeper
 Speaker_CUI_CMR-1206S-67
 Speaker, 30mW, 300-7000Hz, IP67 face, 12x6x2,25mm, https://www.cuidevices.com/product/resource/cmr-12062s-67.pdf
 speaker CUI
-0
-2
-2
-CDRH127F
-CDRH127F-150M
-
-
 0
 2
 2
@@ -57147,13 +57140,6 @@ ceramic
 0
 3
 3
-DO-214AD
-FSV330AF
-
-
-0
-2
-2
 Diode_SMD
 D_0201_0603Metric
 Diode SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator
@@ -67885,27 +67871,195 @@ Yellow 5381 Series LED
 0
 2
 2
-Logos_Ensea
-LogoAres
+Maker_librairy
+0031.8201
 
 
 0
-0
-0
-MP1584
-MP1584-custom
+2
+2
+Maker_librairy
+ABLS-7.3728MHZ-CL-RESR-A-1-G-F
 
 
 0
-9
-9
-MP1584
-SOIC127P600X170-9N
+2
+2
+Maker_librairy
+DIP-8 Gull Wing
 
 
 0
-9
-9
+8
+8
+Maker_librairy
+FDMQ86530L
+
+
+0
+15
+12
+Maker_librairy
+HCPL-7800A
+
+HCPL-7800A 
+0
+8
+8
+Maker_librairy
+KSS221GLFS
+
+KSS221GLFS 
+0
+2
+2
+Maker_librairy
+MODULE_NUCLEO-F303K8
+
+
+0
+30
+30
+Maker_librairy
+MP-LD30-23B15R2
+
+MP-LD30-23B12R2 
+0
+4
+4
+Maker_librairy
+MPRB2415S
+
+
+0
+7
+7
+Maker_librairy
+PX0580-PC-12132
+
+
+0
+3
+3
+Maker_librairy
+SO-16_HCPL-315J_BRA
+
+HCPL-315J-500E 
+0
+12
+12
+Maker_librairy
+SOIC8-GO-SME&slash_SP3_LEM
+
+GO 10-SME 
+0
+8
+8
+Maker_librairy
+SQJ504EP
+
+
+0
+10
+6
+Maker_librairy
+WE 618009233821
+
+618009233821 
+0
+11
+10
+Maker_librairy
+WE 691311500102
+<b>WR-TBL Serie 311 - 5.08 mm Close Vertical PCB Header , 2 Pins
+
+0
+2
+2
+Maker_librairy
+WE 691311500103
+<b>WR-TBL Serie 311 - 5.08 mm Close Vertical PCB Header <br></b>Max Height = 12mm , Pitch 5.08mm , 3pins
+
+0
+3
+3
+Maker_librairy
+WE 691311700002
+
+
+0
+2
+2
+Maker_librairy
+WE 691311700003
+
+
+0
+3
+3
+Maker_librairy
+WE 691311700004
+
+
+0
+4
+4
+Maker_librairy
+WE 171013801
+
+
+0
+13
+13
+Maker_librairy
+WE 173010578
+
+173010542 
+0
+3
+3
+Maker_librairy
+WE 173950575
+
+173010542 
+0
+3
+3
+Maker_librairy
+WE 177920511
+
+
+0
+4
+4
+Maker_librairy
+WE 17791063215
+
+
+0
+7
+7
+Maker_librairy
+WE 824032813
+
+
+0
+2
+2
+Maker_librairy
+WE 452406020024
+
+
+0
+6
+6
+Maker_librairy
+WE 435451019820
+
+
+0
+4
+2
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -93785,13 +93939,6 @@ rotary encoder illuminated switch vertical
 0
 9
 8
-SN74HC125PWR
-SN74HC125PWR
-
-
-0
-14
-14
 Sensor
 ASAIR_AM2302_P2.54mm_Lead2.75mm_TabDown
 Temperature and humidity module, http://akizukidenshi.com/download/ds/aosong/AM2302.pdf
