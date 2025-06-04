@@ -30,8 +30,8 @@ Il s'agit d'un PCB permettant de centraliser l'alimentation des appareils et de 
 
 ## 📷 Captures d’écran KiCad
 
-![Schématique du PCB Rack](./img/Schematic_Rackv1.png)
-![Schématique du PCB Rack](./img/Schematic_Rackv1_2.png)
+![Schématique du PCB Rack](./img/SCH_Rackv1.png)
+![Schématique du PCB Rack](./img/SCH_Rackv1_2.png)
 ---
 ## 📝 Notes techniques
 
