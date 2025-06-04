@@ -1,6 +1,6 @@
-# 🚀 Bienvenue dans la section HARDWARE
+# 🚀 Bienvenue dans le répertoire PCB Rack !
 
-Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques (PCB)** et des pièces **imprimées en 3D** permettant d’automatiser et de connecter les salles de musique.
+Il s'agit d'un PCB permettant de centraliser l'alimentation des appareils et de les connecter au réseau local. 
 
 ---
 
@@ -27,6 +27,11 @@ Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques 
 
 ---
 
+## 📷 Captures d’écran KiCad
+
+![Schématique du PCB Rack](./img/Schematic_Rackv1.png)
+
+---
 ## 📝 Notes techniques
 
 * Toutes les lignes de commande haute‑puissance sont isolées de la logique 3,3 V via les relais bistables et/ou le DRV8428E.
