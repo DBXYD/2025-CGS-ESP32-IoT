@@ -1,0 +1,97 @@
+(footprint "Wurth_2pin_P5.0mm"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 3.1 5.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "a870ba6a-1865-4607-bc10-0df8c2287382")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "Wurth_2pin_P5.0mm"
+		(at 2.85 8.15 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "d6b6944a-c789-4165-85e0-f1e15c5748e6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at -0.05 -0.05 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0eeb5fab-2a3b-4143-8c28-00e9e971919d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at -0.05 -0.05 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e2a1bb8f-be32-4d3f-b530-221dc2c58d96")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_rect
+		(start -3.5 3.8)
+		(end 8.5 -3.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "9ad5b233-dab4-4e0d-85c9-124e4da75557")
+	)
+	(fp_text user "691311700102"
+		(at 3.1 11.15 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "37e26963-736a-40c7-963b-ab7612b40977")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 2.3 2.3)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "9d4bc4b6-a477-4a10-a45e-c1fd866e1ac5")
+	)
+	(pad "2" thru_hole circle
+		(at 5 0)
+		(size 2.3 2.3)
+		(drill 1.6)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "8cbb0106-4836-4bf5-9376-5a32d188308b")
+	)
+	(embedded_fonts no)
+)
