@@ -11,6 +11,274 @@
 		(comment 2 "Version 1")
 	)
 	(lib_symbols
+		(symbol "AC-DC-5V:U_1"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at 5.08 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 5.08 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 5.08 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 5.08 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 5.08 -1.905 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "U_1_0_1"
+				(rectangle
+					(start -7.62 4.445)
+					(end 7.62 -5.715)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -5.334 -1.27) (xy -2.794 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -4.064 0)
+					(mid -4.699 -0.3855)
+					(end -5.334 0)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -4.064 0)
+					(mid -3.429 0.3722)
+					(end -2.794 0)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.794 0) (xy 3.302 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.794 -1.27) (xy 5.334 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 3.81 0) (xy 4.318 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 4.826 0) (xy 5.334 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "U_1_1_1"
+				(polyline
+					(pts
+						(xy 0 4.445) (xy 0 3.175)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.905) (xy 0 0.635)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -0.635) (xy 0 -1.905)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -3.175) (xy 0 -4.445)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at -10.16 1.905 0)
+					(length 2.54)
+					(name "L"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -10.16 -3.175 0)
+					(length 2.54)
+					(name "N"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 1.905 180)
+					(length 2.54)
+					(name "DC+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 -3.175 180)
+					(length 2.54)
+					(name "DC-"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x03"
 			(pin_names
 				(offset 1.016)
@@ -172,311 +440,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Converter_ACDC:VTX-214-015-105"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "PS"
-				(at 0 8.89 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "VTX-214-015-105"
-				(at 0 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Converter_ACDC:Converter_ACDC_Vigortronix_VTX-214-015-1xx_THT"
-				(at 0 11.43 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "http://www.vigortronix.com/15WattSMPSPCBModuleAC-DC"
-				(at 27.94 -20.32 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "5V Vigortronix 15W ACDC Converters"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "5V 15W AC-DC module power supply"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "Converter*ACDC*Vigortronix*VTX*214*015*1xx*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "VTX-214-015-105_0_1"
-				(rectangle
-					(start -7.62 5.08)
-					(end 7.62 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(polyline
-					(pts
-						(xy -5.334 -0.635) (xy -2.794 -0.635)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -4.064 0.635)
-					(mid -4.699 0.2495)
-					(end -5.334 0.635)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -4.064 0.635)
-					(mid -3.429 1.0072)
-					(end -2.794 0.635)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.794 0.635) (xy 3.302 0.635)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.794 -0.635) (xy 5.334 -0.635)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 3.81 0.635) (xy 4.318 0.635)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 4.826 0.635) (xy 5.334 0.635)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "VTX-214-015-105_1_1"
-				(polyline
-					(pts
-						(xy 0 5.08) (xy 0 3.81)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -2.54) (xy 0 -3.81)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin power_in line
-					(at -10.16 2.54 0)
-					(length 2.54)
-					(name "L"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -10.16 -2.54 0)
-					(length 2.54)
-					(name "N"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 0 -5.08 90)
-					(length 2.54)
-					(hide yes)
-					(name "FG"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 10.16 2.54 180)
-					(length 2.54)
-					(name "DC+"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 10.16 -2.54 180)
-					(length 2.54)
-					(name "DC-"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3692,12 +3655,6 @@
 		(uuid "d71199ba-cbb4-4c70-bb29-254927d737e2")
 	)
 	(junction
-		(at 24.13 27.94)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d8edd768-df7b-426c-9d20-bcc9695c4d2d")
-	)
-	(junction
 		(at 189.23 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3995,6 +3952,16 @@
 	)
 	(wire
 		(pts
+			(xy 99.06 29.21) (xy 95.25 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2a691994-b6d0-4650-9290-ef1b5f0c9cd9")
+	)
+	(wire
+		(pts
 			(xy 257.81 148.59) (xy 264.16 148.59)
 		)
 		(stroke
@@ -4142,16 +4109,6 @@
 			(type default)
 		)
 		(uuid "49542ca6-3ad4-43fe-8419-78e3556ddc6e")
-	)
-	(wire
-		(pts
-			(xy 95.25 29.21) (xy 99.06 29.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4c08c392-5a44-4337-ae5d-ce8a1cbb8cb3")
 	)
 	(wire
 		(pts
@@ -4375,6 +4332,16 @@
 	)
 	(wire
 		(pts
+			(xy 95.25 35.56) (xy 95.25 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d5c9896-eafa-449c-b53b-eedeba428202")
+	)
+	(wire
+		(pts
 			(xy 245.11 157.48) (xy 245.11 158.75)
 		)
 		(stroke
@@ -4452,6 +4419,16 @@
 			(type default)
 		)
 		(uuid "905ad618-acdb-4256-8416-c008e710b38d")
+	)
+	(wire
+		(pts
+			(xy 95.25 30.48) (xy 95.25 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9087cf2d-680b-44bc-b7d2-6faef9b496f9")
 	)
 	(wire
 		(pts
@@ -4542,16 +4519,6 @@
 			(type default)
 		)
 		(uuid "a286165c-4bc9-48e7-85bb-22bcb2384a35")
-	)
-	(wire
-		(pts
-			(xy 95.25 35.56) (xy 95.25 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a531965d-2c9a-466f-be1b-4067a96c7b67")
 	)
 	(wire
 		(pts
@@ -4652,16 +4619,6 @@
 			(type default)
 		)
 		(uuid "c507c724-796d-4e72-9d7a-3cb4bf6f4fda")
-	)
-	(wire
-		(pts
-			(xy 95.25 30.48) (xy 95.25 29.21)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cc16a4d3-b7dd-4a2a-a9cb-4dce38d02e57")
 	)
 	(wire
 		(pts
@@ -5749,7 +5706,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Conn_Alim:Conn_Secteur"
 			(at 49.53 30.48 0)
 			(effects
 				(font
@@ -5828,7 +5785,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.farnell.com/datasheets/1442225.pdf"
+		(property "Datasheet" "~"
 			(at 123.19 78.74 0)
 			(effects
 				(font
@@ -5837,7 +5794,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Wurth Elektronik, 5.0mm Pitch, 3117, 2 Way, Pluggable Terminal Block, Header, Through Hole, Solder Termination,"
+		(property "Description" "Push button switch, generic, two pins"
 			(at 128.27 78.74 0)
 			(effects
 				(font
@@ -6542,83 +6499,6 @@
 			(project "PCB_Rack"
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995"
 					(reference "D3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Converter_ACDC:VTX-214-015-105")
-		(at 85.09 33.02 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5a75047d-7804-4cf6-9b9e-f50742957f64")
-		(property "Reference" "PS1"
-			(at 85.09 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "VTX-214-015-105"
-			(at 85.09 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Converter_ACDC:Converter_ACDC_Vigortronix_VTX-214-015-1xx_THT"
-			(at 85.09 21.59 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "http://www.vigortronix.com/15WattSMPSPCBModuleAC-DC"
-			(at 113.03 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "5V Vigortronix 15W ACDC Converters"
-			(at 85.09 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "04fa9f76-c72d-467f-a166-44af71eafd2f")
-		)
-		(pin "2"
-			(uuid "3339a132-69f6-470d-b3a8-8d89f83eaefa")
-		)
-		(pin "1"
-			(uuid "8239ca43-3477-4704-948d-9cdecb41fc46")
-		)
-		(pin "4"
-			(uuid "1d2e4c6a-395f-482a-b142-721e04534f46")
-		)
-		(pin "5"
-			(uuid "33dfc134-e262-42fa-ac10-201f2902169b")
-		)
-		(instances
-			(project ""
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995"
-					(reference "PS1")
 					(unit 1)
 				)
 			)
@@ -7336,7 +7216,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.we-online.com/components/products/datasheet/885012206076.pdf"
+		(property "Datasheet" "~"
 			(at 99.06 33.02 0)
 			(effects
 				(font
@@ -7619,7 +7499,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.we-online.com/components/products/datasheet/150060GS55040.pdf"
+		(property "Datasheet" "~"
 			(at 135.89 31.75 0)
 			(effects
 				(font
@@ -7705,7 +7585,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.farnell.com/datasheets/1442225.pdf"
+		(property "Datasheet" "http://www.apem.com/int/index.php?controller=attachment&id_attachment=488"
 			(at 29.21 22.86 0)
 			(effects
 				(font
@@ -7714,7 +7594,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Wurth Elektronik, 5.0mm Pitch, 3117, 2 Way, Pluggable Terminal Block, Header, Through Hole, Solder Termination,"
+		(property "Description" "MEC 5G single pole normally-open tactile switch"
 			(at 29.21 27.94 0)
 			(effects
 				(font
@@ -8518,7 +8398,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SMA-SMB_Universal_Handsoldering"
+		(property "Footprint" "Diode_SMD:Nexperia_DSN1608-2_1.6x0.8mm"
 			(at 109.855 33.02 0)
 			(effects
 				(font
@@ -8527,7 +8407,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://docs.rs-online.com/3083/0900766b814c16b5.pdf"
+		(property "Datasheet" "https://assets.nexperia.com/documents/data-sheet/PTVS7V5Z1USK.pdf"
 			(at 114.3 33.02 0)
 			(effects
 				(font
@@ -8974,17 +8854,33 @@
 		)
 	)
 	(symbol
-		(lib_id "power:PWR_FLAG")
-		(at 24.13 27.94 180)
+		(lib_id "AC-DC-5V:U_1")
+		(at 85.09 32.385 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "c9e52355-c4e5-4b32-ad7b-3be6bcce99f4")
-		(property "Reference" "#FLG01"
-			(at 24.13 29.845 0)
+		(uuid "c747bdf8-c36f-4f4f-948e-c93e53b11d85")
+		(property "Reference" "U4"
+			(at 85.09 24.765 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 85.09 26.035 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "AC_DC_module:MP-LDE06-20B05"
+			(at 90.17 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8992,8 +8888,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "PWR_FLAG"
-			(at 24.13 33.02 0)
+		(property "Datasheet" "https://www.farnell.com/datasheets/3155173.pdf"
+			(at 90.17 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9001,8 +8897,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
-			(at 24.13 27.94 0)
+		(property "Description" "6W AC to DC Converter - PCB Mount"
+			(at 90.17 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9010,8 +8906,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 24.13 27.94 0)
+		(property "MPN" "MP-LDE06-20B05"
+			(at 85.09 32.385 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9019,22 +8915,22 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Special symbol for telling ERC where power comes from"
-			(at 24.13 27.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
+		(pin "2"
+			(uuid "04d5cf75-054b-4717-be52-e40d55bed5e7")
+		)
+		(pin "3"
+			(uuid "50a5ef08-4ecd-4597-8b10-260ba1e3ed85")
+		)
+		(pin "4"
+			(uuid "b5abd237-c549-442b-81ba-820360a73665")
 		)
 		(pin "1"
-			(uuid "5b123c96-2a46-4bd0-a5dc-837901eb9333")
+			(uuid "3696214f-2ecf-43e1-90a4-372cf91a9c33")
 		)
 		(instances
 			(project ""
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995"
-					(reference "#FLG01")
+					(reference "U4")
 					(unit 1)
 				)
 			)
@@ -9685,7 +9581,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.we-online.com/components/products/datasheet/865060445005.pdf"
+		(property "Datasheet" "~"
 			(at 106.68 33.02 0)
 			(effects
 				(font
@@ -9694,7 +9590,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Polarized capacitor-wurth"
+		(property "Description" "Polarized capacitor"
 			(at 106.68 33.02 0)
 			(effects
 				(font

@@ -1812,7 +1812,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Conn_Alim:Conn_Secteur"
 			(at 182.88 59.69 0)
 			(effects
 				(font
