@@ -447,7 +447,11 @@
   },
   "libraries": {
     "pinned_footprint_libs": [
-      "ESP32_C3_SuperMini"
+      "ESP32_C3_SuperMini",
+      "AC_DC_module",
+      "Capacitor",
+      "Switch",
+      "Relais_Bistable_SPDT"
     ],
     "pinned_symbol_libs": [
       "RT1_bistable",

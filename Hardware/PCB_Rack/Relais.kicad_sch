@@ -1215,6 +1215,131 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:LINE"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "LINE"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"LINE\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LINE_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "LINE_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:NEUT"
 			(power)
 			(pin_numbers
@@ -1319,142 +1444,6 @@
 				)
 			)
 			(symbol "NEUT_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "power:VAC"
-			(power)
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "VAC"
-				(at 0 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"VAC\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "VAC_0_1"
-				(arc
-					(start -1.27 3.175)
-					(mid -0.635 3.8073)
-					(end 0 3.175)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 0 3.175)
-					(radius 1.905)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 1.27 3.175)
-					(mid 0.635 2.5427)
-					(end 0 3.175)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "VAC_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -1620,92 +1609,6 @@
 			(justify right)
 		)
 		(uuid "8c83fd8e-31e7-4993-8b0d-a774933a9257")
-	)
-	(symbol
-		(lib_id "power:VAC")
-		(at 158.75 82.55 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "00f12639-26aa-4268-9693-ff0acf3920a9")
-		(property "Reference" "#PWR0201"
-			(at 158.75 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VAC"
-			(at 158.75 90.17 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 158.75 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 158.75 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VAC\""
-			(at 158.75 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "fa77e56f-9c85-4f5e-8496-2836f70e48b0")
-		)
-		(instances
-			(project ""
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR0201")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR0316")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR0310")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR0304")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR0322")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR0704")
-					(unit 1)
-				)
-			)
-		)
 	)
 	(symbol
 		(lib_id "Device:R")
@@ -2166,7 +2069,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7057bd92-0e13-47b1-9d30-2901d8a8e821")
-		(property "Reference" "R"
+		(property "Reference" "R7"
 			(at 127 80.01 90)
 			(effects
 				(font
@@ -2217,6 +2120,10 @@
 		)
 		(instances
 			(project "PCB_Rack"
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
+					(reference "R7")
+					(unit 1)
+				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
 					(reference "R305")
 					(unit 1)
@@ -2420,6 +2327,92 @@
 		)
 	)
 	(symbol
+		(lib_id "power:LINE")
+		(at 158.75 82.55 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9715c454-1179-4d73-b19e-8d06d3ccca7f")
+		(property "Reference" "#PWR01"
+			(at 158.75 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "LINE"
+			(at 158.75 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 158.75 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 158.75 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"LINE\""
+			(at 158.75 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f1dd7789-61ef-4708-81af-02965c27875a")
+		)
+		(instances
+			(project "PCB_Rack"
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
+					(reference "#PWR01")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
+					(reference "#PWR030")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
+					(reference "#PWR029")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
+					(reference "#PWR028")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
+					(reference "#PWR031")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
+					(reference "#PWR032")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "RT1_bistable:RT314F05_1")
 		(at 154.94 71.12 0)
 		(unit 1)
@@ -2429,7 +2422,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c41eeb6d-f4ec-47b6-a55b-5748304592b5")
-		(property "Reference" "U"
+		(property "Reference" "U3"
 			(at 165.1 70.4849 0)
 			(effects
 				(font
@@ -2447,7 +2440,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Relais_Bistable_SPDT:SPDT_bistable"
 			(at 154.94 71.12 0)
 			(effects
 				(font
@@ -2456,7 +2449,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://eu.mouser.com/datasheet/2/418/5/ENG_DS_RT1_bistable_0819-728100.pdf"
 			(at 154.94 71.12 0)
 			(effects
 				(font
@@ -2465,7 +2458,16 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "General Purpose Relay Polarized bistable version with  2 coils SPDT"
+			(at 154.94 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "8-1393239-5"
 			(at 154.94 71.12 0)
 			(effects
 				(font
@@ -2497,6 +2499,10 @@
 		)
 		(instances
 			(project "PCB_Rack"
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
+					(reference "U3")
+					(unit 1)
+				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
 					(reference "U303")
 					(unit 1)
