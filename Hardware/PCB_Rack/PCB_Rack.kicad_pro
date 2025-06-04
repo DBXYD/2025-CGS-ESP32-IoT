@@ -446,9 +446,12 @@
     }
   },
   "libraries": {
-    "pinned_footprint_libs": [],
+    "pinned_footprint_libs": [
+      "ESP32_C3_SuperMini"
+    ],
     "pinned_symbol_libs": [
-      "RT1_bistable"
+      "RT1_bistable",
+      "ESP32_C3_SuperMini"
     ]
   },
   "meta": {
@@ -614,6 +617,26 @@
     [
       "24795ffd-bac6-477a-a38e-d8501482d995",
       "Root"
+    ],
+    [
+      "5442e838-22b7-4759-82c9-b29dca855bd1",
+      "Relais1"
+    ],
+    [
+      "5ac73c22-8777-4b5a-bfff-3bd51e3d143b",
+      "Relais2"
+    ],
+    [
+      "87f10584-f62a-4163-8423-944293fb6fe3",
+      "Relais3"
+    ],
+    [
+      "8e0d1561-7103-4043-b29b-aa11cac57b69",
+      "Relais4"
+    ],
+    [
+      "bf1ff6a1-c7a5-4d7b-84a2-42ee4b26b20c",
+      "Relais5"
     ]
   ],
   "text_variables": {}
