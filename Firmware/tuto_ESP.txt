@@ -1,0 +1,32 @@
+### A CHAQUE NOUVELLE SESSION DE TERMINAL ###
+source ~/esp/esp-idf/export.sh
+
+### TROUVER LE BON PORT ###
+ls /dev/ttyACM*
+
+### Menuconfig pour configurer le projet
+idf.py menuconfig
+
+### RACOURCIS ###
+
+
+### PROCESS ###
+# creer un nouveau projet
+cd ~/esp
+idf.py create-project my_project_name
+cd my_project_name
+
+#sélectionner la cible esp32-c3
+idf.py set-target esp32c3
+
+#éditer ton code
+fichier principale :
+main/main.c
+
+#compiler le projet
+idf.py build
+
+#flasher + moniteur série
+idf.py -p /dev/ttyACM0 flash monitor
+
+
