@@ -1,0 +1,19 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "5a66f125-244c-459d-9b12-cd28bfb7c1f2")
+	(paper "A4")
+	(title_block
+		(title "PCB d'affichage connecté dans la salle")
+		(date "2025-06-04")
+		(comment 2 "Capodagli Janus")
+	)
+	(lib_symbols)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

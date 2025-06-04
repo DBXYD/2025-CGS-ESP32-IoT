@@ -3,4 +3,5 @@
   (lib (name "RT1_bistable")(type "KiCad")(uri "${KIPRJMOD}/Lib/RT1_bistable.kicad_sym")(options "")(descr ""))
   (lib (name "DRV8428E")(type "KiCad")(uri "${KIPRJMOD}/Lib/DRV8428E.kicad_sym")(options "")(descr ""))
   (lib (name "ESP32_C3_SuperMini")(type "KiCad")(uri "${KIPRJMOD}/Lib/ESP32_C3_SuperMini.kicad_sym")(options "")(descr ""))
+  (lib (name "AC-DC-5V")(type "KiCad")(uri "${KIPRJMOD}/Lib/AC-DC-5V.kicad_sym")(options "")(descr ""))
 )
