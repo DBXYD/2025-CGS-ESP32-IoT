@@ -5,8 +5,10 @@
 	(uuid "24795ffd-bac6-477a-a38e-d8501482d995")
 	(paper "A4")
 	(title_block
+		(title "PCB Rack ")
 		(date "2025-06-02")
-		(comment 1 "Voici le PCB que je développe durant ce stage")
+		(comment 1 "Capodagli Janus")
+		(comment 2 "Version 1")
 	)
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_01x03"
