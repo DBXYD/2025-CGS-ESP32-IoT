@@ -13,6 +13,14 @@ Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques 
 
 ---
 
+## 🔗 Liens vers les PCB
+
+[**PCB Rack**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/PCB_Rack) : Alimente et connecte les appareils de la salle. Commandable depuis le réseau.
+ 
+
+
+---
+
 ## ⚙️ Matériel utilisé
 
 | Composant                | Référence            | Rôle                                                |
