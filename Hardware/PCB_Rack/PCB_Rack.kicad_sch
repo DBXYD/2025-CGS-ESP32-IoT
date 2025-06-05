@@ -5421,7 +5421,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ESP32_C3_SuperMini:C3_SuperMini"
+		(property "Footprint" "ESP32_C3_SuperMini:SuperMini SMT"
 			(at 66.04 73.66 0)
 			(effects
 				(font
