@@ -4,7 +4,7 @@
 	(generator_version "9.0")
 	(layer "F.Cu")
 	(property "Reference" "REF**"
-		(at -6.62 17.39 0)
+		(at 0.55 12.65 0)
 		(unlocked yes)
 		(layer "F.SilkS")
 		(uuid "11563718-a2f4-4c03-8d21-12df973e090f")
@@ -16,7 +16,7 @@
 		)
 	)
 	(property "Value" "Connecteur_Secteur"
-		(at -6.62 18.89 0)
+		(at 0.55 14.15 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(uuid "c4da8392-206d-4c81-b166-b0cdf1d1dfd0")
@@ -28,7 +28,7 @@
 		)
 	)
 	(property "Datasheet" ""
-		(at -7.92 4.74 0)
+		(at -0.75 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
@@ -41,7 +41,7 @@
 		)
 	)
 	(property "Description" ""
-		(at -7.92 4.74 0)
+		(at -0.75 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
 		(hide yes)
@@ -55,8 +55,8 @@
 	)
 	(attr smd)
 	(fp_line
-		(start -15.18 -2.36)
-		(end -15.18 13.75)
+		(start -8.01 -7.1)
+		(end -8.01 9.01)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -65,8 +65,8 @@
 		(uuid "c069985e-4b72-472f-b7dc-0d0c732b93b8")
 	)
 	(fp_line
-		(start -15.18 13.75)
-		(end 15.09 13.75)
+		(start -8.01 9.01)
+		(end 22.26 9.01)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -75,8 +75,8 @@
 		(uuid "568cffa3-910a-44cf-98dd-e9fe0aaac8bf")
 	)
 	(fp_line
-		(start -8.245 -9)
-		(end -15.18 -2.36)
+		(start -1.075 -13.74)
+		(end -8.01 -7.1)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -85,8 +85,8 @@
 		(uuid "7b4721a3-2ca8-47d5-95a4-0b92768f5d6c")
 	)
 	(fp_line
-		(start 8.155 -9)
-		(end -8.245 -9)
+		(start 15.325 -13.74)
+		(end -1.075 -13.74)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -95,8 +95,8 @@
 		(uuid "6c4a8c48-3da3-4716-b8fd-a117def0db09")
 	)
 	(fp_line
-		(start 15.09 -2.36)
-		(end 8.155 -9)
+		(start 22.26 -7.1)
+		(end 15.325 -13.74)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -105,8 +105,8 @@
 		(uuid "74deb8e3-d170-423b-beab-b4c49919ae2b")
 	)
 	(fp_line
-		(start 15.09 13.75)
-		(end 15.09 -2.36)
+		(start 22.26 9.01)
+		(end 22.26 -7.1)
 		(stroke
 			(width 0.1)
 			(type default)
@@ -115,7 +115,7 @@
 		(uuid "3afeb247-b1df-42e1-ad63-79574efb3b66")
 	)
 	(pad "1" thru_hole roundrect
-		(at -7.17 4.74 90)
+		(at 0 0 90)
 		(size 6.8 2)
 		(drill oval 6 1.2)
 		(layers "*.Cu" "*.Mask")
@@ -125,7 +125,7 @@
 		(uuid "3d5e14ea-e1ce-4fe5-8a72-b2c9d31a88b0")
 	)
 	(pad "2" thru_hole roundrect
-		(at 7.13 4.74 90)
+		(at 14.3 0 90)
 		(size 6.8 2)
 		(drill oval 6 1.2)
 		(layers "*.Cu" "*.Mask")
@@ -135,7 +135,7 @@
 		(uuid "4a9e2578-17d4-41fe-b7fa-1d22f1137e15")
 	)
 	(pad "3" thru_hole roundrect
-		(at 0 0 90)
+		(at 7.17 -4.74 90)
 		(size 6.8 2)
 		(drill oval 6 1.2)
 		(layers "*.Cu" "*.Mask")
