@@ -32,6 +32,8 @@ Il s'agit d'un PCB permettant de centraliser l'alimentation des appareils et de 
 
 ![Schématique du PCB Rack](./img/SCH_Rackv1.png)
 ![Schématique du PCB Rack](./img/SCH_Rackv1_2.png)
+![PCB Rack](./img/PCB_Rackv1.png)
+![PCB Rack](./img/PCB_Rackv1_2.png)
 ---
 ## 📝 Notes techniques
 
