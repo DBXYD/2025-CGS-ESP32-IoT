@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.2
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -468,7 +468,8 @@
       "Capacitor",
       "Switch",
       "Relais_Bistable_SPDT",
-      "Conn_Alim"
+      "Conn_Alim",
+      "img"
     ],
     "pinned_symbol_libs": [
       "RT1_bistable",
