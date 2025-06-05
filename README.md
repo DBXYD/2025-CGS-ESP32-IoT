@@ -51,8 +51,8 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | ----------- | ---------------------------------- |
 | Lun 02 (J1) | Kick‑off, revue cahier des charges, listing des composants et début projet Kicad |
 | Mar 03 (J2) | Finalisation composants PCB, Rédaction README du GitHub et planning du projet |
-| Mer 04 (J3) | Finalisation Schématique du PCB RACK, début routage, prise en compte des contraintes 3D  |
-| Jeu 05 (J4) | --  |
+| Mer 04 (J3) | Finalisation Schématique du PCB RACK, prise en compte des contraintes 3D  |
+| Jeu 05 (J4) | Finalisation Routage du PCB RACK  |
 | Ven 06 (J5) | --  |
 
 
