@@ -2141,7 +2141,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Conn_Alim:Conn_Secteur"
+		(property "Footprint" "Conn_Alim:Conn_Secteur_femelle"
 			(at 177.292 59.69 0)
 			(effects
 				(font
@@ -2660,23 +2660,23 @@
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR039")
+					(reference "#PWR0103")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR039")
+					(reference "#PWR0102")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR039")
+					(reference "#PWR0101")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR039")
+					(reference "#PWR0104")
 					(unit 1)
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR039")
+					(reference "#PWR0105")
 					(unit 1)
 				)
 			)
