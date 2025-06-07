@@ -245,8 +245,12 @@
     }
   },
   "libraries": {
-    "pinned_footprint_libs": [],
-    "pinned_symbol_libs": []
+    "pinned_footprint_libs": [
+      "DIP_Switch"
+    ],
+    "pinned_symbol_libs": [
+      "Relais"
+    ]
   },
   "meta": {
     "filename": "PCB_Repetition.kicad_pro",
@@ -429,7 +433,7 @@
       "Relais_XLR1"
     ],
     [
-      "c6c2a45b-deef-44f7-96dd-7a1a2228ec59",
+      "8626c1d5-5981-47d9-9975-892e686a3aac",
       "Relais_XLR2"
     ],
     [
