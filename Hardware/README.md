@@ -16,7 +16,9 @@ Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques 
 ## 🔗 Liens vers les PCB
 
 [**PCB Rack**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/PCB_Rack) : Alimente et connecte les appareils de la salle. Commandable depuis le réseau.
+
 [**PCB salle de répétition**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/PCB_Repetition) : Alimente et connecte les appareils de la salle. Couple les entrées/sorties aux choix pour la répétition.
+
 [**PCB affichage**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/PCB_Affichage) : Alimente et connecte le ruban des néopixels contrôlés par un esp32 pour afficher l'heure et un bar d'avancement.
 
 ---
