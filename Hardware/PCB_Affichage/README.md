@@ -1,23 +1,14 @@
-# 🚀 Bienvenue dans la section HARDWARE
+# 🚀 Bienvenue dans le répertoire du PCB d'affichage !
 
-Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques (PCB)** et des pièces **imprimées en 3D** permettant d’automatiser et de connecter les salles de musique.
+Il s'agit d'un PCB permettant de d'afficher l'heure en contrôlant un ruban de LED néopixels grâce au esp32 connecté au réseau WIFI. 
 
 ---
 
 ## 📌 Cahier des charges
 
 * Connexion Wi‑Fi assurée par un **ESP32‑C3 SuperMini**
-* Alimentation secteur **centralisée** et sécurisée
-* Allumage ciblé et temporisé des différents équipements de la salle à distance
-* Affichage d’état et repères visuels (NeoPixels, LED, etc.)
-
----
-
-## 🔗 Liens vers les PCB
-
-[**PCB Rack**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/PCB_Rack) : Alimente et connecte les appareils de la salle. Commandable depuis le réseau.
-[**PCB salle de répétition**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/PCB_Repetition) : Alimente et connecte les appareils de la salle. Couple les entrées/sorties aux choix pour la répétition.
-[**PCB affichage**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/PCB_Affichage) : Alimente et connecte le ruban des néopixels contrôlés par un esp32 pour afficher l'heure et un bar d'avancement.
+* Alimentation de l'ESP32 et du ruban.
+* Contrôl de l'affichage
 
 ---
 
@@ -36,6 +27,13 @@ Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques 
 
 ---
 
+## 📷 Captures d’écran KiCad
+
+![Schématique du PCB Rack](./img/SCH_Rackv1.png)
+![Schématique du PCB Rack](./img/SCH_Rackv1_2.png)
+![PCB Rack](./img/PCB_v1.png)
+![PCB Rack](./img/PCB_v1_2.png)
+---
 ## 📝 Notes techniques
 
 * Toutes les lignes de commande haute‑puissance sont isolées de la logique 3,3 V via les relais bistables et/ou le DRV8428E.

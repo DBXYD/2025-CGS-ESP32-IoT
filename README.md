@@ -10,7 +10,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 
 | Dossier       | Contenu                                                                                                    | Status        |
 | ------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
-| `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`HARDWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware)) | ✅ v1 en cours |
+| `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`HARDWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware)) | ✅ Terminé |
 | `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.)                                              | 🚧 à démarrer |
 | `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux                                                        | 🚧 à démarrer   |
 ---
@@ -53,7 +53,18 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | Mar 03 (J2) | Finalisation composants PCB, Rédaction README du GitHub et planning du projet |
 | Mer 04 (J3) | Finalisation Schématique du PCB RACK, prise en compte des contraintes 3D  |
 | Jeu 05 (J4) | Finalisation Routage du PCB RACK  |
-| Ven 06 (J5) | --  |
+| Ven 06 (J5) | Finalisation Schématique PCB salle de répétition, début routage  |
+
+
+**Récapitulatif – Semaine 2**
+
+| Jour        | Tâche principale                   |
+| ----------- | ---------------------------------- |
+| Mar 10 (J6) | Finalisation routage du PCB salle de répétition, Début et fin du schématique et routage PCB affichage |
+| Mer 11 (J7) |   |
+| Jeu 12 (J8) |   |
+| Ven 13 (J9) |   |
+
 
 
 ---
