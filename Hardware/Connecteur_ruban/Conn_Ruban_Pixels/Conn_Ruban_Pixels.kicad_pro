@@ -490,7 +490,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../../Gerber/Conn_Ruban/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",

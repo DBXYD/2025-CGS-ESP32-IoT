@@ -559,7 +559,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../Gerber/PCB_Repetition/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",

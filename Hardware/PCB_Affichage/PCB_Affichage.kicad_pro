@@ -488,7 +488,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../Gerber/PCB_Affichage/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "../../../../../../../../../../media/janus/PHILIPS UFD/PCB_Rack_2.step",
