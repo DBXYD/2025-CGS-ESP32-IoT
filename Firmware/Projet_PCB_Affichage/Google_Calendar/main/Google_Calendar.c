@@ -15,15 +15,11 @@ static const char *TAG = "main";
 #define BLINK_MS     200           // durée ON/OFF en ms
 #define BLINK_COUNT  5
 
-static void blink_led(void)
-{
-    for (int i = 0; i < BLINK_COUNT; i++) {
-        gpio_set_level(LED_PIN, 1);
-        vTaskDelay(pdMS_TO_TICKS(BLINK_MS));
-        gpio_set_level(LED_PIN, 0);
-        vTaskDelay(pdMS_TO_TICKS(BLINK_MS));
-    }
-}
+#define LED_ON_LEVEL   0  // active-low : 0 pour allumer
+#define LED_OFF_LEVEL  1  // 1 pour éteindre
+
+
+
 
 static void gcal_task(void *arg)
 {
@@ -93,18 +89,18 @@ static void gcal_task(void *arg)
             // 2) Tant que l’événement n’est pas terminé, on clignote toutes les 2 s
             while (time(NULL) < end_ts) {
                 // LED on
-                gpio_set_level(LED_PIN, 1);
+                gpio_set_level(LED_PIN, LED_ON_LEVEL);
                 vTaskDelay(pdMS_TO_TICKS(100));
                 // LED off
-                gpio_set_level(LED_PIN, 0);
+                gpio_set_level(LED_PIN, LED_OFF_LEVEL);
                 vTaskDelay(pdMS_TO_TICKS(1900));
             }
             // À la fin de l’événement, on s’assure que la LED reste éteinte
-            gpio_set_level(LED_PIN, 0);
+            gpio_set_level(LED_PIN, LED_OFF_LEVEL);
 
         } else {
             // Pas d’événement en cours : LED éteinte et on attend 5 minutes
-            gpio_set_level(LED_PIN, 0);
+            gpio_set_level(LED_PIN, LED_OFF_LEVEL);
             ESP_LOGI(TAG, "Pas d'événement en cours, je reteste dans 1 min");
             vTaskDelay(pdMS_TO_TICKS(1 * 60 * 1000));
         }
@@ -131,11 +127,17 @@ void app_main(void)
     wifi_init();
 
     // LED
-    gpio_reset_pin(LED_PIN);
-    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
-    // désactive pull-up et pull-down sur GPIO8
-    gpio_set_pull_mode(GPIO_NUM_8, GPIO_FLOATING);
-    gpio_set_level(LED_PIN, 0);
+    // LED (GPIO8) : output sans pull-up ni pull-down
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL<<LED_PIN),
+        .mode         = GPIO_MODE_OUTPUT,
+        .pull_up_en   = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type    = GPIO_INTR_DISABLE
+    };
+    ESP_ERROR_CHECK(gpio_config(&io_conf));
+    gpio_set_level(LED_PIN, LED_OFF_LEVEL);
+
 
     // démarrage
     xTaskCreatePinnedToCore(
