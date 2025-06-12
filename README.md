@@ -62,7 +62,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | ----------- | ---------------------------------- |
 | Mar 10 (J6) | Finalisation routage du PCB salle de répétition, Début et fin du schématique et routage PCB affichage. Finalisation tableur pour les commandes des composants. |
 | Mer 11 (J7) | Début Code ESP32. Finalisation du code pour connecter au wifi et obtenir l'heure. Passage de 2 couches à 4 couches pour le PCB des salles de répétition |
-| Jeu 12 (J8) | Finalisation du projet [`ESP32-Google_Calendar`](hhttps://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/Projet_PCB_Affichage/Google_Calendar). Ajout des pinheaders libres sur les PCB (finalisation V2 des PCB).  |
+| Jeu 12 (J8) | Finalisation du projet [`ESP32-Google_Calendar`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/PCB_Affichage_Google_Calendar). Ajout des pinheaders libres sur les PCB (finalisation V2 des PCB).  |
 | Ven 13 (J9) |   |
 
 
