@@ -58,6 +58,8 @@ TEST_CODE_GOOGLECALENDAR
 Chaque dossier contient :
 - Le code source (C/ESP-IDF)
 - Les fichiers de configuration (Wi-Fi, pins, OAuth…)
+```
+
 
 ---
 ## 🖥️ Aperçu du test
