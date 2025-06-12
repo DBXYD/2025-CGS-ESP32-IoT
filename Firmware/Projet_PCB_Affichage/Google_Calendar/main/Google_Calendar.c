@@ -1,111 +1,144 @@
+
 #include "config.h"
 #include "wifi.h"
 #include "oauth.h"
-#include "calendar.h"
+#include "calendar.h"     // contient la déclaration de calendar_check_today()
 #include "esp_log.h"
 #include "nvs_flash.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "driver/gpio.h"  // pour gpio_set_level()
 #include <time.h>
-#include "esp_err.h"
 
 static const char *TAG = "main";
-static const char *TAG_OAUTH = "oauth";  // si jamais tu utilises des logs OAuth ici
+#define LED_PIN      GPIO_NUM_8    // ← votre LED
+#define BLINK_MS     200           // durée ON/OFF en ms
+#define BLINK_COUNT  5
 
-static void gcal_task(void *arg) {
+static void blink_led(void)
+{
+    for (int i = 0; i < BLINK_COUNT; i++) {
+        gpio_set_level(LED_PIN, 1);
+        vTaskDelay(pdMS_TO_TICKS(BLINK_MS));
+        gpio_set_level(LED_PIN, 0);
+        vTaskDelay(pdMS_TO_TICKS(BLINK_MS));
+    }
+}
+
+static void gcal_task(void *arg)
+{
     char refresh_tok[256] = {0};
     char access_tok[2048] = {0};
-    int expires = 0;
+    int  expires = 0;
 
+    // 1) authentification OAuth2
     for (;;) {
-        // Charge le token de rafraîchissement ou lance le device flow
         if (!load_refresh_token(refresh_tok, sizeof(refresh_tok))) {
-            char device_code[256];
-            char user_code[32];
-            char verify_url[128];
-            int interval = 0;
-
-            ESP_LOGI(TAG, "Démarrage du Device Flow OAuth2...");
-            if (!oauth_get_device_code(device_code, user_code, verify_url, &interval)) {
-                ESP_LOGE(TAG, "Échec obtention device_code");
+            // Device Flow...
+            char device[256], user[32], url[128];
+            int  interval = 0;
+            ESP_LOGI(TAG, "Start OAuth2 device flow");
+            if (!oauth_get_device_code(device, user, url, &interval)) {
+                ESP_LOGE(TAG, "oauth_get_device_code() failed");
                 vTaskDelay(pdMS_TO_TICKS(10000));
                 continue;
             }
-            ///Affichage connecxion
-            ESP_LOGW(TAG, "\n"
-                        "========================================\n"
-                        "     ⚠️  AUTHENTIFICATION REQUISE  ⚠️    \n"
-                        "----------------------------------------\n"
-                        "Visitez : %s\n"
-                        "Code    : %s\n"
-                        "========================================\n",
-                        verify_url, user_code
-                    );
-
-
-            // Poll jusqu'à récupération du token
-            while (!oauth_poll_token(device_code, access_tok, &expires, refresh_tok)) {
-                ESP_LOGI(TAG, "En attente token (intervalle %ds)...", interval);
+            ESP_LOGW(TAG,
+                "\n========================================\n"
+                "  ⚠️ AUTHENTIFICATION REQUISE ⚠️\n"
+                "----------------------------------------\n"
+                "Visitez : %s\n"
+                "Code    : %s\n"
+                "========================================\n",
+                url, user
+            );
+            // polling
+            while (!oauth_poll_token(device, access_tok, &expires, refresh_tok)) {
                 vTaskDelay(pdMS_TO_TICKS(interval * 1000));
             }
             save_refresh_token(refresh_tok);
-
         } else {
-            // Rafraîchit le token d'accès
             if (!oauth_refresh(refresh_tok, access_tok, &expires)) {
-                ESP_LOGW(TAG, "Refresh token invalide, purge et ré-auth");
+                ESP_LOGW(TAG, "Refresh token invalide, purge et retry");
                 save_refresh_token("");
                 continue;
             }
         }
+        break;
+    }
 
-        // Boucle principale : fetch + refresh périodique
-        while (true) {
-            esp_err_t err = calendar_fetch_and_print(access_tok);
-            if (err == ESP_ERR_INVALID_STATE) {
-                ESP_LOGW(TAG, "Token expiré, purge et retour au flow");
-                save_refresh_token("");
-                break;
+    // 2) boucle de vérification toutes les 5 minutes
+    while (1) {
+        char evt_name[64];
+        char evt_loc[64];
+        time_t end_ts;
+
+        // 1) Est-ce qu’un événement est en cours AUJOURD’HUI ?
+        if (calendar_check_today(
+                access_tok,
+                evt_name, sizeof(evt_name),
+                evt_loc,  sizeof(evt_loc),
+                &end_ts
+            ))
+        {
+            // Formatage de l’heure de fin pour le log
+            struct tm tm_end;
+            char hfin[6];
+            localtime_r(&end_ts, &tm_end);
+            strftime(hfin, sizeof(hfin), "%H:%M", &tm_end);
+
+            ESP_LOGW(TAG, "➤ Événement en cours : %s @ %s jusqu'à %s",
+                     evt_name, evt_loc, hfin);
+
+            // 2) Tant que l’événement n’est pas terminé, on clignote toutes les 2 s
+            while (time(NULL) < end_ts) {
+                // LED on
+                gpio_set_level(LED_PIN, 1);
+                vTaskDelay(pdMS_TO_TICKS(100));
+                // LED off
+                gpio_set_level(LED_PIN, 0);
+                vTaskDelay(pdMS_TO_TICKS(1900));
             }
-            // Attendre avant le prochain fetch
-            int sleep_s = (expires > 600) ? expires - 300 : 60;
-            ESP_LOGI(TAG, "Prochain fetch dans %ds", sleep_s);
-            vTaskDelay(pdMS_TO_TICKS(sleep_s * 1000));
-            // Rafraîchit le token en fond
-            if (!oauth_refresh(refresh_tok, access_tok, &expires)) {
-                ESP_LOGW(TAG, "Impossible de rafraîchir le token, purge");
-                save_refresh_token("");
-                break;
-            }
+            // À la fin de l’événement, on s’assure que la LED reste éteinte
+            gpio_set_level(LED_PIN, 0);
+
+        } else {
+            // Pas d’événement en cours : LED éteinte et on attend 5 minutes
+            gpio_set_level(LED_PIN, 0);
+            ESP_LOGI(TAG, "Pas d'événement en cours, je reteste dans 1 min");
+            vTaskDelay(pdMS_TO_TICKS(1 * 60 * 1000));
         }
     }
 }
 
-void app_main(void) {
-    // Initialise NVS
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+void app_main(void)
+{
+
+    // NVS
+    esp_err_t r = nvs_flash_init();
+    if (r == ESP_ERR_NVS_NO_FREE_PAGES || r == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
-        ret = nvs_flash_init();
+        r = nvs_flash_init();
     }
-    ESP_ERROR_CHECK(ret);
+    ESP_ERROR_CHECK(r);
 
-    // Réglage du fuseau horaire
-    setenv("TZ", "Europe/Paris", 1);
+    // timezone
+    setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
     tzset();
-    ESP_LOGI(TAG, "Timezone réglée sur Europe/Paris");
+    ESP_LOGI(TAG, "Fuseau horaire réglé en CET/CEST"); 
 
-    // Initialisation du Wi-Fi et SNTP
+    // Wi-Fi + SNTP
     wifi_init();
 
-    // Création de la tâche Google Calendar
+    // LED
+    gpio_reset_pin(LED_PIN);
+    gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
+    // désactive pull-up et pull-down sur GPIO8
+    gpio_set_pull_mode(GPIO_NUM_8, GPIO_FLOATING);
+    gpio_set_level(LED_PIN, 0);
+
+    // démarrage
     xTaskCreatePinnedToCore(
-        gcal_task,
-        "gcal",
-        32768,
-        NULL,
-        5,
-        NULL,
-        0
+        gcal_task, "gcal", 8*1024, NULL, 5, NULL, 0
     );
 }
