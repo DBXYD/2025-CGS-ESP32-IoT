@@ -62,5 +62,3 @@ Chaque dossier contient :
 ---
 ## 🖥️ Aperçu du test
 
-![Résultat](./img/gif_Resultat.gif)
-
