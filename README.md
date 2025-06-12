@@ -11,7 +11,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | Dossier       | Contenu                                                                                                    | Status        |
 | ------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
 | `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`HARDWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware)) | ✅ Terminé |
-| `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.)                                              | 🚧 à démarrer |
+| `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.)   ➡️ voir [`HARDWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware)                                           | ✅ en cours |
 | `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux                                                        | 🚧 à démarrer   |
 ---
 
@@ -60,9 +60,9 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 
 | Jour        | Tâche principale                   |
 | ----------- | ---------------------------------- |
-| Mar 10 (J6) | Finalisation routage du PCB salle de répétition, Début et fin du schématique et routage PCB affichage |
-| Mer 11 (J7) |   |
-| Jeu 12 (J8) |   |
+| Mar 10 (J6) | Finalisation routage du PCB salle de répétition, Début et fin du schématique et routage PCB affichage. Finalisation tableur pour les commandes des composants. |
+| Mer 11 (J7) | Début Code ESP32. Finalisation du code pour connecter au wifi et obtenir l'heure. Passage de 2 couches à 4 couches pour le PCB des salles de répétition |
+| Jeu 12 (J8) | Finalisation du projet [`ESP32-Google_Calendar`](hhttps://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/Projet_PCB_Affichage/Google_Calendar). Ajout des pinheaders libres sur les PCB (finalisation V2 des PCB).  |
 | Ven 13 (J9) |   |
 
 
