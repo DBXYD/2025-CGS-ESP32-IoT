@@ -1,0 +1,13 @@
+idf_component_register(
+    SRCS
+        "Google_Calendar.c"
+    INCLUDE_DIRS
+        "."
+    REQUIRES
+        config
+        time_utils
+        wifi
+        http_client
+        oauth
+        calendar
+)
