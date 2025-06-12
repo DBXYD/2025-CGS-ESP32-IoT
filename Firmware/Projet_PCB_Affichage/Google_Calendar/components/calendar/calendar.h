@@ -1,7 +1,13 @@
 #ifndef CALENDAR_H
 #define CALENDAR_H
 #include <esp_err.h>
+#include <time.h>
 
-esp_err_t calendar_fetch_and_print(const char *access_token);
+bool calendar_check_today(const char *access_token,
+                          char *summary, size_t sum_len,
+                          char *location, size_t loc_len,
+                          time_t *end_ts);
+
+
 
 #endif // CALENDAR_H

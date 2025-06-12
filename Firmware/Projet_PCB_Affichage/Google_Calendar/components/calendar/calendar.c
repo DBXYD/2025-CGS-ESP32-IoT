@@ -1,135 +1,112 @@
-#include "calendar.h"
-#include "http_client.h"
-#include "time_utils.h"
-#include "config.h"
-#include "esp_log.h"
-#include "cJSON.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 #include <time.h>
+#include "http_client.h"
+#include "cJSON.h"
+#include "esp_log.h"
+#include "config.h"
+#include "time_utils.h"  // pour my_timegm()
 
-static const char *TAG_GCAL = "gcal";   
+static const char *TAG_GCAL = "gcal";
 
-esp_err_t calendar_fetch_and_print(const char *access_token) {
-    // 1) Calcul des bornes UTC pour la semaine (de minuit locale à 23:59:59 dimanche)
-    char tmin_iso[40], tmax_iso[40];
+bool calendar_check_today(const char *access_token,
+                          char *summary, size_t sum_len,
+                          char *location, size_t loc_len,
+                          time_t *end_ts)
+{
+    // 1) bornes locales jour courant
     time_t now = time(NULL);
+    struct tm tm0 = *localtime(&now);
+    tm0.tm_hour = tm0.tm_min = tm0.tm_sec = 0;
+    time_t start_local = mktime(&tm0);
+    tm0.tm_hour = 23; tm0.tm_min = 59; tm0.tm_sec = 59;
+    time_t end_local = mktime(&tm0);
 
-    // a) Début local à 00:00:00
-    struct tm local_tm = *localtime(&now);
-    local_tm.tm_hour = 0;
-    local_tm.tm_min  = 0;
-    local_tm.tm_sec  = 0;
-    time_t start_local = mktime(&local_tm);
+    // 2) ISO UTC
+    char tmin[32], tmax[32];
+    struct tm utc;
+    gmtime_r(&start_local, &utc);
+    strftime(tmin, sizeof tmin, "%Y-%m-%dT%H:%M:%SZ", &utc);
+    gmtime_r(&end_local, &utc);
+    strftime(tmax, sizeof tmax, "%Y-%m-%dT%H:%M:%SZ", &utc);
 
-    // b) Passage à dimanche 23:59:59
-    struct tm end_tm = local_tm;
-    int wday = end_tm.tm_wday;                // dimanche=0, lundi=1, etc.
-    int days_to_sunday = (7 - (wday == 0 ? 7 : wday));
-    end_tm.tm_mday += days_to_sunday;
-    end_tm.tm_hour = 23;
-    end_tm.tm_min  = 59;
-    end_tm.tm_sec  = 59;
-    time_t end_local = mktime(&end_tm);
-
-    // c) Conversion en UTC pour l’API
-    struct tm utc_tm;
-    gmtime_r(&start_local, &utc_tm);
-    strftime(tmin_iso, sizeof(tmin_iso), "%Y-%m-%dT%H:%M:%SZ", &utc_tm);
-    gmtime_r(&end_local, &utc_tm);
-    strftime(tmax_iso, sizeof(tmax_iso), "%Y-%m-%dT%H:%M:%SZ", &utc_tm);
-
-    // 2) Construction de l’URL
+    // 3) URL
     char url[512];
-    snprintf(url, sizeof(url),
+    snprintf(url, sizeof url,
         "https://www.googleapis.com/calendar/v3/calendars/%s/events"
-        "?singleEvents=true"
-        "&orderBy=startTime"
-        "&timeMin=%s"
-        "&timeMax=%s"
-        "&timeZone=UTC"
-        "&maxResults=%d",
-        CALENDAR_ID, tmin_iso, tmax_iso, MAX_EVENTS
-    );
+        "?singleEvents=true&orderBy=startTime"
+        "&timeMin=%s&timeMax=%s&timeZone=UTC&maxResults=10",
+        CALENDAR_ID, tmin, tmax);
 
-    // 3) Requête HTTP
+    // 4) fetch
     int status;
     char *resp = http_fetch(url, "GET", access_token, NULL, &status);
-    if (!resp) return -1;
-    if (status == 401) { free(resp); return 401; }
+    if (!resp) return false;
+    if (status == 401) { free(resp); return false; }
 
-    // 4) Parsing JSON
+    // 5) parse + liste
     cJSON *root = cJSON_Parse(resp);
     free(resp);
-    if (!root) return -1;
+    if (!root) return false;
     cJSON *items = cJSON_GetObjectItem(root, "items");
     if (!cJSON_IsArray(items)) {
         cJSON_Delete(root);
-        return status;
+        return false;
     }
 
-    // 5) Affichage formaté
-    static const char *jours[] = {
-        "Dimanche","Lundi","Mardi","Mercredi",
-        "Jeudi","Vendredi","Samedi"
-    };
+    ESP_LOGI(TAG_GCAL, "────── Événements aujourd'hui ──────");
+    time_t now_ts = now;
+    bool found = false;
 
-    ESP_LOGI(TAG_GCAL, "========= Planning de la semaine =========");
     cJSON *ev;
     cJSON_ArrayForEach(ev, items) {
-        // Titre
-        cJSON *sum = cJSON_GetObjectItem(ev, "summary");
-        const char *titre = (sum && cJSON_IsString(sum)) ? sum->valuestring : "(Sans titre)";
+        cJSON *jsum = cJSON_GetObjectItem(ev, "summary");
+        const char *tit = (jsum && cJSON_IsString(jsum))
+                          ? jsum->valuestring
+                          : "(sans titre)";
+        cJSON *jloc = cJSON_GetObjectItem(ev, "location");
+        const char *loc = (jloc && cJSON_IsString(jloc))
+                          ? jloc->valuestring
+                          : "(pas de lieu)";
 
-        // Lieu
-        cJSON *loc = cJSON_GetObjectItem(ev, "location");
-        const char *lieu = (loc && cJSON_IsString(loc)) ? loc->valuestring : "(pas de lieu)";
-
-        // Récupération start/end en ISO
-        cJSON *start = cJSON_GetObjectItem(ev, "start");
-        cJSON *end   = cJSON_GetObjectItem(ev, "end");
-        const char *sstr = "", *estr = "";
-        if (start) {
-            cJSON *d = cJSON_GetObjectItem(start, "dateTime");
-            if (d && cJSON_IsString(d)) sstr = d->valuestring;
-            else {
-                d = cJSON_GetObjectItem(start, "date");
-                if (d && cJSON_IsString(d)) sstr = d->valuestring;
-            }
-        }
-        if (end) {
-            cJSON *d = cJSON_GetObjectItem(end, "dateTime");
-            if (d && cJSON_IsString(d)) estr = d->valuestring;
-            else {
-                d = cJSON_GetObjectItem(end, "date");
-                if (d && cJSON_IsString(d)) estr = d->valuestring;
-            }
+        cJSON *jstart = cJSON_GetObjectItem(
+                            cJSON_GetObjectItem(ev, "start"),
+                            "dateTime");
+        cJSON *jend   = cJSON_GetObjectItem(
+                            cJSON_GetObjectItem(ev, "end"),
+                            "dateTime");
+        if (!cJSON_IsString(jstart) || !cJSON_IsString(jend)) {
+            continue;
         }
 
-        // Conversion ISO → struct tm pour jour & heures (en Europe/Paris)
-        struct tm tmp = {0};
+        struct tm tms = {0}, tme = {0}, loc_tm;
+        time_t ts, te;
+        // on parse l'ISO UTC puis on convertit en timestamp UTC
+        strptime(jstart->valuestring, "%Y-%m-%dT%H:%M:%SZ", &tms);
+        ts = my_timegm(&tms);
+        strptime(jend->valuestring,   "%Y-%m-%dT%H:%M:%SZ", &tme);
+        te = my_timegm(&tme);
 
-        // Heure de début
-        // va parser "2025-06-13T16:30:00+02:00" en tm, et remplir tmp.tm_gmtoff
-        strptime(sstr, "%Y-%m-%dT%H:%M:%S%z", &tmp);
-        time_t ts = my_timegm(&tmp);      // mktime tient compte de tmp.tm_gmtoff
-        localtime_r(&ts, &tmp);        // tmp est maintenant en heure locale
-        char jstart[16], hdeb[6];
-        snprintf(jstart, sizeof(jstart), "%s", jours[tmp.tm_wday]);
-        strftime(hdeb, sizeof(hdeb), "%H:%M", &tmp);
+        char bs[6], be[6];
+        localtime_r(&ts, &loc_tm); strftime(bs, sizeof bs, "%H:%M", &loc_tm);
+        localtime_r(&te, &loc_tm); strftime(be, sizeof be, "%H:%M", &loc_tm);
 
-        // Heure de fin
-        strptime(estr, "%Y-%m-%dT%H:%M:%SZ", &tmp);
-        ts = my_timegm(&tmp);                      // <— idem
-        localtime_r(&ts, &tmp);
-        char hfin[6];
-        strftime(hfin, sizeof(hfin), "%H:%M", &tmp);
+        ESP_LOGI(TAG_GCAL, "• %s @ %s → %s  (Lieu: %s)", tit, bs, be, loc);
 
-        ESP_LOGI(TAG_GCAL,
-            "• %s\n   ↳ %s de %s à %s\n   ↳ Lieu : %s",
-            titre, jstart, hdeb, hfin, lieu
-        );
+        // détection en cours
+        if (!found && now_ts >= ts && now_ts < te) {
+            found = true;
+            strncpy(summary,  tit,    sum_len-1);
+            summary[sum_len-1] = '\0';
+            strncpy(location, loc,    loc_len-1);
+            location[loc_len-1] = '\0';
+            *end_ts = te;
+        }
     }
-    ESP_LOGI(TAG_GCAL, "========================================");
+    ESP_LOGI(TAG_GCAL, "──────────────────────────────────────");
 
     cJSON_Delete(root);
-    return status;
+    return found;
 }
