@@ -20,7 +20,7 @@ Ce projet connecte un **ESP32-C3 SuperMini** en Wi-Fi, interroge un **Google Cal
 
 ## 📂 Structure du projet
 
-TEST_CODE_GOOGLECALENDAR
+PCB_Affichage_Google_Calendar
 ├── components/
 │ ├── config/ ← définitions de configuration (SSID, tokens…)
 │ │ ├── CMakeLists.txt
@@ -61,4 +61,6 @@ Chaque dossier contient :
 
 ---
 ## 🖥️ Aperçu du test
+
+![Résultat](./img/gif_Resultat.gif)
 
