@@ -52,7 +52,7 @@ Une interface web (hébergée localement ou sur le réseau local) permet :
 - La visualisation de l’état des équipements  
 - La configuration et les mises à jour  
 
-L’interface est construite avec [**Jungo**](https://github.com/getjungo/jungo) pour plus de simplicité et de modernité.
+L’interface est construite avec **Django** pour plus de simplicité et de modernité.
 
 
 
