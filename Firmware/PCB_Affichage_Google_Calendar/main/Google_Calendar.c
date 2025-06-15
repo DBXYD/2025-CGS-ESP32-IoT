@@ -8,20 +8,30 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include <time.h>
+#include "esp_wifi.h"          // <-- à ajouter
+
 
 static const char *TAG = "main";
 
-#define LED_PIN       GPIO_NUM_8
-#define TEST_INTERVAL_MIN    1    // intervalle de test en minutes
-#define BLINK_ON_MS          100
-#define BLINK_PERIOD_MS     2000  // clignotement toutes les 2s
+#define LED_PIN            GPIO_NUM_8
+#define TEST_INTERVAL_MIN  1       // intervalle en minutes (pour test: 6 s)
+#define BLINK_ON_MS        100
+#define BLINK_PERIOD_MS    2000    // clignote toutes les 2 s
+#define TOKEN_MARGIN_S     60      // rafraîchir 60 s avant expiration
 
-// flag partagé entre les tâches
 static volatile bool event_active = false;
 
-// Tâche qui clignote la LED si event_active vaut true
+// Buffers pour OAuth
+static char access_tok[512];
+static char refresh_tok[256];
+static uint64_t token_expiry_epoch = 0;
+
+// -----------------------------------------------------------------------------
+// Blink Task : clignote la LED si event_active == true
+// -----------------------------------------------------------------------------
 static void blink_task(void *arg)
 {
+    gpio_set_level(LED_PIN, 1);
     while (1) {
         if (event_active) {
             gpio_set_level(LED_PIN, 0);
@@ -29,111 +39,135 @@ static void blink_task(void *arg)
             gpio_set_level(LED_PIN, 1);
             vTaskDelay(pdMS_TO_TICKS(BLINK_PERIOD_MS - BLINK_ON_MS));
         } else {
-            // LED bien éteinte quand pas d'événement
-            gpio_set_level(LED_PIN, 1);
+            gpio_set_level(LED_PIN, 1);  // assure LED éteinte (1 ou 0 selon ta polarité)
             vTaskDelay(pdMS_TO_TICKS(500));
         }
     }
 }
-
-// Tâche qui interroge Google Calendar toutes les TEST_INTERVAL_MIN minutes
+// -----------------------------------------------------------------------------
+// GCal Task : authentifie, interroge Calendar, rafraîchit le token
+// -----------------------------------------------------------------------------
 static void gcal_task(void *arg)
 {
-    char refresh_tok[256] = {0};
+    /*  ✱✱✱  TAILLE DES BUFFERS  ✱✱✱
+     * access_token : potentiellement >1 500 o → 2 048 pour être tranquille
+     * refresh_token : ~200 o max
+     */
     char access_tok[2048] = {0};
-    int  expires = 0;
+    char refresh_tok[256] = {0};
+    int  expires_in       = 0;
+    uint64_t token_expiry = 0;
 
-    // 1) Authentification OAuth2 (device flow)
-    for (;;) {
-        if (!load_refresh_token(refresh_tok, sizeof(refresh_tok))) {
-            char device[256], user[32], url[128];
-            int  interval = 0;
-            ESP_LOGI(TAG, "Start OAuth2 device flow");
-            if (!oauth_get_device_code(device, user, url, &interval)) {
-                ESP_LOGE(TAG, "oauth_get_device_code() failed");
-                vTaskDelay(pdMS_TO_TICKS(10000));
-                continue;
-            }
-            ESP_LOGW(TAG,
-                "⚠️ AUTH REQ ⚠️\n"
-                "Visitez : %s\n"
-                "Code    : %s\n",
-                url, user
-            );
-            while (!oauth_poll_token(device, access_tok, &expires, refresh_tok)) {
-                vTaskDelay(pdMS_TO_TICKS(interval * 1000));
-            }
-            save_refresh_token(refresh_tok);
-        } else {
-            if (!oauth_refresh(refresh_tok, access_tok, &expires)) {
-                ESP_LOGW(TAG, "Refresh token invalide, purge et retry");
-                save_refresh_token("");
-                continue;
-            }
+    /* ---------------------------------------------------------------------
+     * 1) Tentative de « refresh » immédiat si un refresh_token est déjà
+     *    stocké en NVS ; sinon on démarre le Device-Code Flow.
+     * ------------------------------------------------------------------ */
+    if (load_refresh_token(refresh_tok, sizeof(refresh_tok)) &&
+        oauth_refresh(refresh_tok, access_tok, &expires_in))
+    {
+        token_expiry = time(NULL) + expires_in;
+        ESP_LOGI(TAG, "Refresh initial OK, valable %d s", expires_in);
+    }
+    else
+    {
+        char device[256], user_code[32], verify_url[128];
+        int  poll_interval = 0;
+
+        ESP_LOGI(TAG, "Démarrage Device-Code Flow");
+        while (!oauth_get_device_code(device, user_code,
+                                      verify_url, &poll_interval))
+        {
+            vTaskDelay(pdMS_TO_TICKS(5000));   // réessayer dans 5 s
         }
-        break;
+
+        ESP_LOGW(TAG,
+                 "⚠️  Autorisation requise  ⚠️\n"
+                 "Visitez : %s\n"
+                 "Code    : %s",
+                 verify_url, user_code);
+
+        /* On poll tant que l’utilisateur n’a pas validé le code. */
+        while (!oauth_poll_token(device, access_tok,
+                                 &expires_in, refresh_tok))
+        {
+            vTaskDelay(pdMS_TO_TICKS(poll_interval * 1000));
+        }
+        ESP_LOGI(TAG, "Device-Flow terminé, token OK");
+
+        save_refresh_token(refresh_tok);      // persiste le refresh_token
+        token_expiry = time(NULL) + expires_in;
     }
 
-    // 2) Boucle de test
-    while (1) {
-        char evt_name[64], evt_loc[64];
-        time_t end_ts;
+    /* ---------------------------------------------------------------------
+     * 2) Boucle principale : refresh automatique + lecture du calendrier
+     * ------------------------------------------------------------------ */
+    for (;;)
+    {
+        uint64_t now = time(NULL);
 
-        bool found = calendar_check_today(
-            access_tok,
-            evt_name, sizeof(evt_name),
-            evt_loc,  sizeof(evt_loc),
-            &end_ts
-        );
+        /* Rafraîchit le token 60 s avant son expiration ----------------- */
+        if (now + TOKEN_MARGIN_S >= token_expiry)
+        {
+            if (oauth_refresh(refresh_tok, access_tok, &expires_in))
+            {
+                token_expiry = now + expires_in;
+                ESP_LOGI(TAG, "Auto-refresh OK (+%d s)", expires_in);
+                save_refresh_token(refresh_tok);   // au cas où il changerait
+            }
+            else
+            {
+                ESP_LOGW(TAG, "Auto-refresh KO, retry dans 60 s");
+                vTaskDelay(pdMS_TO_TICKS(60000));
+                continue;
+            }
+        }
 
+        /* Lecture du planning du jour ----------------------------------- */
+        char title[128] = "", loc[128] = "";
+        time_t end_ts   = 0;
+
+        bool found = calendar_check_today(access_tok,
+                                          title, sizeof(title),
+                                          loc,   sizeof(loc),
+                                          &end_ts);
         event_active = found;
 
-        if (found) {
+        if (found)
+        {
             struct tm tm_end;
-            char hfin[6];
             localtime_r(&end_ts, &tm_end);
-            strftime(hfin, sizeof(hfin), "%H:%M", &tm_end);
-            ESP_LOGW(TAG, "➤ Événement en cours : %s @ %s jusqu'à %s",
-                     evt_name, evt_loc, hfin);
-        } else {
-            ESP_LOGI(TAG, "Pas d'événement en cours, je reteste dans %d min",
-                     TEST_INTERVAL_MIN);
+            ESP_LOGI(TAG, "Événement : \"%s\" @ %s  fin %02d:%02d",
+                     title, loc, tm_end.tm_hour, tm_end.tm_min);
         }
-                            /// temps en ms :
-        vTaskDelay(pdMS_TO_TICKS(TEST_INTERVAL_MIN * 6 * 1000)); /// Attention, pour faciliter les tests j'ai remplacé 60 par 6. à remettre pour avoir l'intervalle en minute.
+        else
+        {
+            ESP_LOGI(TAG, "Aucun événement — nouveau test dans %d s",
+                     TEST_INTERVAL_MIN * 6 /* 6 s pour le mode test */);
+        }
+
+        /* Pause --------------------------------------------------------- */
+        vTaskDelay(pdMS_TO_TICKS(TEST_INTERVAL_MIN * 6000));
     }
 }
 
+
 void app_main(void)
 {
-    // 1) NVS
-    esp_err_t r = nvs_flash_init();
-    if (r == ESP_ERR_NVS_NO_FREE_PAGES || r == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-        ESP_ERROR_CHECK(nvs_flash_erase());
-        r = nvs_flash_init();
-    }
-    ESP_ERROR_CHECK(r);
-
-    // 2) Fuseau horaire
+    ESP_ERROR_CHECK(nvs_flash_init());
     setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
     tzset();
-    ESP_LOGI(TAG, "Timezone CET/CEST");
 
-    // 3) Wi-Fi + SNTP
     wifi_init();
 
-    // 4) Config LED
+    // config LED
     gpio_config_t io_conf = {
-        .pin_bit_mask   = (1ULL << LED_PIN),
-        .mode           = GPIO_MODE_OUTPUT,
-        .pull_up_en     = GPIO_PULLUP_DISABLE,
-        .pull_down_en   = GPIO_PULLDOWN_DISABLE,
-        .intr_type      = GPIO_INTR_DISABLE
+        .pin_bit_mask = 1ULL<<LED_PIN,
+        .mode         = GPIO_MODE_OUTPUT,
     };
     gpio_config(&io_conf);
     gpio_set_level(LED_PIN, 1);
 
-    // 5) Lancer les 2 tâches
-    xTaskCreatePinnedToCore(blink_task, "blink", 2048, NULL, 5, NULL, 0);
-    xTaskCreatePinnedToCore(gcal_task,  "gcal",  8192, NULL, 5, NULL, 0);
+    // créer les deux tâches
+    xTaskCreate(blink_task, "blink", 2048, NULL, 5, NULL);
+    xTaskCreate(gcal_task,  "gcal",  8192, NULL, 5, NULL);
 }

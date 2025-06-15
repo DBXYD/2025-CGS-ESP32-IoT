@@ -2,6 +2,7 @@
 #include "http_client.h"
 #include "config.h"
 #include "nvs_flash.h"
+#include "esp_http_client.h"
 #include "cJSON.h"
 #include "esp_log.h"
 #include <string.h>
@@ -15,8 +16,9 @@ bool oauth_get_device_code(char *device_code, char *user_code, char *verificatio
     // Build POST body for device code request
     char post_fields[256];
     snprintf(post_fields, sizeof(post_fields),
-             "client_id=%s&scope=%s",
-             GOOGLE_CLIENT_ID, GOOGLE_SCOPE);
+         OAUTH_DEVICE_CODE_POST_FMT,
+         GOOGLE_CLIENT_ID,
+         GOOGLE_SCOPE);
 
     // Fetch device code
     char *resp = http_fetch(
@@ -62,18 +64,26 @@ bool oauth_get_device_code(char *device_code, char *user_code, char *verificatio
     return true;
 }
 
-bool oauth_poll_token(const char *device_code, char *access_token, int *expires_in, char *refresh_tok)
+bool oauth_poll_token(const char *device_code,
+                      char *access_token, int *expires_in,
+                      char *refresh_tok)
 {
     int status;
     // Build POST body for token polling
     char post_fields[512];
-    snprintf(post_fields, sizeof(post_fields),
-             "client_id=%s&client_secret=%s&device_code=%s&grant_type=urn:ietf:params:oauth:grant-type:device_code",
-             GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, device_code);
+    int len = snprintf(post_fields, sizeof(post_fields),
+         OAUTH_POLL_BODY_FMT,
+         GOOGLE_CLIENT_ID,
+         GOOGLE_CLIENT_SECRET,
+         device_code);
+    if (len < 0 || len >= sizeof(post_fields)) {
+        ESP_LOGE(TAG_OAUTH, "post_fields overflow");
+        return false;
+    }
 
     ESP_LOGI(TAG_OAUTH, "Polling token, device_code=%s", device_code);
     char *resp = http_fetch(
-        "https://oauth2.googleapis.com/token",
+        OAUTH_TOKEN_URL,
         "POST",
         NULL,
         post_fields,
@@ -115,44 +125,59 @@ bool oauth_poll_token(const char *device_code, char *access_token, int *expires_
     return ok;
 }
 
-bool oauth_refresh(const char *refresh_tok, char *access_token, int *expires_in)
+bool oauth_refresh(const char *refresh_token, char *access_token, int *expires)
 {
-    int status;
-    char post_fields[512];
-    snprintf(post_fields, sizeof(post_fields),
-             "client_id=%s&client_secret=%s&refresh_token=%s&grant_type=refresh_token",
-             GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, refresh_tok);
-
-    char *resp = http_fetch(
-        "https://oauth2.googleapis.com/token",
-        "POST",
-        NULL,
-        post_fields,
-        &status
-    );
-    if (!resp || status != 200) {
-        ESP_LOGE(TAG_OAUTH, "Refresh failed (status=%d)", status);
-        free(resp);
+    char post_data[256];
+    int len = snprintf(post_data, sizeof(post_data),
+                    OAUTH_REFRESH_BODY_FMT,
+                    GOOGLE_CLIENT_ID,
+                    refresh_token);
+    if (len < 0 || len >= sizeof(post_data)) {
+        ESP_LOGE(TAG_OAUTH, "post_data overflow");
         return false;
     }
 
-    cJSON *j = cJSON_Parse(resp);
-    free(resp);
-    if (!j) {
-        ESP_LOGE(TAG_OAUTH, "JSON parse error");
+    esp_http_client_config_t cfg = {
+        .url      = OAUTH_TOKEN_URL,
+        .method   = HTTP_METHOD_POST,
+        .transport_type    = HTTP_TRANSPORT_OVER_SSL,
+        .use_global_ca_store = true,
+    };
+    esp_http_client_handle_t client = esp_http_client_init(&cfg);
+    esp_http_client_set_header(client, "Content-Type", "application/x-www-form-urlencoded");
+    esp_http_client_set_post_field(client, post_data, len);
+
+    esp_err_t err = esp_http_client_perform(client);
+    int status = esp_http_client_get_status_code(client);
+    if (err != ESP_OK || status != 200) {
+        ESP_LOGE("OAUTH", "Refresh failed (%d): %s", status, esp_err_to_name(err));
+        esp_http_client_cleanup(client);
         return false;
     }
 
-    cJSON *at = cJSON_GetObjectItem(j, "access_token");
-    cJSON *ex = cJSON_GetObjectItem(j, "expires_in");
-    bool ok = at && ex;
-    if (ok) {
-        strncpy(access_token, at->valuestring, 2047);
-        access_token[2047] = '\0';
-        *expires_in = ex->valueint;
-    }
+    // Lire la réponse
+    int len_body = esp_http_client_get_content_length(client);
+    char *body = malloc(len_body + 1);
+    esp_http_client_read_response(client, body, len_body);
+    body[len_body] = 0;
+
+    // Parser JSON
+    cJSON *j = cJSON_Parse(body);
+    const char *new_token = cJSON_GetObjectItem(j, "access_token")->valuestring;
+    int new_expires       = cJSON_GetObjectItem(j, "expires_in")->valueint;
+
+    // Copier dans les buffers passés en argument
+    strcpy(access_token, new_token);
+    *expires = new_expires;
+
+    // Optionnel : enregistrer le nouveau access_token et expiry en NVS…
+    // (toi tu sauvegardes seulement le refresh_token, mais tu peux aussi
+    //  stocker l’access_token et l’expiration si tu veux redémarrer proprement)
+
     cJSON_Delete(j);
-    return ok;
+    free(body);
+    esp_http_client_cleanup(client);
+    return true;
 }
 
 bool save_refresh_token(const char *tok)

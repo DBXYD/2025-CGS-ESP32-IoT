@@ -24,13 +24,10 @@ static void on_wifi_event(void *arg, esp_event_base_t base,
         esp_wifi_connect();
 
     } else if (base == WIFI_EVENT && id == WIFI_EVENT_STA_DISCONNECTED) {
-        if (s_retry < MAX_WIFI_RETRY) {
-            ESP_LOGW(TAG, "Déconnecté, tentative de reconnexion #%d", ++s_retry);
-            esp_wifi_connect();
-        } else {
-            ESP_LOGE(TAG, "Échec de connexion après %d tentatives", MAX_WIFI_RETRY);
-        }
-
+    ESP_LOGW(TAG, "Wi-Fi déconnecté (reason=%d), tentative de reconnexion...", 
+             ((wifi_event_sta_disconnected_t*)data)->reason);
+    esp_wifi_connect();
+    // Remarque : on n’incrémente plus s_retry ni on n’arrête jamais les essais
     } else if (base == IP_EVENT && id == IP_EVENT_STA_GOT_IP) {
         ip_event_got_ip_t *evt = (ip_event_got_ip_t*) data;
         ESP_LOGI(TAG, "Adresse IP reçue : " IPSTR, IP2STR(&evt->ip_info.ip));

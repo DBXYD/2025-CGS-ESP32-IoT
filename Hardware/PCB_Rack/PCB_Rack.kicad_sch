@@ -8672,6 +8672,15 @@
 				(hide yes)
 			)
 		)
+		(property "MPN" "WS2812B"
+			(at 170.18 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d6d60cb1-7c94-4bad-9387-2a185cbd59c9")
 		)
@@ -9270,7 +9279,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder"
+		(property "Footprint" "img:LED_0603_avec_dessin"
 			(at 135.89 31.75 0)
 			(effects
 				(font
@@ -11690,7 +11699,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.we-online.com/components/products/datasheet/865060445005.pdf"
 			(at 106.68 33.02 0)
 			(effects
 				(font

@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#define OAUTH_CLIENT_ID   GOOGLE_CLIENT_ID
+#define OAUTH_SCOPE       GOOGLE_SCOPE
+
 /**
  * Lance le Device Code Flow OAuth2.
  * @param device_code   buffer (>=256) pour recevoir le device_code
@@ -38,5 +41,8 @@ bool load_refresh_token(char *buf, size_t len);
  * @return true si OK
  */
 bool save_refresh_token(const char *tok);
+
+
+
 
 #endif // OAUTH_H
