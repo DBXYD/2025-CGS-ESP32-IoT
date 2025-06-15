@@ -1733,6 +1733,16 @@
 	)
 	(wire
 		(pts
+			(xy 156.21 55.88) (xy 168.91 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "059d3437-321e-4aa4-b8b3-37652692c62d")
+	)
+	(wire
+		(pts
 			(xy 142.24 109.22) (xy 142.24 107.95)
 		)
 		(stroke
@@ -1820,16 +1830,6 @@
 			(type default)
 		)
 		(uuid "63cb531b-d98e-4502-ad78-db85c962d74a")
-	)
-	(wire
-		(pts
-			(xy 156.21 55.88) (xy 171.45 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6f2b794b-8d41-42a4-b187-293c6e58f795")
 	)
 	(wire
 		(pts
@@ -2204,7 +2204,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://eu.mouser.com/datasheet/2/418/5/ENG_DS_RT1_bistable_0819-728100.pdf"
 			(at 155.575 88.9 0)
 			(effects
 				(font
@@ -2213,8 +2213,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "Relais SPDT bistable, 1 from C"
 			(at 155.575 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MPN" "RT314F05"
+			(at 146.05 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2367,7 +2376,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
-		(at 176.53 58.42 0)
+		(at 173.99 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2376,7 +2385,7 @@
 		(fields_autoplaced yes)
 		(uuid "38eea6ee-3f02-41bf-a18d-249a2a2a425f")
 		(property "Reference" "J2"
-			(at 179.07 57.1499 0)
+			(at 176.53 57.1499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2385,7 +2394,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03"
-			(at 179.07 59.6899 0)
+			(at 176.53 59.6899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2394,7 +2403,7 @@
 			)
 		)
 		(property "Footprint" "Conn_Alim:Conn_Secteur_femelle"
-			(at 176.53 58.42 0)
+			(at 173.99 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2403,7 +2412,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 176.53 58.42 0)
+			(at 173.99 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2412,7 +2421,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 176.53 58.42 0)
+			(at 173.99 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2453,93 +2462,6 @@
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
 					(reference "J7")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:NEUT")
-		(at 171.45 58.42 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "40bb1810-f230-4e2a-bb4d-77c070cf2c98")
-		(property "Reference" "#PWR040"
-			(at 175.26 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "NEUT"
-			(at 167.64 58.4199 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 171.45 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 171.45 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"NEUT\""
-			(at 171.45 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f42b6721-482f-46bc-877a-c28bd5a2d1bd")
-		)
-		(instances
-			(project "PCB_Rack"
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
-					(reference "#PWR040")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
-					(reference "#PWR058")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
-					(reference "#PWR052")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
-					(reference "#PWR046")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
-					(reference "#PWR064")
-					(unit 1)
-				)
-				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
-					(reference "#PWR070")
 					(unit 1)
 				)
 			)
@@ -2936,7 +2858,7 @@
 	)
 	(symbol
 		(lib_id "power:Earth")
-		(at 171.45 60.96 0)
+		(at 168.91 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2945,7 +2867,7 @@
 		(fields_autoplaced yes)
 		(uuid "b9d5a15c-fa13-4a47-b51d-fe1bf4d0a977")
 		(property "Reference" "#PWR041"
-			(at 171.45 67.31 0)
+			(at 168.91 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2954,7 +2876,7 @@
 			)
 		)
 		(property "Value" "Earth"
-			(at 171.45 66.04 0)
+			(at 168.91 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2962,7 +2884,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 171.45 60.96 0)
+			(at 168.91 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2971,7 +2893,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 171.45 60.96 0)
+			(at 168.91 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2980,7 +2902,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"Earth\""
-			(at 171.45 60.96 0)
+			(at 168.91 60.96 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3190,6 +3112,93 @@
 				)
 				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
 					(reference "R30")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:NEUT")
+		(at 168.91 58.42 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d9115365-fea5-4353-99af-1d40f63199ce")
+		(property "Reference" "#PWR046"
+			(at 172.72 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "NEUT"
+			(at 165.1 58.4199 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 168.91 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 168.91 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"NEUT\""
+			(at 168.91 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8452d494-cbb1-4c94-af08-47636dcb4e14")
+		)
+		(instances
+			(project "PCB_Rack"
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5442e838-22b7-4759-82c9-b29dca855bd1"
+					(reference "#PWR046")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/5e4c1706-e559-4546-9182-b23e927581d6"
+					(reference "#PWR057")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/75b15100-946d-4ab0-a7ee-fd42b4c9e313"
+					(reference "#PWR052")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/8b3a903d-fead-4375-b5bf-423b54a60210"
+					(reference "#PWR051")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/b42fd1b5-6c7b-4805-bf9d-9efb210f2cb8"
+					(reference "#PWR058")
+					(unit 1)
+				)
+				(path "/24795ffd-bac6-477a-a38e-d8501482d995/d6311d45-f513-4dac-bbb5-f801c07c799f"
+					(reference "#PWR064")
 					(unit 1)
 				)
 			)

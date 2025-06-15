@@ -16,6 +16,12 @@ bool calendar_check_today(const char *access_token,
                           char *location, size_t loc_len,
                           time_t *end_ts)
 {
+// --- Initialisation des sorties ---
+    if (summary && sum_len > 0)   summary[0] = '\0';
+    if (location && loc_len > 0)  location[0] = '\0';
+    if (end_ts)                   *end_ts = 0;
+
+
     // 1) bornes locales jour courant
     time_t now = time(NULL);
     struct tm tm0 = *localtime(&now);

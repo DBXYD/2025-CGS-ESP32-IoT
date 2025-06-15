@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/esp-idf/newlib/port/cmake_install.cmake")
+  include("/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/esp-idf/newlib/port/cmake_install.cmake")
 endif()
 

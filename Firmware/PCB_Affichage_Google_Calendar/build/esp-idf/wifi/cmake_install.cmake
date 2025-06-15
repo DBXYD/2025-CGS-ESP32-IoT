@@ -1,4 +1,4 @@
-# Install script for directory: /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/components/wifi
+# Install script for directory: /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/components/wifi
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

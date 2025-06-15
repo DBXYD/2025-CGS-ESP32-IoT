@@ -22,4 +22,4 @@ set confirm off
 set confirm on
 
 # Load application symbols
-file /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader/bootloader.elf
+file /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader/bootloader.elf

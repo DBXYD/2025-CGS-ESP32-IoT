@@ -1,4 +1,4 @@
-/* * Data converted from /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)

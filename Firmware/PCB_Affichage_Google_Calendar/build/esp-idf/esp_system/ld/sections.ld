@@ -1,6 +1,6 @@
 /* Automatically generated file; DO NOT EDIT */
 /* Espressif IoT Development Framework Linker Script */
-/* Generated from: /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/esp-idf/esp_system/ld/sections.ld.in */
+/* Generated from: /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/esp-idf/esp_system/ld/sections.ld.in */
 
 /*
  * SPDX-FileCopyrightText: 2021 Espressif Systems (Shanghai) CO LTD

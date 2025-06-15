@@ -1,13 +1,13 @@
 # Target labels
  bootloader
 # Source files and their labels
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/CMakeFiles/bootloader
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/CMakeFiles/bootloader.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/CMakeFiles/bootloader-complete.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
-/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Projet_PCB_Affichage/Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/CMakeFiles/bootloader
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/CMakeFiles/bootloader.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/CMakeFiles/bootloader-complete.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

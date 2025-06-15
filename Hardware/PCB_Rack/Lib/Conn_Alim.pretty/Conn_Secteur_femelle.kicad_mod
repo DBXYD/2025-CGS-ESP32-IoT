@@ -65,17 +65,33 @@
 		(layer "F.SilkS")
 		(uuid "efbc0b32-48b0-462f-85b4-292552bcda62")
 	)
-	(pad "1" thru_hole roundrect
-		(at -6.85 -8.605 180)
-		(size 6.8 2.1)
-		(drill oval 6 1.3)
-		(layers "*.Cu" "*.Mask")
-		(remove_unused_layers no)
-		(roundrect_rratio 0.15)
-		(thermal_bridge_angle 45)
-		(uuid "17d616e2-8088-4068-bec2-8c5c9f1b9d26")
+	(fp_text user "N"
+		(at -7.43 -9.97 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "2d0f97d8-3eb0-46b0-815d-dfbb6994098e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
 	)
-	(pad "2" thru_hole roundrect
+	(fp_text user "L"
+		(at 6.34 -9.97 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "ab822ea4-ecef-486f-84b4-3616fa50984c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(pad "1" thru_hole roundrect
 		(at 6.85 -8.605 180)
 		(size 6.8 2.1)
 		(drill oval 6 1.3)
@@ -84,6 +100,16 @@
 		(roundrect_rratio 0.15)
 		(thermal_bridge_angle 45)
 		(uuid "3bf065f2-c746-411b-92ac-64da6760eee6")
+	)
+	(pad "2" thru_hole roundrect
+		(at -6.85 -8.605 180)
+		(size 6.8 2.1)
+		(drill oval 6 1.3)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(roundrect_rratio 0.15)
+		(thermal_bridge_angle 45)
+		(uuid "17d616e2-8088-4068-bec2-8c5c9f1b9d26")
 	)
 	(pad "3" thru_hole roundrect
 		(at 0 0 180)
