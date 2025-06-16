@@ -94,7 +94,10 @@ static void gcal_task(void *arg)
         }
         ESP_LOGI(TAG, "Device-Flow terminé, token OK");
 
-        save_refresh_token(refresh_tok);      // persiste le refresh_token
+        /* 1ʳᵉ fois : on persiste le refresh-token (Google ne le renvoie qu’une fois) */
+        if (refresh_tok[0]) {
+            save_refresh_token(refresh_tok);  /* écrit UNE seule fois en NVS */
+        }
         token_expiry = time(NULL) + expires_in;
     }
 
@@ -112,7 +115,7 @@ static void gcal_task(void *arg)
             {
                 token_expiry = now + expires_in;
                 ESP_LOGI(TAG, "Auto-refresh OK (+%d s)", expires_in);
-                save_refresh_token(refresh_tok);   // au cas où il changerait
+                //save_refresh_token(refresh_tok);   // au cas où il changerait  commenter pour /* Pas de ré-écriture NVS : le refresh-token reste inchangé */
             }
             else
             {
@@ -153,7 +156,7 @@ static void gcal_task(void *arg)
 
 void app_main(void)
 {
-    ESP_ERROR_CHECK(nvs_flash_init());
+    //ESP_ERROR_CHECK(nvs_flash_init());  <- commenter cette ligne pour ne pas redevoir se connecter au google device à chaque reboot
     setenv("TZ", "CET-1CEST,M3.5.0/2,M10.5.0/3", 1);
     tzset();
 

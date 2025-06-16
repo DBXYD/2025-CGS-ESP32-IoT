@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "Google_Calendar",
-    "project_version":    "e4912a5-dirty",
+    "project_version":    "715a610-dirty",
     "project_path":       "/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar",
     "idf_path":           "/home/janus/esp/esp-idf",
     "build_dir":          "/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/PCB_Affichage_Google_Calendar/build",

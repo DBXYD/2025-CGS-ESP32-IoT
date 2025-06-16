@@ -7,4 +7,5 @@ idf_component_register(
                 esp_http_client
                 http_client     # pour http_fetch()
                 json           # pour cJSON_Parse(), etc.
+                #esp_crt_bundle
 )

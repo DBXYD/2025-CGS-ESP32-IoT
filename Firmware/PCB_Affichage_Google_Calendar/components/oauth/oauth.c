@@ -7,6 +7,7 @@
 #include "esp_log.h"
 #include <string.h>
 #include <stdlib.h>
+#include "esp_crt_bundle.h"
 
 static const char *TAG_OAUTH = "oauth";
 
@@ -113,6 +114,9 @@ bool oauth_poll_token(const char *device_code,
     cJSON *rt = cJSON_GetObjectItem(j, "refresh_token");
     bool ok = at && ex;
     if (ok) {
+        //strncpy(access_token, at->valuestring, 2047);
+        //access_token[2047] = '\0';
+        /* Access-token ~1 500 o max → tampon 2 048 suffisant */
         strncpy(access_token, at->valuestring, 2047);
         access_token[2047] = '\0';
         *expires_in = ex->valueint;
@@ -127,57 +131,57 @@ bool oauth_poll_token(const char *device_code,
 
 bool oauth_refresh(const char *refresh_token, char *access_token, int *expires)
 {
-    char post_data[256];
+    /*  client_id(≈70) + refresh_token(≈200) + constante(≈45)  */
+    char post_data[512];
     int len = snprintf(post_data, sizeof(post_data),
                     OAUTH_REFRESH_BODY_FMT,
-                    GOOGLE_CLIENT_ID,
-                    refresh_token);
+                   GOOGLE_CLIENT_ID,
+                   GOOGLE_CLIENT_SECRET,   
+                   refresh_token);
     if (len < 0 || len >= sizeof(post_data)) {
         ESP_LOGE(TAG_OAUTH, "post_data overflow");
         return false;
     }
 
-    esp_http_client_config_t cfg = {
-        .url      = OAUTH_TOKEN_URL,
-        .method   = HTTP_METHOD_POST,
-        .transport_type    = HTTP_TRANSPORT_OVER_SSL,
-        .use_global_ca_store = true,
-    };
-    esp_http_client_handle_t client = esp_http_client_init(&cfg);
-    esp_http_client_set_header(client, "Content-Type", "application/x-www-form-urlencoded");
-    esp_http_client_set_post_field(client, post_data, len);
-
-    esp_err_t err = esp_http_client_perform(client);
-    int status = esp_http_client_get_status_code(client);
-    if (err != ESP_OK || status != 200) {
-        ESP_LOGE("OAUTH", "Refresh failed (%d): %s", status, esp_err_to_name(err));
-        esp_http_client_cleanup(client);
+    int status;
+    char *body = http_fetch(OAUTH_TOKEN_URL,
+                            "POST",
+                            NULL,          /* pas de bearer */
+                            post_data,     /* corps POST */
+                            &status);
+    if (!body || status != 200) {
+        ESP_LOGE(TAG_OAUTH, "Refresh failed (%d)", status);
+        free(body);
         return false;
     }
 
-    // Lire la réponse
-    int len_body = esp_http_client_get_content_length(client);
-    char *body = malloc(len_body + 1);
-    esp_http_client_read_response(client, body, len_body);
-    body[len_body] = 0;
-
-    // Parser JSON
+    /* Parser JSON */
     cJSON *j = cJSON_Parse(body);
-    const char *new_token = cJSON_GetObjectItem(j, "access_token")->valuestring;
-    int new_expires       = cJSON_GetObjectItem(j, "expires_in")->valueint;
-
-    // Copier dans les buffers passés en argument
-    strcpy(access_token, new_token);
-    *expires = new_expires;
-
-    // Optionnel : enregistrer le nouveau access_token et expiry en NVS…
-    // (toi tu sauvegardes seulement le refresh_token, mais tu peux aussi
-    //  stocker l’access_token et l’expiration si tu veux redémarrer proprement)
-
-    cJSON_Delete(j);
     free(body);
-    esp_http_client_cleanup(client);
-    return true;
+    if (!j) {
+        ESP_LOGE(TAG_OAUTH, "JSON parse error");
+        return false;
+    }
+    /* Vérifie que les champs existent ------------------------------- */
+    cJSON *at = cJSON_GetObjectItem(j, "access_token");
+    cJSON *ex = cJSON_GetObjectItem(j, "expires_in");
+    if (!cJSON_IsString(at) || !cJSON_IsNumber(ex)) {
+        ESP_LOGE(TAG_OAUTH, "Champs JSON manquants");
+        cJSON_Delete(j);
+        return false;
+    }
+
+    /* Copie vers la sortie ----------------------------------------- */
+    strncpy(access_token, at->valuestring, 2047);
+    access_token[2047] = '\0';
+    *expires = ex->valueint;
+ 
+     // Optionnel : enregistrer le nouveau access_token et expiry en NVS…
+     // (toi tu sauvegardes seulement le refresh_token, mais tu peux aussi
+     //  stocker l’access_token et l’expiration si tu veux redémarrer proprement)
+ 
+     cJSON_Delete(j);
+     return true;
 }
 
 bool save_refresh_token(const char *tok)

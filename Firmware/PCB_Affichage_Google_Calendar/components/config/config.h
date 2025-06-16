@@ -21,8 +21,8 @@ static const char SNTP_SERVER[] = "pool.ntp.org";
 #define OAUTH_POLL_BODY_FMT  \
   "client_id=%s&client_secret=%s&device_code=%s&grant_type=urn:ietf:params:oauth:grant-type:device_code"
 
-#define OAUTH_REFRESH_BODY_FMT       "client_id=%s&refresh_token=%s&grant_type=refresh_token"
-
+#define OAUTH_REFRESH_BODY_FMT       \
+  "client_id=%s&client_secret=%s&refresh_token=%s&grant_type=refresh_token"
 // URLs
 #define OAUTH_DEVICE_CODE_URL  "https://oauth2.googleapis.com/device/code"
 #define OAUTH_TOKEN_URL        "https://oauth2.googleapis.com/token"
