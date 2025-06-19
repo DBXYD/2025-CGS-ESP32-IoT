@@ -1,0 +1,43 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Contrôle des Appareils</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Studio</th>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>État</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for device in devices %}
+        <tr>
+            <td>{{ device.studio.nom }}</td>
+            <td>{{ device.marque }} {{ device.modele }}</td>
+            <td>{{ device.get_type_appareil_display }}</td>
+            <td>
+                {% if device.is_on %}
+                    ✅ Allumé
+                {% else %}
+                    ❌ Éteint
+                {% endif %}
+            </td>
+            <td>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="device_id" value="{{ device.id }}">
+                    <button type="submit" class="btn btn-sm {% if device.is_on %}btn-danger{% else %}btn-success{% endif %}">
+                        {% if device.is_on %}Éteindre{% else %}Allumer{% endif %}
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

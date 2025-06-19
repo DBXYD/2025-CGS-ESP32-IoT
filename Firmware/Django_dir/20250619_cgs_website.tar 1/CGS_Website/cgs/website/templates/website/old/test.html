@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .carre {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            display: none; /* Masqué par défaut */
+        }
+    </style>
+    <title>Apparition et Disparition du Carré</title>
+</head>
+<body>
+    <button id="btn">Afficher le carré</button>
+    <div class="carre" id="carre"></div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const carre = document.getElementById('carre');
+
+        btn.addEventListener('click', function() {
+            carre.style.display = 'block'; // Affiche le carré
+        });
+
+        document.addEventListener('click', function(event) {
+            const isClickInside = carre.contains(event.target) || btn.contains(event.target);
+
+            if (!isClickInside) {
+                carre.style.display = 'none'; // Cache le carré
+            }
+        });
+
+        carre.addEventListener('click', function(event) {
+            event.stopPropagation(); // Empêche la propagation de l'événement pour ne pas déclencher le gestionnaire du document
+        });
+    </script>
+</body>
+</html>
+

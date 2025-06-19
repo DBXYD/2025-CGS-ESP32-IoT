@@ -1,0 +1,45 @@
+.login-box {
+  margin-top: 120px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
+  background-color: rgba(35, 35, 35, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+  background-color: transparent;
+  border: 1px solid #c3b988;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.login-box label {
+  color: #c3b988;
+  margin-top: 10px;
+}
+
+.login-box .btn-primary {
+  background-color: #c3b988;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.login-box .btn-primary:hover {
+  background-color: #b0a56e;
+}
+
+.text-danger {
+  color: #ff6b6b;
+  font-weight: bold;
+}

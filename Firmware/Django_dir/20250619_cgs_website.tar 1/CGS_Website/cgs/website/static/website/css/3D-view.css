@@ -1,0 +1,48 @@
+/* Visite virtuelle */
+#panorama {
+	width: 100%;
+	height: 250px;
+}
+
+.panorama-container {
+	max-width: 800px; /* ajustez la valeur selon vos besoins */
+	margin: 0 auto; /* centre l'élément horizontalement */
+}
+
+.image-container {
+	flex: 0 0 50%;
+	margin-right: 20px;
+}
+
+.text-container {
+
+	text-align: justify;
+}
+
+/* Ligne entre les studios */ 
+
+  .stud {
+	border-bottom: 3px solid #c3b988;
+	padding-bottom: 55px;
+	margin-bottom: 20px;
+	text-align: center;
+	
+  }
+
+ /* centrer les titres */
+
+ h3 {
+	margin-bottom: 40px;
+	font-weight: bold;
+	font-size: xx-large;
+ }
+
+ .button{
+	
+	margin-top: 80px;
+ }
+
+ .table-center{
+   margin-left: 0;
+   margin-right: 0;
+ }

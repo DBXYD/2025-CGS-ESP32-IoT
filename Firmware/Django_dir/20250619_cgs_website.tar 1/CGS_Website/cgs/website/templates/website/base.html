@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Metadata -->
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Covent Garden Studios">
+	
+	<!-- Title -->
+	<title>Covent Garden Studios</title>
+
+	<!-- Styles -->
+	<link rel="shortcut icon" href="{% static 'website/images/cgs-icon.jpg' %}">
+	
+    <link rel="stylesheet" href="{% static 'website/css/familyOpenSans.css' %}" media="screen"/>
+    <link rel="stylesheet" href="{% static 'website/css/bootstrap.min.css' %}"/>
+    <!--<link rel="stylesheet" href="{% static 'website/css/font-awesome.min.css' %}"/>-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="{% static 'website/css/bootstrap-theme.css' %}" media="screen"/>
+	<link rel="stylesheet" href="{% static 'website/css/main.css' %}"/>
+	{% block style %}{% endblock %}
+
+</head>
+
+<body class="home">
+
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/"><img id="navbar-logo" src="{% static 'website/images/logo.png' %}"></a>
+			</div>
+
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li><a href="/">Accueil</a></li>
+					<li><a href="/studios">Studios</a></li>
+					<li><a href="/bar">Bar</a></li>
+					<li><a href="/booking">Réservation</a></li>
+					<li><a href="/contact">Contact</a></li>
+
+					{% if user.is_authenticated %}
+						<li class="dropdown">
+							<a class="btn dropdown-toggle" data-toggle="dropdown">MON COMPTE <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{% url 'profil' %}">Profil</a></li>
+								<li><a href="">Mes groupes</a></li>
+								<li><a href="">Mes réservations</a></li>
+								<li><a href="">Espace Pro</a></li>
+								<li><a href="">Déconnexion</a></li>
+							</ul>
+						</li>
+					{% endif %}
+					<li><a target="_blank" href="https://www.facebook.com/CGS95"><i class="fa-brands fa-facebook fa-2"></i></a></li>
+					<li><a target="_blank" href="https://www.instagram.com/coventgardenstudios/"><i class="fa-brands fa-instagram fa-2"></i></a></li>
+					<li><a target="_blank" href="https://www.tiktok.com/@covent.garden.studios"><i class="fa-brands fa-tiktok fa-2"></i></a></li>
+				</ul>
+			</div>
+		</div>
+	</div> <!-- /Navbar -->
+
+	<!--  MAIN CONTENT  -->
+	<main class="main-content">
+		{% block header %}{% endblock %}
+		<div class="container no-padding">
+			<div class="row">
+				<article class="col-xs-20 maincontent">
+					<div class="container no-padding">
+						{% block page_header %}{% endblock %}
+						{% block content %}{% endblock %}
+					</div>
+				</article>
+			</div>
+		</div>
+	</main> <!-- /main -->
+
+
+
+
+	<!-- Footer -->
+	<footer id="footer">
+
+		<!-- Cookies -->
+		<div id="cookieConsentBanner" class="hidden">
+			<div id="cookieConsentContent text-center">
+			  <p>Ce site utilise des cookies pour améliorer votre expérience. En continuant à naviguer sur ce site, vous acceptez notre utilisation des cookies.</p>
+			</div>
+			<div id="cookieConsentButtons">
+			  <button id="acceptCookiesButton">Accepter</button>
+			  <a href="" id="learnMoreButton">En savoir plus</a>
+			</div>
+		</div>
+
+		<!-- Footer 1 -->
+		<div class="footer1">
+			<div class="container">
+
+				<!-- Row of widgets -->
+				<div class="row">
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contact</h3>
+						<div class="widget-body">
+							<p>
+								Téléphone : <a href="tel:0130365291">01 30 36 52 91</a><br>
+								E-mail : <a href="mailto:contact@coventgarden.fr">contact@coventgarden.fr</a>
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Adresse</h3>
+						<div class="widget-body">
+							<p>
+ 								<a href="https://goo.gl/maps/xwy7vnXwuFTFXfJA8" target="_blank">
+ 									1 Rue du Bouvreuil,<br>
+ 									Parc d'activité de la Danne<br>
+ 									95610, Eragny-sur-Oise
+ 								</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Horaires</h3>
+						<div class="widget-body">
+							<p>
+								Lundi - Vendredi : 16h - 00h<br>
+								Samedi : 10h - 18h<br>
+								Dimanche : 13h - 21h<br>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Réseaux sociaux</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons">
+								<!-- <a target="_blank" href="https://www.youtube.com/user/CoventGardenStudio"><i class="fa fa-youtube-play fa-2"></i></a> -->
+								<a target="_blank" href="https://www.facebook.com/CGS95"><i class="fa-brands fa-facebook fa-2"></i></a>
+								<a target="_blank" href="https://www.instagram.com/coventgardenstudios/"><i class="fa-brands fa-instagram fa-2"></i></a>
+								<a target="_blank" href="https://www.tiktok.com/@covent.garden.studios"><i class="fa-brands fa-tiktok fa-2"></i></a>
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /Row of widgets -->
+
+			</div>
+		</div> <!-- /Footer 1 -->
+		
+		<!-- Footer 2 -->
+		<div class="footer2">
+			<div class="container">
+
+				<!-- Row of widgets -->
+				<div class="row">
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="simplenav">
+								<a href="/">Accueil</a> /
+								<!--<a href="">Actu-Concert</a> /-->
+								<a href="/studios">Studios</a> /
+								<a href="/bar">Bar</a> /
+								<a href="/booking">Réservation</a> /
+								<a href="/contact">Contact</a> /
+								<a href="/cgu">CGU</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="text-right">
+								Copyright &copy; 2024 Covent Garden Studios</a> 
+							</p>
+						</div>
+					</div>
+				</div> <!-- /Row of widgets -->
+
+			</div>
+		</div> <!-- /Footer 2 -->
+
+	</footer>
+	
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="{% static 'website/js/jquery.min.js' %}"></script>
+	<script src="{% static 'website/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'website/js/headroom.min.js' %}"></script>
+	<script src="{% static 'website/js/jQuery.headroom.min.js' %}"></script>
+	<script src="{% static 'website/js/template.js' %}"></script>
+
+	<!-- Cookies -->
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		  var cookieConsentBanner = document.getElementById("cookieConsentBanner");
+		  var acceptCookiesButton = document.getElementById("acceptCookiesButton");
+		  var learnMoreButton = document.getElementById("learnMoreButton");
+	   
+		  // Vérifie si le cookie d'acceptation est déjà présent
+		  var isCookieAccepted = document.cookie.indexOf("cookieAccepted=true") !== -1;
+	   
+		  if (!isCookieAccepted) {
+			cookieConsentBanner.classList.remove("hidden");
+		  }
+	   
+		  // Fonction pour accepter les cookies et masquer la bannière
+		  function acceptCookies() {
+			cookieConsentBanner.classList.add("hidden");
+			// Définir un cookie d'acceptation pour une durée de validité (par exemple, 30 jours)
+			var expirationDate = new Date();
+			expirationDate.setDate(expirationDate.getDate() + 30);
+			document.cookie = "cookieAccepted=true; expires=" + expirationDate.toUTCString() + "; path=/";
+		  }
+	   
+		  acceptCookiesButton.addEventListener("click", acceptCookies);
+	   
+		  // Fonction pour gérer l'action "En savoir plus" (à personnaliser selon vos besoins)
+		  function learnMore() {
+			// Ajoutez ici votre logique pour rediriger l'utilisateur vers une page d'informations supplémentaires sur les cookies
+			console.log("Redirection vers la page d'informations sur les cookies");
+		  }
+	   
+		  learnMoreButton.addEventListener("click", learnMore);
+		});
+	</script>
+
+	<!-- Custom JavaSript for our template -->
+	{% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,502 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+<!-- Header -->
+{% block header %}
+
+<header id="head" class="secondary"></header>
+
+{% endblock %}
+
+
+
+<!-- Page header -->
+{% block page_header %}
+
+<header class="page-header">
+	<h1 class="page-title color-gold bottom-space"><strong>Nos Studios</strong></h1>
+</header>
+
+{% endblock %}
+
+
+<!-- Main content -->
+{% block content %}
+
+<!-- Content 1 -->
+<div class="container">
+	<div class="row">
+		<!-- Left -->
+		<div class="col-md-6 col-sm-12 justify-right-to-center">
+			<div class="parallelogramme">
+				<h2 class="color-black"><strong>Tarifs :</strong></h2><br>
+				<table class="table-center color-black parallelogramme-text">
+					<tbody>
+						<tr><td>1 heure.........................................</td><td>20€</td></tr>
+						<tr><td>2 heures........................................</td><td>38€</td></tr>
+						<tr><td>3 heures........................................</td><td>54€</td></tr>
+						<tr><td>4 heures........................................</td><td>68€</td></tr>
+						<tr><td>Heure supplémentaire.............   +</td><td>17€</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Right -->
+		<div class="col-md-6 col-sm-0">
+			<div class="parallelogramme-tonull">
+				<h2 class="color-black"><strong>Horaires :</strong></h2><br>
+				<table class="table-center color-black parallelogramme-text">
+					<tbody>
+						<tr><td>Lundi - Vendredi</td><td>16h00 - 00h00</td></tr>
+						<tr><td>Samedi</td><td>10h00 - 18h00*</td></tr>
+						<tr><td>Dimanche</td><td>13h00 - 21h00</td></tr>
+						<tr><td><br>*10h - 00h les jours de concerts</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-md-0 justify-center">
+			<div class="parallelogramme-tofull">
+				<h2 class="color-black"><strong>Horaires :</strong></h2><br>
+				<table class="table-center color-black parallelogramme-text">
+					<tbody>
+						<tr><td>Lundi - Vendredi</td><td>16h00 - 00h00</td></tr>
+						<tr><td>Samedi</td><td>10h00 - 18h00*</td></tr>
+						<tr><td>Dimanche</td><td>13h00 - 21h00</td></tr>
+						<tr><td><br>*10h - 00h les jours de concerts</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container text-center top-space">
+	<div class="row">
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<h3>Supernova - 48m²</h3>
+			<img class="click" src="{% static 'studios/images/supernova.png' %}" alt="supernova" onclick="afficher('supernova')">
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<h3>Octopuss - 48m²</h3>
+			<img class="click" src="{% static 'studios/images/octopuss.png' %}" alt="octopuss" onclick="afficher('octopuss')">
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<h3>Rainbow - 31m²</h3>
+			<img class="click" src="{% static 'studios/images/rainbow.png' %}" alt="rainbow" onclick="afficher('rainbow')">
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<h3>California - 25m²</h3>
+			<img class="click" src="{% static 'studios/images/california.png' %}" alt="california" onclick="afficher('california')">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<h3>Scène - 25m²/60m²</h3>
+			<img class="click" src="{% static 'studios/images/scene.png' %}" alt="scene" onclick="afficher('scene')">
+		</div>
+	</div>
+</div>
+
+<div class="container justify no-padding top-space">
+	<div class="container-full background-color-gray">
+		<div class="swiper mySwiper" style="z-index: 0;">
+			<div class="swiper-wrapper" style="z-index: 0;">
+				<div class="swiper-slide"><img src="{% static 'studios/images/Shure.png' %}" alt="Shure"></div>
+				<div class="swiper-slide"><img src="{% static 'studios/images/Peavey.png' %}" alt="Peavey"></div>
+				<div class="swiper-slide"><img src="{% static 'studios/images/Pearl.png' %}" alt="Pearl"></div>
+				<div class="swiper-slide"><img src="{% static 'studios/images/Pdp.png' %}" alt="Pdp"></div>
+				<div class="swiper-slide"><img src="{% static 'studios/images/Marshall.png' %}" alt="Marshall"></div>
+				<div class="swiper-slide"><img src="{% static 'studios/images/Fender.png' %}" alt="Fender"></div>
+				<div class="swiper-slide"><img src="{% static 'studios/images/Ampeg.png' %}" alt="Ampeg"></div>
+				<div class="swiper-slide"><img src="{% static 'studios/images/Soundcraft.png' %}" alt="Soundcraft"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fond-onclick" id="fond-onclick">
+	<div class="container-sm">
+		<div class="cadre-onclick text-center" id="cadre-onclick">
+			<h3 class="color-gold" id="nom_salle"></h3>
+			<div class="row">
+				<div class="col-md-1 col-sm-0"></div>
+				<div class="col-md-5 col-sm-12 justify-center">
+					<div class="text-container">
+						<ul>
+							<li><h4 id="Superficie">Superficie : 48m²</h4></li>
+							<li><h4>2 amplis guitare à lampe 2 corps</h4></li>
+							<li><h4>Ampli basse Hartke 250w</h4></li>
+							<li><h4 id="Batterie">Batterie Pearl Export 5 fûts</h4></li>
+							<li><h4>3 micros AKG D5</h4></li>
+							<li><h4>Console Soundfraft EFX8</h4></li>
+							<li><h4 id="Diffusion">Diffusion Maryland (2x 1500w)</h4></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-5 col-sm-12 justify-center" id="360container">
+					<div id="panorama-supernova" class="panorama-supernova-container"></div>
+				</div>
+				<div class="col-md-1 col-sm-0"></div>
+			</div>
+			<a class="btn btn-action btn-lg no-grow top-margin bottom-margin" href="{% url 'booking' %}" role="button">Réserver ce studio</a>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+<!-- Custom CSS styles file(s) -->
+{% block style %}
+
+	<link rel="stylesheet" href="{% static 'studios/css/3D-view.css' %}" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap">
+
+	<!-- Link Swiper's CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+	<!-- Demo styles -->
+	<style>
+	  .swiper {
+		width: 100%;
+		padding-top: 50px;
+		padding-bottom: 50px;
+	  }
+
+	  .swiper-slide {
+		background-position: center;
+		background-size: cover;
+		width: 175px;
+		height: 175px;
+	  }
+
+	  .swiper-slide img {
+		display: block;
+		width: 100%;
+	  }
+	</style>
+
+{% endblock %}
+
+
+
+<!-- Custom JavaScript file(s) -->
+{% block scripts %}
+
+	<script src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+		var pannellumViewer = pannellum.viewer('panorama-supernova', {
+		"type": "equirectangular",
+		"panorama": "../static/studios/images/360pictures/supernova.JPG",
+		"autoLoad": true,
+		"autoRotate": -2,
+		"title": "Studio SUPERNOVA",
+		"author": "CoventGardenStudios",
+		"hotSpots": [	
+					{
+						"pitch": -40,
+						"yaw": 225,
+						"type": "info",
+						"text": "Ampli guitare"
+					},
+					{
+						"pitch": -17,
+						"yaw": 308,
+						"type": "info",
+						"text": "Console Soundfraft EFX8"
+					},
+					{
+						"pitch": -20,
+						"yaw": 0,
+						"type": "info",
+						"text": "Batterie Pearl Export 5 fûts"
+					},
+					{
+						"pitch": -22,
+						"yaw": 45,
+						"type": "info",
+						"text": "Ampli basse Hartke 250w"
+					},
+					{
+						"pitch": -25,
+						"yaw": 140,
+						"type": "info",
+						"text": "Ampli guitare"
+					},
+
+					]
+		});
+		});
+	</script>
+
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+			var pannellumViewer = pannellum.viewer('panorama-octopuss', {
+				"type": "equirectangular",
+				"panorama": "../static/studios/images/360pictures/octopuss.JPG",
+				"autoLoad": true,
+				"autoRotate": -2,
+				"title": "Studio OCTOPUSS",
+				"author": "CoventGardenStudios",
+				"hotSpots": [
+					{
+						"pitch": -40,
+						"yaw": 225,
+						"type": "info",
+						"text": "Ampli guitare"
+					},
+					{
+						"pitch": -17,
+						"yaw": 308,
+						"type": "info",
+						"text": "Console Soundfraft EFX8"
+					},
+					{
+						"pitch": -20,
+						"yaw": 0,
+						"type": "info",
+						"text": "Batterie Pearl Export 5 fûts"
+					},
+					{
+						"pitch": -22,
+						"yaw": 55,
+						"type": "info",
+						"text": "Ampli basse Hartke 250w"
+					},
+					{
+						"pitch": -25,
+						"yaw": 140,
+						"type": "info",
+						"text": "Ampli guitare"
+					}
+
+					]
+			});
+		});
+	</script>
+
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+			var pannellumViewer = pannellum.viewer('panorama-rainbow', {
+				"type": "equirectangular",
+				"panorama": "../static/studios/images/360pictures/rainbow.JPG",
+				"autoLoad": true,
+				"autoRotate": -2,
+				"title": "Studio RAINBOW",
+				"author": "CoventGardenStudios",
+				"hotSpots": [
+					{
+						"pitch": -40,
+						"yaw": 225,
+						"type": "info",
+						"text": "Ampli guitare"
+					},
+					{
+						"pitch": -17,
+						"yaw": 308,
+						"type": "info",
+						"text": "Ampli basse Hartke 250w"
+					},
+					{
+						"pitch": -20,
+						"yaw": 0,
+						"type": "info",
+						"text": "Batterie Pearl Export 5 fûts"
+					},
+					{
+						"pitch": -22,
+						"yaw": 35,
+						"type": "info",
+						"text": "Console Soundfraft EFX8"
+					},
+					{
+						"pitch": -25,
+						"yaw": 140,
+						"type": "info",
+						"text": "Ampli guitare"
+					}
+				]	
+			});
+		});
+	</script>
+
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+			var pannellumViewer = pannellum.viewer('panorama-california', {
+				"type": "equirectangular",
+				"panorama": "../static/studios/images/360pictures/california.JPG",
+				"autoLoad": true,
+				"autoRotate": -2,
+				"title": "Studio CALIFORNIA",
+				"author": "CoventGardenStudios",
+				"hotSpots": [
+					{
+						"pitch": -40,
+						"yaw": 240,
+						"type": "info",
+						"text": "Ampli guitare"
+					},
+					{
+						"pitch": -17,
+						"yaw": 308,
+						"type": "info",
+						"text": "Console Soundfraft EFX8"
+					},
+					{
+						"pitch": -20,
+						"yaw": 0,
+						"type": "info",
+						"text": "Batterie Pearl CZX custom fûts"
+					},
+					{
+						"pitch": -32,
+						"yaw": 45,
+						"type": "info",
+						"text": "Ampli basse Hartke 250w"
+					},
+					{
+						"pitch": -25,
+						"yaw": 150,
+						"type": "info",
+						"text": "Ampli guitare"
+					}
+				]	
+			});
+		});
+	</script>
+
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+			var pannellumViewer = pannellum.viewer('panorama-scene', {
+				"type": "equirectangular",
+				"panorama": "../static/studios/images/360pictures/scene.JPG",
+				"autoLoad": true,
+				"autoRotate": -2,
+				"title": "SCENE",
+				"author": "CoventGardenStudios",
+				"hotSpots": [
+					{
+						"pitch": -35,
+						"yaw": 250,
+						"type": "info",
+						"text": "Ampli guitare"
+					},
+					{
+						"pitch": -23,
+						"yaw": 318,
+						"type": "info",
+						"text": "Console Soundfraft EFX8"
+					},
+					{
+						"pitch": -20,
+						"yaw": 0,
+						"type": "info",
+						"text": "Batterie PDP Concept 6 fûts"
+					},
+					{
+						"pitch": -22,
+						"yaw": 45,
+						"type": "info",
+						"text": "Ampli basse Hartke 250w"
+					},
+					{
+						"pitch": -25,
+						"yaw": 125,
+						"type": "info",
+						"text": "Ampli guitare"
+					}
+				]	
+			});
+		});
+	</script>
+
+	<script>
+		var disp = 'removed';
+		var surclick = false;
+
+		function afficher(studio) {
+			var nom = document.getElementById('nom_salle');
+			var fond = document.getElementById('fond-onclick');
+			fond.classList.add('fond-onclick-apparant');
+			disp = 'added';
+			var superficie = document.getElementById('Superficie');
+			var batterie = document.getElementById('Batterie');
+			var diffusion = document.getElementById('Diffusion');
+			switch(studio){
+				case 'supernova':
+					nom.textContent = 'Supernova - 48m²';
+					superficie.textContent = 'Superficie : 48m²';
+					break;
+				case 'octopuss':
+					nom.textContent = 'Octopuss - 48m²';
+					superficie.textContent = 'Superficie : 48m²';
+					break;
+				case 'rainbow':
+					nom.textContent = 'Rainbow - 31m²';
+					superficie.textContent = 'Superficie : 31m²';
+					diffusion.textContent = 'Diffusion Nexo PS15 (2x 1000w)';
+					break;
+				case 'california':
+					nom.textContent = 'California - 25m²';
+					superficie.textContent = 'Superficie : 25m²';
+					batterie.textContent = 'Batterie Pearl CZX custom fûts';
+					diffusion.textContent = 'Diffusion Nexo PS15 (2x 1000w)';
+					break;
+				case 'scene':
+					nom.textContent = 'Scène - 25m²/60m²';
+					superficie.textContent = 'Superficie : Plateau 25m² / Fosse 60m²';
+					batterie.textContent = 'Batterie PDP Concept 6 fûts';
+					diffusion.textContent = '6 JBL SRX712';
+					break;
+			}
+		}
+
+		document.addEventListener('click', function(event) {
+            const cadre = document.getElementById('cadre-onclick');
+			const fond = document.getElementById('fond-onclick');
+			const isClickInside = cadre.contains(event.target);
+			if (disp === 'added') {
+				if (surclick === true) {
+					if (!isClickInside) {
+						fond.classList.remove('fond-onclick-apparant');
+						disp = 'removed';
+						surclick = false;
+					}
+				}
+				else {
+					surclick = true;
+				}
+			}
+        });
+	</script>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+	var swiper = new Swiper(".mySwiper", {
+		effect: "coverflow",
+		grabCursor: true,
+		centeredSlides: true,
+		slidesPerView: "auto",
+		coverflowEffect: {
+		rotate: 0,
+		stretch: 0,
+		depth: 40,
+		modifier: 1,
+		slideShadows: false,
+		},
+		pagination: {
+		el: ".swiper-pagination",
+		},
+		initialSlide: 3, // Affiche la 3e image (index 2) par défaut
+	});
+</script>
+ 
+{% endblock %}
