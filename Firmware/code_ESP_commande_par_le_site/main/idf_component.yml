@@ -1,0 +1,2 @@
+dependencies:
+  espressif/led_strip: "^3"     # prend la dernière 3.x (v3.0.1 aujourd’hui)

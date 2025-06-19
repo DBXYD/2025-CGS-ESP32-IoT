@@ -1,0 +1,124 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+<!-- Header -->
+{% block header %}
+
+<header id="head" class="secondary"></header>
+
+{% endblock %}
+
+
+
+<!-- Page header -->
+{% block page_header %}
+
+<header class="page-header">
+	<h1 class="page-title">{{title}}</h1>
+</header>
+
+{% endblock %}
+
+
+
+<!-- Main content -->
+{% block content %}
+
+<!-- Content 1 -->
+<div class="container">
+	<div class="row">
+		<!-- Left -->
+		<div class="col-md-6 col-sm-12 justify-right-to-center">
+			<div class="parallelogramme">
+				<h2 class="color-black"><strong>Tarifs :</strong></h2><br>
+				<table class="table-center color-black parallelogramme-text">
+					<tbody>
+						<tr><td>1 heure.........................................</td><td>21€</td></tr>
+						<tr><td>2 heures........................................</td><td>40€</td></tr>
+						<tr><td>3 heures........................................</td><td>57€</td></tr>
+						<tr><td>4 heures........................................</td><td>72€</td></tr>
+						<tr><td>Heure supplémentaire.............   +</td><td>18€</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Right -->
+		<div class="col-md-6 col-sm-0">
+			<div class="parallelogramme-tonull">
+				<h2 class="color-black"><strong>Horaires :</strong></h2><br>
+				<table class="table-center color-black parallelogramme-text">
+					<tbody>
+						<tr><td>Lundi - Vendredi</td><td>16h00 - 00h00</td></tr>
+						<tr><td>Samedi</td><td>10h00 - 18h00*</td></tr>
+						<tr><td>Dimanche</td><td>13h00 - 21h00</td></tr>
+						<tr><td><br>*10h - 00h les jours de concerts</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="row">
+		<div class="col-sm-12 col-md-0 justify-center">
+			<div class="parallelogramme-tofull">
+				<h2 class="color-black"><strong>Horaires :</strong></h2><br>
+				<table class="table-center color-black parallelogramme-text">
+					<tbody>
+						<tr><td>Lundi - Vendredi</td><td>16h00 - 00h00da</td></tr>
+						<tr><td>Samedi</td><td>10h00 - 18h00*</td></tr>
+						<tr><td>Dimanche</td><td>13h00 - 21h00</td></tr>
+						<tr><td><br>*10h - 00h les jours de concerts</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div> -->
+</div>
+
+<div class="d-flex justify-content-center top-space margin-auto">
+	<div class="col-sm-12 text-center ">
+			<h2>Coordonnées</h2><br>
+			E-Mail : <a href="mailto:contact@coventgarden.fr">contact@coventgarden.fr</a><br>
+			Tel : <a href="tel:0130365291">01 30 36 52 91</a>
+	</div>
+</div>
+<div class="container top-space">
+	<div class="row">
+        <div class="col-md-12 col-sm-12 justify-center top-space">
+            <iframe style="border: solid 1px #777;" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%233F51B5&amp;ctz=Europe%2FParis&amp;src=bDlmdTlwa2o2dXFocTFqZG44NjFpbWc2MDBAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%233F51B5&amp;title=Supernova&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="col-md-12 col-sm-12 justify-center top-space">
+            <iframe style="border: solid 1px #777;" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23E4C441&amp;ctz=Europe%2FParis&amp;src=dGpzMjF1cDFrM3Fwb2dkb3BlY2YxMnV2aWtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23F6BF26&amp;title=Octopuss&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="col-md-12 col-sm-12 justify-center top-space">
+            
+            <iframe style="border: solid 1px #777;" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23D50000&amp;ctz=Europe%2FParis&amp;src=YmliZW1lM25jbHZzcnRuaGFycWJnNG1yaWNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23D50000&amp;title=Rainbow&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="col-md-12 col-sm-12 justify-center top-space">
+            
+            <iframe style="border: solid 1px #777;" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%238E24AA&amp;ctz=Europe%2FParis&amp;src=cWkyazBtbTQ4Yms1MGxtMzhhMDJqMWF0aW9AZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%238E24AA&amp;title=California&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+        <div class="col-md-12 col-sm-12 justify-center top-space">
+            <iframe style="border: solid 1px #777;" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=2&amp;bgcolor=%23795548&amp;ctz=Europe%2FParis&amp;src=a2oybDZ2ZW51YzJocnNnNm1xY2RidnZlajRAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23795548&amp;title=Sc%C3%A8ne&amp;showNav=1&amp;showDate=1&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;mode=WEEK" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+</div>
+    
+
+
+{% endblock %}
+
+
+
+<!-- Custom CSS styles file(s) -->
+{% block style %}
+<link rel="stylesheet" href="{% static 'studios/css/booking.css' %}">
+
+{% endblock %}
+
+
+
+<!-- Custom JavaScript file(s) -->
+{% block scripts %}
+
+{% endblock %}

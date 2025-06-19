@@ -1,0 +1,170 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+<!-- Header -->
+{% block header %}
+
+<header id="head">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<img class="navbar-brand" src="{% static 'studios/images/logo.png' %}" alt= "Covent Garden logo">
+			</div>
+			<a class="btn btn-action btn-lg" href="{% url 'booking' %}" role="button">RÉSERVER UN STUDIO</a>
+		</div>
+	</div>
+</header>
+
+{% endblock %}
+
+
+
+<!-- Page header -->
+{% block page_header %}
+
+{% endblock %}
+
+
+
+<!-- Main content -->
+{% block content %}
+<div class="container">
+	<h1 class="color-gold text-center top-space"><strong>4 STUDIOS DE RÉPÉTITIONS, 1 SALLE DE CONCERT ET 1 BAR DANS LE VAL-D'OISE !</strong></h1><br>
+
+	<h4 class="fade-in text-center">Tous nos studios insonorisés sont équipés de matériel professionnel entretenu et un régisseur est là pour vous accueillir et prendre soin de vous !</h4>
+	<h4 class="fade-in text-center">Musicien amateur ou professionnel, le Covent Garden Studios est le lieu indépendant du 95 où vous pourrez exprimer toute votre créativité musicale !</h4><br>
+</div>
+
+<div class="row no-gutters">
+	<div class="col-xs-12 col-md-6">
+		<img class="img img-rounded" src="{% static 'studios/images/presentation_studios1.jpg' %}" alt="presentation_studios1">
+	</div>
+	<div class="col-xs-0 col-md-6">
+		<img class="img" src="{% static 'studios/images/bandes_horizontales1.svg' %}" alt="bandes-horizontales1">
+	</div>
+</div>
+
+<!-- doit remonter de 138px-->
+<div class="row no-gutters animated-grid1" id="img-animated1">
+	<div class="col-xs-0 col-md-5"></div>
+	<div class="col-xs-0 col-md-7">
+		<img class="img img-rounded" src="{% static 'studios/images/presentation_studios2.png' %}" alt="presentation_studios2">
+	</div>
+</div>
+
+<!-- doit remonter de 155px-->
+<div class="row no-gutters animated-grid1" id="img-animated2">
+	<div class="col-xs-0 col-md-1">
+		<img src="{% static 'studios/images/bandes_horizontales2.svg' %}" alt="bandes-horizontales2">
+	</div>
+	<div class="col-xs-0 col-md-8">
+		<img class="img img-rounded" src="{% static 'studios/images/presentation_studios3.jpg' %}" alt="presentation_studios3">
+	</div>
+	<div class="col-xs-0 col-md-3">
+		<img src="{% static 'studios/images/bandes_horizontales3.svg' %}" alt="bandes-horizontales3">
+	</div>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const image1 = document.getElementById("img-animated1");
+		const image2 = document.getElementById("img-animated2");
+		const image3 = document.getElementById("img-animated3");
+		const image4 = document.getElementById("img-animated4");
+
+		const observerOptions = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.01
+		};
+
+		const observerCallback = (entries, observer) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('visible');
+					observer.unobserve(entry.target); // Arrêter l'observation après ajout de la classe
+				}
+			});
+		};
+
+		const observer1 = new IntersectionObserver(observerCallback, observerOptions);
+		observer1.observe(image1);
+
+		const observer2 = new IntersectionObserver(observerCallback, observerOptions);
+		observer2.observe(image2);
+
+		const observer3 = new IntersectionObserver(observerCallback, observerOptions);
+		observer3.observe(image3);
+
+		const observer4 = new IntersectionObserver(observerCallback, observerOptions);
+		observer4.observe(image4);
+	});
+</script>
+
+<div class="container justify no-padding animated-grid2" id="img-animated3">
+	<div class="container-full background-color-brown">
+		<div class="container">
+			<div class="row">
+				<h1 class="text-center top-space color-gold"><strong>LES ACTUS ET LES CONCERTS !</strong></h1><br>
+
+				<h4 class="fade-in text-center color-black">Une scène complètement équipée pour les lives, qui permet aux groupes professionnels</h4>
+				<h4 class="fade-in text-center color-black">et amateurs de se produire dans d'excellentes conditions !</h4>
+
+				<div class="col-md-4 col-sm-6 highlight mx-auto">
+					<img src="{% static 'studios/images/presentation_concerts1.jpg' %}" alt="presentation_concerts1">
+				</div>
+				<div class="col-md-4 col-sm-6 highlight mx-auto">
+					<img src="{% static 'studios/images/presentation_concerts2.jpg' %}" alt="presentation_concerts2">
+				</div>
+				<div class="col-md-4 col-sm-6 highlight mx-auto">
+					<img src="{% static 'studios/images/presentation_concerts3.jpg' %}" alt="presentation_concerts3">
+				</div>
+			</div>
+		</div>
+		<div class="container justify margtopbot">
+			<a class="btn btn-action btn-lg no-grow" href="{% url 'news' %}" role="button">VOIR TOUTES LES ACTUS</a>
+		</div>
+	</div>
+</div>
+
+<div class="row animated-grid3" id="img-animated4">
+	<div class="col-xs-12 col-sm-4 highlight mx-auto align-justify-center">
+		<a class="navbar-brand" href="https://coventgarden.fr/" target="_blank">
+			<div class="crop-image-container">
+				<img class="crop-image" src="{% static 'studios/images/48Volt.png' %}" alt="48Volts">
+			</div>
+		</a>
+	</div>
+
+	<div class="col-xs-12 col-sm-4 highlight mx-auto align-justify-center">
+		<a class="navbar-brand" href="https://www.combo95.org/" target="_blank">
+			<div class="crop-image-container">
+				<img class="crop-image" src="{% static 'studios/images/Combo95.png' %}" alt="Combo 95">
+			</div>
+		</a>
+	</div>
+	
+	<div class="col-xs-12 col-sm-4 highlight mx-auto align-justify-center">
+		<a class="navbar-brand" href="https://www.brasseriedesutter.com/" target="_blank">
+			<div class="crop-image-container">
+				<img class="crop-image" src="{% static 'studios/images/De_Sutter.png' %}" alt="De Sutter">
+			</div>
+		</a>
+	</div>
+</div>
+
+{% endblock %}
+
+
+
+<!-- Custom CSS styles file(s) -->
+{% block style %}
+
+{% endblock %}
+
+
+
+<!-- Custom JavaScript file(s) -->
+{% block scripts %}
+
+{% endblock %}

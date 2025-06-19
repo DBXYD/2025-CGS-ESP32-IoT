@@ -1,0 +1,122 @@
+(footprint "Wurth-470u-50V"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 2.8 9.05 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "efec46a2-a424-4d77-8f8d-0831e338f453")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "Wurth-470u-50V"
+		(at 2.43 8.22 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "1f546d7f-5588-4ac0-8c78-deb376985d9c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at -0.09 -0.12 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e9f76065-9d7b-4b8b-95b7-56a5e1a8182f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at -0.09 -0.12 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "24638f33-8623-4371-a042-c6ba5b13a3db")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_circle
+		(center 2.5 0)
+		(end 9 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "8c9e51a8-6dc1-447a-8bd5-4c15bb9dbcf8")
+	)
+	(fp_circle
+		(center 2.5 0)
+		(end 9 0)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "b9900de7-72bc-4e29-ac5f-a0a1420306e2")
+	)
+	(fp_text user "+"
+		(at -1.78 -1.66 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "211f1216-9606-4e14-940c-ba56ef71ee8a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom)
+		)
+	)
+	(fp_text user "860080678019"
+		(at 2.97 9.88 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "6ed6179d-3a3f-4674-9ef2-3d12418387ca")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 1.6 1.6)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "59af6889-79d5-4505-b1eb-e573743aef04")
+	)
+	(pad "2" thru_hole circle
+		(at 5 0)
+		(size 1.6 1.6)
+		(drill 0.9)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "b94b6128-e5a7-4c90-be88-9fbcb4902622")
+	)
+	(embedded_fonts no)
+)

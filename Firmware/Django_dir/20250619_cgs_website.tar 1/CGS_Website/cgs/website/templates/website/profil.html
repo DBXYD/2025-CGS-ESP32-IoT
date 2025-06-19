@@ -1,0 +1,91 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="padding-top: 120px;">
+  <h2>Bonjour {{ user.username }} !</h2>
+
+  {% if user.is_superuser %}
+      <p>Contrôle des ESP32 par studio :</p>
+      <ul>
+        {% for esp in esps %}
+          <li class="mb-3">
+            <strong>{{ esp.name }}</strong> — IP: {{ esp.esp_ip }}<br>
+            État:
+            <span id="state-{{ esp.id }}" class="{% if esp.status == 'ON' %}text-success{% else %}text-danger{% endif %}">
+              {{ esp.status }}
+            </span> /
+            Connexion:
+            <span id="conn-{{ esp.id }}">
+              {{ esp.connected|yesno:"Connecté,Déconnecté" }}
+            </span>
+            <form method="post" onsubmit="event.preventDefault(); toggleESP({{ esp.id }})">
+              {% csrf_token %}
+              <button class="btn btn-sm btn-warning mt-1">Inverser l'état</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+  {% else %}
+      <p>Vous n'avez pas les droits pour accéder à ce panneau.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  function toggleESP(espId) {
+      fetch(`/api/esp/${espId}/toggle/`, {
+          method: 'POST',
+          headers: {
+              'X-CSRFToken': csrftoken,
+              'Content-Type': 'application/json'
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          const span = document.getElementById(`state-${espId}`);
+          if (span) {
+              span.innerText = data.status;
+              span.className = data.status === "ON" ? "text-success" : "text-danger";
+          }
+      });
+  }
+
+  function updateESPStatus(espId, espName) {
+      fetch(`/api/esp/status/?name=${encodeURIComponent(espName)}`)
+      .then(response => response.json())
+      .then(data => {
+          const spanState = document.getElementById(`state-${espId}`);
+          const spanConn = document.getElementById(`conn-${espId}`);
+
+          if (spanState) {
+              spanState.innerText = data.state;
+              spanState.className = data.state === "ON" ? "text-success" : "text-danger";
+          }
+
+          if (spanConn) {
+            spanConn.innerText = data.connected ? "Connecté" : "Déconnecté";
+        }
+      })
+      .catch(() => {
+          const spanConn = document.getElementById(`conn-${espId}`);
+          if (spanConn) {
+              spanConn.innerText = "Déconnecté";
+          }
+      });
+  }
+
+  const espList = [
+    {% for esp in esps %}
+      { id: {{ esp.id }}, name: "{{ esp.name }}" }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+
+  setInterval(() => {
+      espList.forEach(esp => updateESPStatus(esp.id, esp.name));
+  }, 5000);
+</script>
+{% endblock %}
