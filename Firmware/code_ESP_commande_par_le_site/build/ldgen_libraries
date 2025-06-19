@@ -82,4 +82,5 @@
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/time_utils/libtime_utils.a
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__led_strip/libespressif__led_strip.a
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/api_client/libapi_client.a
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/libespressif__mdns.a
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/main/libmain.a

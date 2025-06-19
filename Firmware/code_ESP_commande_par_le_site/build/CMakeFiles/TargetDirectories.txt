@@ -855,6 +855,13 @@
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/api_client/CMakeFiles/install.dir
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/api_client/CMakeFiles/install/local.dir
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/api_client/CMakeFiles/install/strip.dir
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/CMakeFiles/__idf_espressif__mdns.dir
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/CMakeFiles/edit_cache.dir
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/CMakeFiles/rebuild_cache.dir
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/CMakeFiles/list_install_components.dir
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/CMakeFiles/install.dir
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/CMakeFiles/install/local.dir
+/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/espressif__mdns/CMakeFiles/install/strip.dir
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/main/CMakeFiles/__idf_main.dir
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/main/CMakeFiles/edit_cache.dir
 /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/esp-idf/main/CMakeFiles/rebuild_cache.dir

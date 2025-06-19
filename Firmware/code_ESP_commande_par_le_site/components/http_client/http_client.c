@@ -6,6 +6,8 @@
 #include <string.h>
 
 static const char *TAG = "http";
+#define MAX_HTTP_RESPONSE_SIZE 4096
+#define MAX_HTTP_RESPONSE_CAP 16384  // limite RAM à 16 ko (ou moins
 
 typedef struct {
     char *body;
@@ -19,9 +21,15 @@ typedef struct {
 static esp_err_t on_data(esp_http_client_event_t *evt)
 {
     response_t *resp = evt->user_data;
+
     if (evt->event_id == HTTP_EVENT_ON_DATA && evt->data_len > 0) {
+        if (evt->data_len > MAX_HTTP_RESPONSE_CAP) {
+            ESP_LOGE(TAG, "Chunk trop gros : %d octets", evt->data_len);
+            return ESP_FAIL;
+        }
+
         if (resp->cap == 0) {
-            resp->cap = 1024;
+            resp->cap = MAX_HTTP_RESPONSE_SIZE;
             resp->body = malloc(resp->cap);
             if (!resp->body) {
                 ESP_LOGE(TAG, "Allocation initiale échouée");
@@ -29,21 +37,38 @@ static esp_err_t on_data(esp_http_client_event_t *evt)
             }
             resp->len = 0;
         }
+
         while (resp->len + evt->data_len > resp->cap) {
-            resp->cap *= 2;
-            char *p = realloc(resp->body, resp->cap);
-            if (!p) {
-                ESP_LOGE(TAG, "Reallocation à %d échouée", resp->cap);
-                free(resp->body);
+            int new_cap = resp->cap * 2;
+            if (new_cap > MAX_HTTP_RESPONSE_CAP) {
+                ESP_LOGE(TAG, "Réponse trop grande (cap %d), abandon", new_cap);
+                // NE PAS free ici
                 return ESP_FAIL;
             }
-            resp->body = p;
+
+            char *new_body = realloc(resp->body, new_cap);
+            if (!new_body) {
+                ESP_LOGE(TAG, "Échec de réallocation mémoire à %d octets", new_cap);
+                // NE PAS free ici
+                return ESP_FAIL;
+            }
+
+            resp->cap = new_cap;
+            resp->body = new_body;
         }
+
         memcpy(resp->body + resp->len, evt->data, evt->data_len);
         resp->len += evt->data_len;
+
+        if (resp->len > MAX_HTTP_RESPONSE_CAP) {
+            ESP_LOGE(TAG, "Dépassement mémoire après accumulation (%d octets)", resp->len);
+            return ESP_FAIL;
+        }
     }
+
     return ESP_OK;
 }
+
 
 char *http_fetch(const char *url,
                  const char *method,
@@ -81,6 +106,18 @@ char *http_fetch(const char *url,
 
     // Exécution de la requête
     esp_err_t err = esp_http_client_perform(client);
+    int status = esp_http_client_get_status_code(client);  // 👈 seule déclaration
+    if (out_status) {
+        *out_status = status;
+    }
+
+    if (status != 200) {
+        ESP_LOGW(TAG, "Code HTTP inattendu : %d", status);
+        if (resp.body) free(resp.body);
+        esp_http_client_cleanup(client);
+        return NULL;
+    }
+
     if (err != ESP_OK) {
         ESP_LOGE(TAG, "HTTP perform error: %s", esp_err_to_name(err));
         esp_http_client_cleanup(client);
@@ -88,11 +125,9 @@ char *http_fetch(const char *url,
         return NULL;
     }
 
-    int status = esp_http_client_get_status_code(client);
-    if (out_status) {
-        *out_status = status;
-    }
     ESP_LOGI(TAG, "HTTP status: %d, length: %d", status, resp.len);
+
+
 
     // Null-terminer
     char *body = NULL;
@@ -108,5 +143,13 @@ char *http_fetch(const char *url,
     }
 
     esp_http_client_cleanup(client);
+    if (body) {
+    ESP_LOGI(TAG, "Corps JSON : %s", body);
+    }
     return body;
 }
+
+
+
+
+

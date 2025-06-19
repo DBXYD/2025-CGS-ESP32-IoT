@@ -69,6 +69,8 @@ static void sntp_sync(void)
  */
 void wifi_init(void)
 {
+
+    
     // 1) NVS (nécessaire pour driver Wi-Fi et stockage SNTP)
     esp_err_t err = nvs_flash_init();
     if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -83,7 +85,7 @@ void wifi_init(void)
     // 3) Event loop
     ESP_ERROR_CHECK(esp_event_loop_create_default());
 
-    // 4) Création de l'interface Wi-Fi par défaut (station)
+    /* 4) Crée l’interface Wi-Fi STA et récupère son handle */
     esp_netif_create_default_wifi_sta();
 
     // 5) Initialisation Wi-Fi
@@ -125,7 +127,7 @@ void wifi_init(void)
     if (bits & WIFI_CONNECTED_BIT) {
         ESP_LOGI(TAG, "Wi-Fi connecté avec succès");
     } else {
-        ESP_LOGW(TAG, "Timeout de connexion Wi-Fi");
+        ESP_LOGW(TAG, "Timeout de connexion Wi-Fi"); 
     }
 
     // 11) Synchronisation temporelle

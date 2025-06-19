@@ -5,4 +5,6 @@
 
 bool api_get_esp_status(bool *should_turn_on);
 
+void api_send_ping(void);
+
 #endif

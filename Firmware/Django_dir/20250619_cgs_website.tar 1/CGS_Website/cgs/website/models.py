@@ -74,19 +74,23 @@ class News(models.Model):
 
 
 
-### class pour communiquer avec les ESP
-class ESPCommand(models.Model):
-    current_state = models.CharField(max_length=10, choices=[("ON", "ON"), ("OFF", "OFF")], default="OFF")
-    updated_at = models.DateTimeField(auto_now=True)
 
 
 ### class pour afficher les etats des esp dans les differents studios
 class StudioESP(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     esp_ip = models.GenericIPAddressField()
-    status = models.CharField(max_length=10, choices=[('ON', 'ON'), ('OFF', 'OFF')], default='OFF')
-    connected = models.BooleanField(default=False)
-    last_ping = models.DateTimeField(default=timezone.now)  # 👈 ce champ est nouveau
+    state = models.BooleanField(default=False)  # ON = True, OFF = False
+    last_seen = models.DateTimeField(null=True, blank=True)
+
+    def is_connected(self):
+        if not self.last_seen:
+            return False
+        return timezone.now() - self.last_seen < timedelta(seconds=30)
+
+    @property
+    def connected(self):
+        return self.is_connected()
 
     def __str__(self):
         return self.name
