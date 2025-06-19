@@ -1,1 +1,68 @@
-ef0114de6bf7f6b4240fb76171c844e0fe046058
+0000000000000000000000000000000000000000 bdf405c6bd32b39ecee45a88465e1d18130b581f CaptainJaja <capodagli.janus@outlook.com> 1748935052 +0200	clone: from github.com:DBXYD/2025-CGS-ESP32-IoT.git
+bdf405c6bd32b39ecee45a88465e1d18130b581f 6e9edcbb38a3b9a2e8a53ccb3929d39b3804826a CaptainJaja <capodagli.janus@outlook.com> 1748935134 +0200	commit: ajout répertoires, et début projet KiCad
+6e9edcbb38a3b9a2e8a53ccb3929d39b3804826a a1d1f987438a783b22ce91b201c67024bcbb0df2 CaptainJaja <capodagli.janus@outlook.com> 1748935244 +0200	commit: ajout tableur composants
+a1d1f987438a783b22ce91b201c67024bcbb0df2 48afc72eb42f4a4391574764c7db40a4f212a09f CaptainJaja <capodagli.janus@outlook.com> 1748938454 +0200	commit: modification README de la partie hardware
+48afc72eb42f4a4391574764c7db40a4f212a09f 5efa7690137a2ea7d25c7880eabaa8d96b4683bd CaptainJaja <capodagli.janus@outlook.com> 1748938552 +0200	commit: modification README de la partie hardware
+5efa7690137a2ea7d25c7880eabaa8d96b4683bd 1a3b078daa41f090d6998a1e222dd96b17a2c97b CaptainJaja <capodagli.janus@outlook.com> 1748939772 +0200	commit: Modif README principal
+1a3b078daa41f090d6998a1e222dd96b17a2c97b 13c81282684c1990ce2a5dc5277823b8e6cbb90f CaptainJaja <capodagli.janus@outlook.com> 1748939883 +0200	commit: Modif README principal
+13c81282684c1990ce2a5dc5277823b8e6cbb90f 365be49f8a9c58c0825dfe560d10e39d07ef3401 CaptainJaja <capodagli.janus@outlook.com> 1749021852 +0200	commit: finalisation Schematic du PCB Rack
+365be49f8a9c58c0825dfe560d10e39d07ef3401 3a24671330c9285bfd2a0271272c88317c4da0c1 CaptainJaja <capodagli.janus@outlook.com> 1749023105 +0200	commit: modification README de la partie HARDWARE, ajout README dans le répertoir PCB Rack
+3a24671330c9285bfd2a0271272c88317c4da0c1 7177051f43f24fee704750e564fef806be1531a8 CaptainJaja <capodagli.janus@outlook.com> 1749023306 +0200	commit: modification README du PCB Rack
+7177051f43f24fee704750e564fef806be1531a8 0607440cfdde70b9fea13b25c43a9082346f09dd CaptainJaja <capodagli.janus@outlook.com> 1749023391 +0200	commit: modification README du HARDWARE
+0607440cfdde70b9fea13b25c43a9082346f09dd 625b61753f833c997191e1469de1632b71f88d8e CaptainJaja <capodagli.janus@outlook.com> 1749023695 +0200	commit: modification README du HARDWARE
+625b61753f833c997191e1469de1632b71f88d8e 75f1cedc8db20806e2174a25189b3ba86505528d CaptainJaja <capodagli.janus@outlook.com> 1749028346 +0200	commit: commit avant pull
+75f1cedc8db20806e2174a25189b3ba86505528d b9fc70daa04cee44e6d82992fa64994f2f63b873 CaptainJaja <capodagli.janus@outlook.com> 1749028798 +0200	commit (merge): ajout du gitignore
+b9fc70daa04cee44e6d82992fa64994f2f63b873 f114c791072ca8e8441af1d5305b951b93bcad85 CaptainJaja <capodagli.janus@outlook.com> 1749028977 +0200	commit: Retire fp-info-cache/ et ~PCB_Rack.kicad_sch.lck du suivi
+f114c791072ca8e8441af1d5305b951b93bcad85 b6afa782fc860ff2e1489cf841af4f4bcf7c3c83 CaptainJaja <capodagli.janus@outlook.com> 1749028984 +0200	commit: Retire fp-info-cache/ et ~PCB_Rack.kicad_sch.lck du suivi
+b6afa782fc860ff2e1489cf841af4f4bcf7c3c83 eca2e138af98fd9fd6744d0da8d4f67d545433ed CaptainJaja <capodagli.janus@outlook.com> 1749029100 +0200	commit: Supprime définitivement ~PCB_Rack.kicad_sch.lck du suivi
+eca2e138af98fd9fd6744d0da8d4f67d545433ed dd1758b72b0ddbc13b14ea35447a1910ebe3f4dd CaptainJaja <capodagli.janus@outlook.com> 1749037656 +0200	commit: finalisation schematic PCB RACK + modif README
+dd1758b72b0ddbc13b14ea35447a1910ebe3f4dd 7f355286dfc030f1b35c73a41e778f011281c76f CaptainJaja <capodagli.janus@outlook.com> 1749037760 +0200	commit: modif README
+7f355286dfc030f1b35c73a41e778f011281c76f cdace7d95ba27809a3d5d539fe97a4bfc2c4d7d0 CaptainJaja <capodagli.janus@outlook.com> 1749037946 +0200	commit: modif README
+cdace7d95ba27809a3d5d539fe97a4bfc2c4d7d0 d971299507818551912bb5304f2014466d719b09 CaptainJaja <capodagli.janus@outlook.com> 1749044988 +0200	commit: modif footprint + symbole module AC-DC
+d971299507818551912bb5304f2014466d719b09 579f383194c75a3bd7ab121f5d8184069458f1f9 CaptainJaja <capodagli.janus@outlook.com> 1749066463 +0200	commit: finalisation 2.0 schematic PCB RACK et début PCB
+579f383194c75a3bd7ab121f5d8184069458f1f9 2194259cf9090622354961c8b6c77597ee625ac1 CaptainJaja <capodagli.janus@outlook.com> 1749066659 +0200	commit: Update README
+2194259cf9090622354961c8b6c77597ee625ac1 e43a78ff6098c8a2330510b278ea11790e8d7375 CaptainJaja <capodagli.janus@outlook.com> 1749133495 +0200	commit: finalisation PCB Rack
+e43a78ff6098c8a2330510b278ea11790e8d7375 60bcfacac2e541c5fc151bbc9ac37fb259f47e66 CaptainJaja <capodagli.janus@outlook.com> 1749158775 +0200	commit: finalisation PCB routagev2
+60bcfacac2e541c5fc151bbc9ac37fb259f47e66 cbbec2515fc4099bb0038e44831e092968768953 CaptainJaja <capodagli.janus@outlook.com> 1749158873 +0200	commit: maj README
+cbbec2515fc4099bb0038e44831e092968768953 725f6c8033b95831ac76fe780e5f95ecee915cb4 CaptainJaja <capodagli.janus@outlook.com> 1749159056 +0200	commit: maj README
+725f6c8033b95831ac76fe780e5f95ecee915cb4 db145f50005001749a3a12176ed6c5e38cd93633 CaptainJaja <capodagli.janus@outlook.com> 1749159192 +0200	commit: maj README
+db145f50005001749a3a12176ed6c5e38cd93633 6297741ac0584866dfa8f54b632ee5d3c0a45899 CaptainJaja <capodagli.janus@outlook.com> 1749159816 +0200	commit: final maj
+6297741ac0584866dfa8f54b632ee5d3c0a45899 813403941ff0f7bcd3106f757c1dba64e90cc159 CaptainJaja <capodagli.janus@outlook.com> 1749195530 +0200	commit: maj pcb
+813403941ff0f7bcd3106f757c1dba64e90cc159 66d6a1e5ea09d83d2e14d1d403d1fe6618cde57a CaptainJaja <capodagli.janus@outlook.com> 1749198393 +0200	commit: update LOGO
+66d6a1e5ea09d83d2e14d1d403d1fe6618cde57a d8e3107b0c2c26d3929e4a30422341a3194d08bf CaptainJaja <capodagli.janus@outlook.com> 1749206960 +0200	commit: 49.3
+d8e3107b0c2c26d3929e4a30422341a3194d08bf 4dbaa7d5ba6fa5c2b6b7e473b6f11f312fc15c11 CaptainJaja <capodagli.janus@outlook.com> 1749215127 +0200	commit: Correction footprint connecteurs
+4dbaa7d5ba6fa5c2b6b7e473b6f11f312fc15c11 695ed0050bcf584652cd5625d0f8775ef197ce9d CaptainJaja <capodagli.janus@outlook.com> 1749221129 +0200	commit: maj pcb
+695ed0050bcf584652cd5625d0f8775ef197ce9d 7c16baa4b585778406ff12f8e8c482534b1b9636 CaptainJaja <capodagli.janus@outlook.com> 1749300203 +0200	commit: ajout des pulldown sur les transistors
+7c16baa4b585778406ff12f8e8c482534b1b9636 687a0b7bbab88883ae2eb7cd193fe6b9765de9e3 CaptainJaja <capodagli.janus@outlook.com> 1749497937 +0200	commit: finalisation PCB-salle de Répétition
+687a0b7bbab88883ae2eb7cd193fe6b9765de9e3 00b12d69b3739377789464cb74c074ec05473218 CaptainJaja <capodagli.janus@outlook.com> 1749510771 +0200	commit: ajout vias
+00b12d69b3739377789464cb74c074ec05473218 f1de9fac00616b033690501ba0d09e0425cc5e99 CaptainJaja <capodagli.janus@outlook.com> 1749539209 +0200	commit: Final change
+f1de9fac00616b033690501ba0d09e0425cc5e99 e436e902a9bcd8c40f84cc1c79251620219d4ab8 CaptainJaja <capodagli.janus@outlook.com> 1749543949 +0200	commit: finalisation PCB affichage
+e436e902a9bcd8c40f84cc1c79251620219d4ab8 5206c7f37f6df41ef0399472e5cb676a5f637fae CaptainJaja <capodagli.janus@outlook.com> 1749546922 +0200	commit: début et fin du petit PCB de connection inter-ruban pour les néopixels
+5206c7f37f6df41ef0399472e5cb676a5f637fae 1dfec2cb3b6cabde2de37a929a44e418dafcd2d3 CaptainJaja <capodagli.janus@outlook.com> 1749549762 +0200	commit: modif pcb affichage, modif tableur
+1dfec2cb3b6cabde2de37a929a44e418dafcd2d3 13decd2127beb54c8de3af5b83992fd55f129a13 CaptainJaja <capodagli.janus@outlook.com> 1749549818 +0200	commit: modif README
+13decd2127beb54c8de3af5b83992fd55f129a13 525a17503fe0e30c530d5a23504c955a8bda7de1 CaptainJaja <capodagli.janus@outlook.com> 1749552365 +0200	commit: modif README
+525a17503fe0e30c530d5a23504c955a8bda7de1 46fa56ab882dd4b480e8c3ce4f710b2e2df40268 CaptainJaja <capodagli.janus@outlook.com> 1749571386 +0200	commit: finalisation v2 PCB repetition
+46fa56ab882dd4b480e8c3ce4f710b2e2df40268 81e9df006bff8770fdac87bc878cd08d58972ea0 CaptainJaja <capodagli.janus@outlook.com> 1749571824 +0200	commit: arrondissement des bords des PCB affichage et connecteur
+81e9df006bff8770fdac87bc878cd08d58972ea0 5d7fb93b01976eab1fa89507b30e6e3712a241fe CaptainJaja <capodagli.janus@outlook.com> 1749588062 +0200	commit: ajout vias PCB repetition
+5d7fb93b01976eab1fa89507b30e6e3712a241fe a5fe568a318f5d9c25869ff3fa7f35efee83c132 CaptainJaja <capodagli.janus@outlook.com> 1749626689 +0200	commit: final push pcb
+a5fe568a318f5d9c25869ff3fa7f35efee83c132 a6e25614d3f67632740668176a9bfac9798f2901 CaptainJaja <capodagli.janus@outlook.com> 1749636580 +0200	commit: modif Silkscreens PCB repetition et ajout répertoire GERBER
+a6e25614d3f67632740668176a9bfac9798f2901 39cfa02efc008b9d6ed3f383032927198ae4772b CaptainJaja <capodagli.janus@outlook.com> 1749723535 +0200	commit: ajout des pinheaders en plus
+39cfa02efc008b9d6ed3f383032927198ae4772b af4086e6c6c8ea1375e4393776032fa7768985b1 CaptainJaja <capodagli.janus@outlook.com> 1749737293 +0200	commit: ajout du projet esp32 Google_Calendar affichant tout le planing de la semaine
+af4086e6c6c8ea1375e4393776032fa7768985b1 8f7c5275215bc3f11789e5524e5934fbba4fff45 CaptainJaja <capodagli.janus@outlook.com> 1749741988 +0200	commit: modif code : acces planing de la journée et teste toutes les minutes si y'a un changement
+8f7c5275215bc3f11789e5524e5934fbba4fff45 06e987b6e8b6894f0687ab786c0a99b2488fe421 CaptainJaja <capodagli.janus@outlook.com> 1749742713 +0200	commit: amélioration code v2
+06e987b6e8b6894f0687ab786c0a99b2488fe421 6d3673605a7f6563336b4d4f2dc15f197d330381 CaptainJaja <capodagli.janus@outlook.com> 1749743289 +0200	commit: Version finale du code Google_Calendar ! -> clignottement de la LED lorsqu'un évènement est en cours, test toutes les X minutes
+6d3673605a7f6563336b4d4f2dc15f197d330381 2c63ce947e66bef6cc1c9535f096003994387cc3 CaptainJaja <capodagli.janus@outlook.com> 1749751681 +0200	commit: Update README principal et ajout README dans le répertoire Firmware
+2c63ce947e66bef6cc1c9535f096003994387cc3 3f5c56b383df738eb7592e3ef7ed0e5af8ecbbee CaptainJaja <capodagli.janus@outlook.com> 1749751790 +0200	commit: correction README
+3f5c56b383df738eb7592e3ef7ed0e5af8ecbbee 013d8a2b57115a0656060d7ec801359764069d4d CaptainJaja <capodagli.janus@outlook.com> 1749752984 +0200	commit: maj README et ajout README projet esp32 du PCB affichage
+013d8a2b57115a0656060d7ec801359764069d4d 70704d1ece1a6484493803d2eb7f948ecb3d9d39 CaptainJaja <capodagli.janus@outlook.com> 1749753160 +0200	commit: maj READMEs
+70704d1ece1a6484493803d2eb7f948ecb3d9d39 ac8ca864d660a6fd90fc4ef845962c299930ecb4 CaptainJaja <capodagli.janus@outlook.com> 1749753292 +0200	commit: maj READMEs
+ac8ca864d660a6fd90fc4ef845962c299930ecb4 2aa9420022719648aacde08f407f22545246ff14 CaptainJaja <capodagli.janus@outlook.com> 1749753364 +0200	commit: maj READMEs
+2aa9420022719648aacde08f407f22545246ff14 1490fc93e52e0cb118a548e868d13bae1c33172d CaptainJaja <capodagli.janus@outlook.com> 1749753418 +0200	commit: maj READMEs
+1490fc93e52e0cb118a548e868d13bae1c33172d 844101458ac425f1cc73ac09e9d200794e24a121 CaptainJaja <capodagli.janus@outlook.com> 1749753489 +0200	commit: maj READMEs
+844101458ac425f1cc73ac09e9d200794e24a121 974895f4e3bc479b53877d99c992fd7f03238052 CaptainJaja <capodagli.janus@outlook.com> 1749753536 +0200	commit: maj READMEs
+974895f4e3bc479b53877d99c992fd7f03238052 e4912a5c8cbad56ebe7532f853aa24fb7d9699f4 CaptainJaja <capodagli.janus@outlook.com> 1749803927 +0200	commit: maj README
+e4912a5c8cbad56ebe7532f853aa24fb7d9699f4 c5d0a15bc58321f119283571980144b4151f3ee7 CaptainJaja <capodagli.janus@outlook.com> 1750018360 +0200	commit: correction orientation des connecteurs sur secteur
+c5d0a15bc58321f119283571980144b4151f3ee7 715a61073c250c660b7f15ebd828213986664776 CaptainJaja <capodagli.janus@outlook.com> 1750020877 +0200	commit: maj final PCB
+715a61073c250c660b7f15ebd828213986664776 7253a7c7d616e96851930bf6f966e6f595fe1bac CaptainJaja <capodagli.janus@outlook.com> 1750074048 +0200	commit: correction des pull-up sur SDA/SCL, finalisation du code esp32 Google_Calendar pour que la reconnexion (sur google device)se fasse automatiquement après reboot
+7253a7c7d616e96851930bf6f966e6f595fe1bac ef0114de6bf7f6b4240fb76171c844e0fe046058 CaptainJaja <capodagli.janus@outlook.com> 1750337160 +0200	commit: ajout des repertoire pour le site web et le code : site web améliorer V1 : les superusers peuvent allumer et éteindre l'esp32
+ef0114de6bf7f6b4240fb76171c844e0fe046058 87b1750024842cd7161597936487e373c9f97b21 CaptainJaja <capodagli.janus@outlook.com> 1750341906 +0200	commit: Amélioration du code : création des etats pour chaque studio : gerable dans admin
