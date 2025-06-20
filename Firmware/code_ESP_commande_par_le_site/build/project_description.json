@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "code_ESP_commande_par_le_site",
-    "project_version":    "87b17500-dirty",
+    "project_version":    "1c5a518f-dirty",
     "project_path":       "/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site",
     "idf_path":           "/home/janus/esp/esp-idf",
     "build_dir":          "/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build",
