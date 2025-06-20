@@ -502,3 +502,24 @@ html, body {
 #footer {
     flex-shrink: 0;
 }
+
+
+
+/* nouveau */
+.esp-row{
+    display:flex;
+    align-items:center;          /* centrage vertical */
+    justify-content:space-between;
+    gap: 12px;                   /* petit espace entre texte et bouton */
+}
+
+/* nouveau : permet au texte de prendre toute la largeur restante */
+.esp-info{
+    flex:1 1 auto;               /* grandit / rétrécit au besoin */
+    min-width:0;                 /* évite des débordements */
+}
+
+/* largeur homogène des boutons : déjà présent, ok */ 
+.esp-row button{
+    min-width:110px;
+}

@@ -9,21 +9,27 @@
       <p>Contrôle des ESP32 par studio :</p>
       <ul>
         {% for esp in esps %}
-          <li class="mb-3">
-            <strong>{{ esp.name }}</strong> — IP: {{ esp.esp_ip }}<br>
-            État:
-            <span id="state-{{ esp.id }}" class="{% if esp.status == 'ON' %}text-success{% else %}text-danger{% endif %}">
-              {{ esp.status }}
-            </span> /
-            Connexion:
-            <span id="conn-{{ esp.id }}">
-              {{ esp.connected|yesno:"Connecté,Déconnecté" }}
-            </span>
-            <form method="post" onsubmit="event.preventDefault(); toggleESP({{ esp.id }})">
-              {% csrf_token %}
-              <button class="btn btn-sm btn-warning mt-1">Inverser l'état</button>
-            </form>
-          </li>
+          <li class="esp-row mb-3">
+
+            <!-- bloc texte placé dans <div> pour rester sur une seule ligne -->
+            <div class="esp-info">
+                <strong>{{ esp.name }}</strong> — IP : {{ esp.esp_ip }} —
+                État : <span id="state-{{ esp.id }}">({{ esp.state|yesno:"ON,OFF" }})</span> /
+                Connexion : <span id="conn-{{ esp.id }}">
+                            {{ esp.connected|yesno:"Connecté,Déconnecté" }}</span>
+            </div>
+
+            <!-- bouton déjà présent -->
+            <button id="btn-{{ esp.id }}"
+                    class="btn btn-sm {{ esp.state|yesno:'btn-danger,btn-success' }}"
+                    {% if not esp.connected %}disabled{% endif %}>
+                <span id="spin-{{ esp.id }}"
+                      class="spinner-border spinner-border-sm d-none" role="status"></span>
+                <span class="label" id="lbl-{{ esp.id }}">
+                    {{ esp.state|yesno:"Éteindre,Allumer" }}
+                </span>
+            </button>
+        </li>
         {% endfor %}
       </ul>
   {% else %}
@@ -34,58 +40,116 @@
 
 {% block extra_js %}
 <script>
-  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-
-  function toggleESP(espId) {
-      fetch(`/api/esp/${espId}/toggle/`, {
-          method: 'POST',
-          headers: {
-              'X-CSRFToken': csrftoken,
-              'Content-Type': 'application/json'
-          }
-      })
-      .then(response => response.json())
-      .then(data => {
-          const span = document.getElementById(`state-${espId}`);
-          if (span) {
-              span.innerText = data.status;
-              span.className = data.status === "ON" ? "text-success" : "text-danger";
-          }
-      });
-  }
-
-  function updateESPStatus(espId, espName) {
-      fetch(`/api/esp/status/?name=${encodeURIComponent(espName)}`)
-      .then(response => response.json())
-      .then(data => {
-          const spanState = document.getElementById(`state-${espId}`);
-          const spanConn = document.getElementById(`conn-${espId}`);
-
-          if (spanState) {
-              spanState.innerText = data.state;
-              spanState.className = data.state === "ON" ? "text-success" : "text-danger";
-          }
-
-          if (spanConn) {
-            spanConn.innerText = data.connected ? "Connecté" : "Déconnecté";
-        }
-      })
-      .catch(() => {
-          const spanConn = document.getElementById(`conn-${espId}`);
-          if (spanConn) {
-              spanConn.innerText = "Déconnecté";
-          }
-      });
-  }
-
+  /* liste ESPS pour le polling (générée par Django) */
   const espList = [
     {% for esp in esps %}
-      { id: {{ esp.id }}, name: "{{ esp.name }}" }{% if not forloop.last %},{% endif %}
+      { id: {{ esp.id }} }{% if not forloop.last %},{% endif %}
     {% endfor %}
   ];
 
-  setInterval(() => {
-      espList.forEach(esp => updateESPStatus(esp.id, esp.name));
-  }, 5000);
+  /* --- tableau des commandes en attente d’ACK --- */
+  const pending = {};   // clé : id de l’ESP, valeur : true pendant l’attente
+  
+  
+  function getCookie(name) {
+      return ('; '+document.cookie).split('; '+name+'=').pop().split(';')[0];
+  }
+  const csrftoken = getCookie('csrftoken');
+
+
+  /* ---------- helpers d’affichage ---------- */
+  function setBtnState(id, {enabled, pending, on}) {
+      const btn  = document.getElementById(`btn-${id}`);
+      const lbl  = document.getElementById(`lbl-${id}`);
+      const spin = document.getElementById(`spin-${id}`);
+
+      btn.disabled = !enabled || pending;
+      btn.className = `btn btn-sm mt-1 ${on ? 'btn-danger' : 'btn-success'}`;
+
+      lbl.textContent = pending
+          ? (on ? 'Extinction…' : 'Allumage…')
+          : (on ? 'Éteindre' : 'Allumer');
+
+      spin.classList.toggle('d-none', !pending);
+  }
+
+  /* ---------- basculement ---------- */
+    const FIRST_POLL_DELAY = 1000;   // 1 s
+    const MIN_ACK_AGE      = 1000;   // le ping doit dater d’au moins 1 s
+    const TIMEOUT          = 12000; // ms – patience maxi   
+
+  function toggleESP(id) {
+    const t0      = Date.now();
+    const btn     = document.getElementById(`btn-${id}`);
+    const wasOn   = btn.classList.contains('btn-danger');
+    const desired = !wasOn;
+
+    setBtnState(id, {enabled:false, pending:true, on:wasOn});
+    pending[id] = true;               // ← on gèle refreshAll() pour cet ESP
+
+    fetch(`/api/esp/${id}/toggle/`, {
+        method : 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+    }); 
+    /* -- boucle de vérification -- */
+    const timeout = 12000;
+    const poll = () => {
+    fetch(`/api/esp/status/?id=${id}`)
+      .then(r => r.json())
+      .then(d => {
+          const ack = d.connected &&
+             d.state === (desired ? "ON" : "OFF") &&
+             d.last_seen  &&                // il y a bien eu un ping
+             d.last_seen   > t0 + 400;
+
+          if (ack) {
+              delete pending[id];       // plus en attente
+              setBtnState(id, {enabled:true, pending:false, on:desired});
+              document.getElementById(`state-${id}`).textContent = d.state;
+          } else if (Date.now() - t0 < timeout) {
+              setTimeout(poll, 1000);
+          } else {
+              alert("Pas de réponse de l'ESP");
+              delete pending[id];      // on débloque malgré l’erreur
+              setBtnState(id, {enabled:true, pending:false, on:wasOn});
+          }
+      });
+  };
+    setTimeout(poll, 800);   // premier test à ~0,8 s
+}
+
+/* ---------- polling connexion (init + 5 s) ---------- */
+function refreshAll() {
+
+    espList.forEach(({id}) => {
+        if (pending[id]) return;     // on n’écrase pas l’UI tant que pas d’ACK
+
+        fetch(`/api/esp/status/?id=${id}`)
+          .then(r => r.json())
+          .then(d => {
+              setBtnState(id, {
+                  enabled : d.connected,
+                  pending : false,
+                  on      : d.state === "ON"
+              });
+              document.getElementById(`state-${id}`).textContent = d.state;
+              document.getElementById(`conn-${id}`).textContent =
+                  d.connected ? "Connecté" : "Déconnecté";
+          });
+    });
+}
+
+
+/* ---------- binding click ---------- */
+espList.forEach(({id}) => {
+    document.getElementById(`btn-${id}`)
+            .addEventListener('click', () => toggleESP(id));
+});
+
+/* ---------- première mise à jour après 1 s, puis toutes les 5 s ---------- */
+setTimeout(refreshAll, 1000);   // ← déclenche 1 s après le chargement
+setInterval(refreshAll, 5000);  // ← ensuite toutes les 5 s
+
+
 </script>
 {% endblock %}

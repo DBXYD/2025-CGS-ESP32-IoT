@@ -58,22 +58,18 @@ bool api_get_esp_status(bool *should_turn_on)
     return ok;
 }
 
-void api_send_ping(void)
+void api_send_ping(bool current_state)
 {
-    char body[64];
-    snprintf(body, sizeof(body), "{\"name\":\"%s\"}", STUDIO_NAME);
+    char body[96];
+    snprintf(body, sizeof(body),
+             "{\"name\":\"%s\",\"state\":%s}",
+             STUDIO_NAME,
+             current_state ? "true" : "false");
 
-    int http_st;
-
-    /* tentative mDNS */
-    http_fetch(PING_URL, "POST", NULL, body, &http_st);
-
-    /* repli IP si la 1ʳᵉ tentative échoue */
-    if (http_st != 200) {
-        http_fetch(PING_URL_FB, "POST", NULL, body, &http_st);
-    }
-
-    ESP_LOGD(TAG, "Ping status=%d", http_st);
+    int st;
+    http_fetch(PING_URL,    "POST", NULL, body, &st);
+    if (st != 200)
+        http_fetch(PING_URL_FB, "POST", NULL, body, &st);
 }
 
 
