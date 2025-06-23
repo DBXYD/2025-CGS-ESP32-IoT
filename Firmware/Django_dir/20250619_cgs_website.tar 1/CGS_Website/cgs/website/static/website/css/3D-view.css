@@ -1,13 +1,17 @@
 /* Visite virtuelle */
 #panorama {
 	width: 100%;
-	height: 250px;
+	height: 400px;
 }
 
+
 .panorama-container {
-	max-width: 800px; /* ajustez la valeur selon vos besoins */
-	margin: 0 auto; /* centre l'élément horizontalement */
+    width: 100%;
+    height: 350px;       /* réduit la hauteur */
+    max-width: 550px;    /* augmente légèrement la largeur */
+    margin: 0 auto;
 }
+
 
 .image-container {
 	flex: 0 0 50%;
@@ -32,7 +36,7 @@
  /* centrer les titres */
 
  h3 {
-	margin-bottom: 40px;
+	margin-bottom: 50px;
 	font-weight: bold;
 	font-size: xx-large;
  }
@@ -46,3 +50,61 @@
    margin-left: 0;
    margin-right: 0;
  }
+
+ /* -------------------------------------------------------
+   Modale 360 °  (overlay plein écran + cadre central)
+   --------------------------------------------------- */
+
+/* état fermé */
+.fond-onclick { display:none; }
+
+/* état ouvert : full-screen */
+.fond-onclick-apparant{
+    display:flex !important;      /* le !important coupe toute surcharge */
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.85);
+    z-index:1050;                 /* au-dessus de la navbar (1000)      */
+    overflow:auto;
+    align-items:center;           /* centrage vertical                  */
+    justify-content:center;       /* centrage horizontal                */
+}
+
+/* le “cadre blanc” intérieur */
+.cadre-onclick{
+    max-width:1100px;
+    margin:80px auto;
+    padding:20px 40px;
+    background-color: #1c1c1c;
+    color: white;
+    border-radius:8px;
+}
+
+/* le bouton de fermeture X éventuel
+   (si tu veux en ajouter un plus tard) */
+.cadre-onclick .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #000;
+}
+/* ---------- forcer l’overlay visible ---------- */
+
+.fond-onclick-apparant{
+    display:flex !important;      /* le !important empêche toute surcharge */
+}
+
+#fond-onclick.fond-onclick-apparant{
+    display:flex !important;   /* prioritaire sur Bootstrap, etc. */
+}
+
+
+#nom_salle {
+    font-size: 5rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #d9c98a;  /* facultatif si tu veux l’harmoniser avec "Équipements" */
+}
+
+

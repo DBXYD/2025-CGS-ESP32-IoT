@@ -4,11 +4,13 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.utils import timezone
-from .models import StudioESP, StudioDevice, News
+from .models import StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News, Studio
 import json
 from django.utils.timezone import now, timedelta
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from .serializers import StudioEspRackDeviceSerializer, StudioEspDisplayDeviceSerializer
+from django.db.models import Prefetch
 
 
 def index(request):
@@ -18,14 +20,17 @@ def index(request):
     )[:3]
     return render(request, 'website/index.html', {'upcoming_news': upcoming_news})
 
-def studios(request):
-    return render(request, 'website/studios.html')
 
 def bar(request):
     return render(request, 'website/bar.html')
 
 def booking(request):
-    return render(request, 'website/booking.html')
+    studio_slug = request.GET.get("studio")
+    studio = Studio.objects.filter(slug=studio_slug).first() if studio_slug else None
+    return render(request, 'website/booking.html', {
+        'studio': studio
+    })
+
 
 def contact(request):
     return render(request, 'website/contact.html')
@@ -34,26 +39,70 @@ def cgu(request):
     return render(request, 'website/cgu.html')
 
 
+
+@api_view(['GET'])
+def studio_devices(request, slug):
+    studio = get_object_or_404(Studio, slug=slug)
+    esps = StudioESP.objects.filter(studio=studio)
+
+    rack_devices = StudioEspRackDevice.objects.filter(esp__in=esps)
+    display_devices = StudioEspDisplayDevice.objects.filter(esp__in=esps)
+
+    rack_serializer = StudioEspRackDeviceSerializer(rack_devices, many=True)
+    display_serializer = StudioEspDisplayDeviceSerializer(display_devices, many=True)
+
+    return Response({
+        "rack_devices": rack_serializer.data,
+        "display_devices": display_serializer.data
+    })
+
+
+
+# ----- PAGE HTML -----
+def studios(request):
+    studios = Studio.objects.order_by("ordre_tri")
+    return render(request, "website/studios.html", {"studios": studios})
+
+
+
 @login_required
 def control_panel(request):
-    devices = StudioDevice.objects.all()
     if request.method == "POST":
+        device_type = request.POST.get("device_type")
         device_id = request.POST.get("device_id")
-        device = StudioDevice.objects.get(id=device_id)
+
+        if device_type == "rack":
+            device = StudioEspRackDevice.objects.get(id=device_id)
+        elif device_type == "display":
+            device = StudioEspDisplayDevice.objects.get(id=device_id)
+        else:
+            return redirect('control_panel')  # sécurité
+
         device.is_on = not device.is_on
         device.save()
         return redirect('control_panel')
-    return render(request, 'website/control_panel.html', {'devices': devices})
+
+    rack_devices = StudioEspRackDevice.objects.all()
+    display_devices = StudioEspDisplayDevice.objects.all()
+
+    return render(request, 'website/control_panel.html', {
+        'rack_devices': rack_devices,
+        'display_devices': display_devices,
+    })
+
 
 
 @login_required
 def profil_view(request):
-    #  on réinitialise les ESP vieux de +15s
-    cutoff = now() - timedelta(seconds=15)
-    StudioESP.objects.filter(last_seen__lt=cutoff).update(last_seen=None)
+    if not request.user.is_superuser:
+        return render(request, 'website/profil.html')
 
-    esps = StudioESP.objects.all()
+    esps = StudioESP.objects.prefetch_related(
+        Prefetch('studioesprackdevice_set'),
+        Prefetch('studioespdisplaydevice_set'),
+    )
     return render(request, 'website/profil.html', {'esps': esps})
+
 
 
 @api_view(['GET'])
@@ -70,9 +119,11 @@ def control_device(request):
 def toggle_esp_status(request, esp_id):
     try:
         esp = StudioESP.objects.get(pk=esp_id)
-        # on bascule directement dans la BD : l’ESP lira cette nouvelle valeur
-        esp.state = not esp.state
-        esp.save(update_fields=["state"])
+        if esp.status == "is_on":
+            esp.status = "is_off"
+        else:
+            esp.status = "is_on"
+        esp.save(update_fields=["status"])
         return JsonResponse({"status": "pending"})   # aucune certitude encore
     except StudioESP.DoesNotExist:
         return JsonResponse({"error": "ESP not found"}, status=404)
@@ -88,20 +139,24 @@ def esp_status_api(request):
     # prise en charge ?id= ou ?name=
     esp_id  = request.GET.get("id")
     name    = request.GET.get("name")
+
+    if not esp_id and not name:
+        return JsonResponse({"error": "missing id or name"}, status=400)
+
     try:
-        esp = (StudioESP.objects.get(pk=esp_id) if esp_id
-               else StudioESP.objects.get(name=name))
+        esp = StudioESP.objects.get(pk=esp_id) if esp_id else StudioESP.objects.get(name=name)
     except StudioESP.DoesNotExist:
         return JsonResponse({"error": "not found"}, status=404)
-
-    connected = esp.connected   # propriété déjà calculée
+    
+    connected = esp.connected
+    # ton champ s'appelle `status`, par exemple 'is_on' ou 'is_off'
+    is_on = (esp.status == "is_on")
     return JsonResponse({
-        "state": "ON" if esp.state else "OFF",
-        "connected": connected,
-        #  conversion UTC → Europe/Paris avant isoformat()
-        "last_seen": int(esp.last_seen.timestamp() * 1000)
-                     if esp.last_seen else None
-    })
+        "state": "ON" if is_on else "OFF",
+         "connected": connected,
+         "last_seen": int(esp.last_seen.timestamp() * 1000)
+                      if esp.last_seen else None
+     })
 
 
 
@@ -118,10 +173,11 @@ def get_state_api(request):
 
     # Met à jour l’ESP comme "vu récemment"
     esp.last_seen = timezone.now()
-    esp.save()
+    esp.save(update_fields=['last_seen'])
 
+    is_on = (esp.status == "is_on")
     return JsonResponse({
-        'state': esp.state,  # Booléen simple
+        'state': is_on,  # Booléen simple
         'connected': esp.connected  # propriété booléenne (is_connected)
     })
 
@@ -131,9 +187,9 @@ def get_state_api(request):
 def toggle_esp_state(request, esp_id):
     if request.method == 'POST':
         esp = get_object_or_404(StudioESP, id=esp_id)
-        esp.state = not esp.state  # toggle le booléen
-        esp.save()
-        return JsonResponse({'state': esp.state})
+        esp.status = 'is_off' if esp.status == 'is_on' else 'is_on'
+        esp.save(update_fields=['status'])
+        return JsonResponse({'state': esp.status == 'is_on'})
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
 def reset_all_esp_connection_status():
@@ -150,22 +206,22 @@ def esp_ping(request):
     """
     data  = json.loads(request.body or "{}")
     name  = data.get("name")
-    state = data.get("state")           # bool ou None
+    state = data.get("state")  # bool ou None
 
-    # ───── 1) on retrouve l’objet ESP ─────
     try:
         esp = StudioESP.objects.get(name=name)
     except StudioESP.DoesNotExist:
         return JsonResponse({"error": "unknown esp"}, status=404)
 
-    # ───── 2) vérification IP ─────
-    if request.META["REMOTE_ADDR"] != esp.esp_ip:
+    # 2) vérification IP
+    if request.META["REMOTE_ADDR"] != esp.ip:
         return JsonResponse({"error": "ip mismatch"}, status=400)
 
-    # ───── 3) mise à jour ─────
+    # 3) mise à jour
     esp.last_seen = timezone.now()
-    if state is not None:              # le MCU a envoyé son état réel
-        esp.state = bool(state)
+    esp.connected = True
+    if state is not None:
+        esp.status = "is_on" if state else "is_off"
 
-    esp.save(update_fields=["last_seen", "state"])
+    esp.save(update_fields=["last_seen", "connected", "status"])
     return JsonResponse({"ok": True})

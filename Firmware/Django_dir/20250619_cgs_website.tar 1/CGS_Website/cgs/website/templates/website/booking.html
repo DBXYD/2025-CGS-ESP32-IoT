@@ -21,11 +21,17 @@
 
 
 
+
 <!-- Main content -->
 {% block content %}
 
 <!-- Content 1 -->
-<div class="container">
+
+<div class="container top-space">
+    {% if studio %}
+        <h3 class="color-gold text-center mb-4">Réservation pour <strong>{{ studio.nom }}</strong></h3>
+    {% endif %}
+
 	<div class="row">
 		<!-- Left -->
 		<div class="col-md-6 col-sm-12 justify-right-to-center">

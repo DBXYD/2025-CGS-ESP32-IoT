@@ -2,42 +2,85 @@
 {% load static %}
 
 {% block content %}
-<h2>Contrôle des Appareils</h2>
+<div class="container mt-5" style="padding-top: 120px;">
+    <h2>Contrôle des Appareils</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Studio</th>
-            <th>Nom</th>
-            <th>Type</th>
-            <th>État</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for device in devices %}
-        <tr>
-            <td>{{ device.studio.nom }}</td>
-            <td>{{ device.marque }} {{ device.modele }}</td>
-            <td>{{ device.get_type_appareil_display }}</td>
-            <td>
-                {% if device.is_on %}
-                    ✅ Allumé
-                {% else %}
-                    ❌ Éteint
-                {% endif %}
-            </td>
-            <td>
-                <form method="POST">
-                    {% csrf_token %}
-                    <input type="hidden" name="device_id" value="{{ device.id }}">
-                    <button type="submit" class="btn btn-sm {% if device.is_on %}btn-danger{% else %}btn-success{% endif %}">
-                        {% if device.is_on %}Éteindre{% else %}Allumer{% endif %}
-                    </button>
-                </form>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <h4 class="mt-4">🟦 Rack Devices</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Studio</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>État</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for device in rack_devices %}
+            <tr>
+                <td>{{ device.esp.studio.nom }}</td>
+                <td>{{ device.marque }} {{ device.modele }}</td>
+                <td>{{ device.type }}</td>
+                <td>
+                    {% if device.is_on %}
+                        ✅ Allumé
+                    {% else %}
+                        ❌ Éteint
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="device_type" value="rack">
+                        <input type="hidden" name="device_id" value="{{ device.id }}">
+                        <button type="submit" class="btn btn-sm {% if device.is_on %}btn-danger{% else %}btn-success{% endif %}">
+                            {% if device.is_on %}Éteindre{% else %}Allumer{% endif %}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h4 class="mt-5">🟨 Display Devices</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Studio</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>État</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for device in display_devices %}
+            <tr>
+                <td>{{ device.esp.studio.nom }}</td>
+                <td>Display ESP #{{ device.esp.id }}</td>
+                <td>{{ device.type }}</td>
+                <td>
+                    {% if device.is_on %}
+                        ✅ Allumé
+                    {% else %}
+                        ❌ Éteint
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="device_type" value="display">
+                        <input type="hidden" name="device_id" value="{{ device.id }}">
+                        <button type="submit" class="btn btn-sm {% if device.is_on %}btn-danger{% else %}btn-success{% endif %}">
+                            {% if device.is_on %}Éteindre{% else %}Allumer{% endif %}
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}

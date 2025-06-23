@@ -1,0 +1,65 @@
+🔧 Installation et création de projet
+
+pip install django          # Installer Django
+django-admin startproject monprojet  # Créer un nouveau projet Django
+cd monprojet                # Entrer dans le dossier du projet
+python manage.py runserver  # Lancer le serveur de développement
+
+Pour lancer le serveur Django sur un port spécifique, tu peux utiliser la commande suivante :
+
+python manage.py runserver 0.0.0.0:8000
+
+💡 Détails :
+
+0.0.0.0 : rend le site accessible depuis toutes les adresses IP (par exemple sur un réseau local).
+Tu peux aussi mettre :
+
+127.0.0.1:8000 → pour un port spécifique mais en accès local uniquement
+
+192.168.X.X:8000 → pour une IP précise de ton réseau
+
+8000 : le port sur lequel tu veux écouter (remplace-le par celui que tu veux, comme 8080, 5000, etc.)
+
+
+🧱 Applications
+
+python manage.py startapp monapp     # Créer une nouvelle application
+
+
+🔄 Migrations (modèles → base de données)
+
+python manage.py makemigrations      # Crée des fichiers de migration à partir des modèles
+python manage.py migrate             # Applique les migrations à la base de données
+
+
+👤 Superutilisateur et base utilisateur
+
+python manage.py createsuperuser     # Crée un compte admin pour accéder au panneau d’administration
+
+
+🧪 Tests
+
+python manage.py test                # Lance les tests unitaires
+
+
+🧰 Utilitaires en développement
+
+python manage.py shell               # Lance un shell Python interactif avec les modules Django chargés
+python manage.py showmigrations      # Liste les migrations disponibles/appliquées
+python manage.py sqlmigrate app_name 0001_initial  # Montre le SQL d'une migration
+python manage.py check               # Vérifie les erreurs de configuration du projet
+python manage.py diffsettings        # Affiche les différences avec les paramètres par défaut de Django
+
+
+📜 Traduction / Internationalisation
+
+python manage.py makemessages -l fr  # Crée les fichiers .po pour la traduction en français
+python manage.py compilemessages     # Compile les traductions .po en .mo
+
+📁 Fichiers statiques
+
+python manage.py collectstatic       # Copie les fichiers statiques vers le dossier défini (ex: en production)
+
+🧼 Autres utiles
+
+python manage.py flush               # Réinitialise la base de données (supprime toutes les données)

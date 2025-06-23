@@ -20,6 +20,7 @@ urlpatterns = [
     path("api/esp/<int:esp_id>/toggle/", views.toggle_esp_status, name="toggle_esp_status"),
     path('api/esp/status/', views.esp_status_api, name='esp_status'),
     path("api/esp/ping/", views.esp_ping, name="esp_ping"),
+    path('api/studio/<slug:slug>/devices/', views.studio_devices, name='studio_devices'),
 ]
 
 if settings.DEBUG:

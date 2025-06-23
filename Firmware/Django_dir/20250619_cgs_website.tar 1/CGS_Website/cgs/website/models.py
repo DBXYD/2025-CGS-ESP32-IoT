@@ -1,96 +1,74 @@
-from django.db import models
-
-# Create your models here.
+# website/models.py
 from django.db import models
 from django.utils import timezone
 from datetime import timedelta
-
-class Studio(models.Model):
-    nom = models.CharField(max_length=100)
-    surface = models.DecimalField(max_digits=6, decimal_places=2)  # Surface en m², par exemple 100.50 m²
-    nbr_max_personnes = models.PositiveIntegerField()  # Nombre maximum de personnes pouvant être accueillies
-    image = models.ImageField(upload_to='studios/')  # Upload d'images vers le dossier 'studios/'
-
-    def __str__(self):
-        return self.nom
-    
-class StudioDevice(models.Model):
-    TYPE_CHOICES = [
-        ('ampli', 'Amplificateur'),
-        ('baffle guitare', 'Baffle guitare'),
-        ('baffle basse', 'Baffle basse'),
-        ('batterie', 'Batterie'),
-        ### ajoutez d'autres types si besoin
-    ]
-
-    studio = models.ForeignKey(Studio, on_delete=models.CASCADE, related_name='devices')
-    marque = models.CharField(max_length=100)
-    modele = models.CharField(max_length=100)
-    numero_serie = models.CharField(max_length=100, unique=True)
-    date_achat = models.DateField()
-    type_appareil = models.CharField(max_length=50, choices=TYPE_CHOICES)
-    duree_garantie_annees = models.PositiveIntegerField()
-    
-    is_on = models.BooleanField(default=False)  # État de l’appareil
-    esp_id = models.CharField(max_length=50, unique=True)  # ID de l'ESP32 associé
-
-    @property
-    def date_fin_garantie(self):
-        return self.date_achat + timedelta(days=365 * self.duree_garantie_annees)
-
-    def __str__(self):
-        return f"{self.marque} {self.modele} - {self.studio.nom}"
+from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 
 
-
-
-class Entretien(models.Model):
-    studio_device = models.ForeignKey(StudioDevice, on_delete=models.CASCADE, related_name='entretiens')
-    date_entretien = models.DateField()
-    description = models.TextField()
-
-    def __str__(self):
-        return f"Entretien du {self.date_entretien} pour {self.studio_device.marque} {self.studio_device.modele}"
-
+class MusicGroup(models.Model):
+    name = models.CharField(max_length=255)
 
 class News(models.Model):
     title = models.CharField(max_length=50)
-    description = models.TextField(blank=True, null=True)
-    img = models.ImageField(upload_to='images/', blank=True, null=True)  
-    price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
-    start_date = models.DateField(auto_now_add=True)
+    description = models.TextField(blank=True)
+    img = models.ImageField(upload_to="images/", blank=True)
+    start_date = models.DateField()
     end_date = models.DateField()
-    link_insta = models.URLField(max_length=200, blank=True, null=True)
-    link_facebook = models.URLField(max_length=200, blank=True, null=True)
-    link_ext = models.URLField(max_length=200, blank=True, null=True)
-
-    class Meta:
-        verbose_name = "News"
-        verbose_name_plural = "News"
+    price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
         return self.title
 
 
+class EnrollmentUserMusicGroup(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    music_group = models.ForeignKey(MusicGroup, on_delete=models.CASCADE)
 
+class Studio(models.Model):
+    nom = models.CharField(max_length=100, unique=True)
+    surface = models.PositiveIntegerField(null=True, blank=True)
+    etat = models.CharField(max_length=4, default='free')
+    panoramic = models.ImageField(upload_to='360/', blank=True)
+    vignette = models.ImageField(upload_to='studios/', blank=True)
+    calendar = models.CharField(max_length=255, blank=True)
+    ordre_tri = models.SmallIntegerField(default=0)
+    slug = models.SlugField(unique=True, blank=True)
 
+    class Meta:
+        ordering = ["ordre_tri"]
 
-### class pour afficher les etats des esp dans les differents studios
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nom)
+        super().save(*args, **kwargs)
+    def __str__(self):  
+        return self.nom
+    
+
+# models.py
 class StudioESP(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    esp_ip = models.GenericIPAddressField()
-    state = models.BooleanField(default=False)  # ON = True, OFF = False
+    studio = models.ForeignKey(Studio, on_delete=models.SET_NULL, null=True, blank=True)
+    role = models.CharField(max_length=30, default='other')
+    ip = models.GenericIPAddressField()
     last_seen = models.DateTimeField(null=True, blank=True)
-
-    def is_connected(self):
-        if not self.last_seen:
-            return False
-        return timezone.now() - self.last_seen < timedelta(seconds=30)
-
-    @property
-    def connected(self):
-        return self.is_connected()
-
+    status = models.CharField(max_length=20, default='is_off')
+    name = models.CharField(max_length=50, unique=True, null=True, blank=True)  # ← AJOUT
+    connected = models.BooleanField(default=False)
     def __str__(self):
-        return self.name
+        return self.name or f"ESP-{self.id}"
+
+
+class StudioEspRackDevice(models.Model):
+    esp = models.ForeignKey(StudioESP, on_delete=models.SET_NULL, null=True, blank=True)
+    type = models.CharField(max_length=20, default='ampli')
+    marque = models.CharField(max_length=100)
+    modele = models.CharField(max_length=100)
+    esp_output_id = models.IntegerField()
+    is_on = models.BooleanField(default=False)  # ← ajouté ici
+
+class StudioEspDisplayDevice(models.Model):
+    esp = models.ForeignKey(StudioESP, on_delete=models.SET_NULL, null=True, blank=True)
+    type = models.CharField(max_length=20, default='display')
+    is_on = models.BooleanField(default=False)  # ← ajouté ici aussi

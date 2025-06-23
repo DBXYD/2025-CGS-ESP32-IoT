@@ -28,5 +28,5 @@ static const char SNTP_SERVER[] = "pool.ntp.org";
 #define PING_URL_FB    API_BASE_FALLBACK "ping/"
 
 /* --- Divers -------------------------------------------------- */
-#define STUDIO_NAME  "Rainbow"
+#define STUDIO_NAME  "Rack_Rainbow"
 #endif /* CONFIG_H */
