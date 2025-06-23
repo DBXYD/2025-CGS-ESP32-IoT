@@ -1,0 +1,131 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="padding-top:120px">
+  <h2>Bonjour {{ user.username }} !</h2>
+
+  {% if user.is_superuser %}
+    <p>Contrôle des ESP32 par studio :</p>
+    <ul style="list-style:none; padding:0; margin:0;">
+      {% for esp in esps %}
+        <li style="margin-bottom:2em"><!-- espacement plus grand -->
+          <!-- Ligne principale -->
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <div>
+              <strong>{{ esp.name }}</strong>
+               — IP : {{ esp.ip }}
+               — État :
+                 <span id="state-{{ esp.id }}">
+                   {% if esp.status == "is_on" %}ON{% else %}OFF{% endif %}
+                 </span>
+               — Connexion : {{ esp.connected|yesno:"Connecté,Déconnecté" }}
+            </div>
+            <button
+              id="btn-{{ esp.id }}"
+              class="btn btn-sm {% if esp.status == "is_on" %}btn-danger{% else %}btn-success{% endif %}"
+              {% if not esp.connected %}disabled{% endif %}>
+              <span id="lbl-{{ esp.id }}">
+                {% if esp.status == "is_on" %}Éteindre{% else %}Allumer{% endif %}
+              </span>
+            </button>
+          </div>
+
+          {# On affiche toujours la liste des devices de ce ESP #}
+          {% with devices=esp.studioesprackdevice_set.all %}
+            <div style="margin-left:1em; margin-top:0.5em; color:#ddd; font-size:0.9em;">
+              {% if devices %}
+                {% for device in devices %}
+                  {{ device.type|capfirst }} : {% if device.is_on %}ON{% else %}OFF{% endif %}
+                  {% if not forloop.last %} | {% endif %}
+                {% endfor %}
+              {% else %}
+                Aucun appareil rack associé
+              {% endif %}
+            </div>
+          {% endwith %}
+
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Vous n'avez pas les droits pour accéder à ce panneau.</p>
+  {% endif %}
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script>
+  const espList = [{% for esp in esps %}{ id:{{ esp.id }} }{% if not forloop.last %},{% endif %}{% endfor %}];
+  const pending = {};
+  const getCookie = n => ('; '+document.cookie).split('; '+n+'=').pop().split(';')[0];
+  const csrftoken = getCookie('csrftoken');
+
+  function setBtnState(id,{enabled,pending,on}){
+    const btn = document.getElementById(`btn-${id}`);
+    const lbl = document.getElementById(`lbl-${id}`);
+    btn.disabled = !enabled || pending;
+    btn.className = `btn btn-sm ${on?'btn-danger':'btn-success'}`;
+    lbl.textContent = pending
+      ? (on?'Extinction…':'Allumage…')
+      : (on?'Éteindre':'Allumer');
+  }
+
+  function toggleESP(id){
+    const t0 = Date.now();
+    const btnEl = document.getElementById(`btn-${id}`);
+    const wasOn = btnEl.classList.contains('btn-danger');
+    const desired = !wasOn;
+    setBtnState(id,{enabled:false,pending:true,on:wasOn});
+    pending[id] = true;
+
+    fetch(`/api/esp/${id}/toggle/`, {
+      method:'POST',
+      headers:{'X-CSRFToken':csrftoken}
+    });
+
+    const timeout = 12000;
+    (function poll(){
+      fetch(`/api/esp/status/?id=${id}`)
+        .then(r=>r.json())
+        .then(d=>{
+          const ack = d.connected
+            && d.state === (desired?'ON':'OFF')
+            && d.last_seen > t0+400;
+          if(ack){
+            delete pending[id];
+            setBtnState(id,{enabled:true,pending:false,on:desired});
+            document.getElementById(`state-${id}`).textContent = d.state;
+          } else if(Date.now()-t0 < timeout) {
+            setTimeout(poll,1000);
+          } else {
+            alert("Pas de réponse de l'ESP");
+            delete pending[id];
+            setBtnState(id,{enabled:true,pending:false,on:wasOn});
+          }
+        });
+    })();
+  }
+
+  function refreshAll(){
+    espList.forEach(({id})=>{
+      if(pending[id]) return;
+      fetch(`/api/esp/status/?id=${id}`)
+        .then(r=>r.json())
+        .then(d=>{
+          setBtnState(id,{enabled:d.connected,pending:false,on:d.state==="ON"});
+          document.getElementById(`state-${id}`).textContent = d.state;
+        });
+    });
+  }
+
+  espList.forEach(({id})=>{
+    document.getElementById(`btn-${id}`)
+      .addEventListener('click',()=>toggleESP(id));
+  });
+
+  setTimeout(refreshAll,1000);
+  setInterval(refreshAll,5000);
+</script>
+{% endblock %}

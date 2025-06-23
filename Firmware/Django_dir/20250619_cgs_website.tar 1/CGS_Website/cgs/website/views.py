@@ -91,17 +91,36 @@ def control_panel(request):
     })
 
 
+@login_required
+def gestion_reservations(request):
+    # Si vous avez un modèle Reservation lié à l’utilisateur :
+    # reservations = Reservation.objects.filter(user=request.user)
+    # return render(request, 'website/gestion_reservations.html', {'reservations': reservations})
+
+    # Pour l’instant page vide :
+    return render(request, 'website/gestion_reservation.html')
+
 
 @login_required
 def profil_view(request):
+    # Si vous avez un modèle Reservation lié à l’utilisateur :
+    # reservations = Reservation.objects.filter(user=request.user)
+    # return render(request, 'website/gestion_reservations.html', {'reservations': reservations})
+
+    # Pour l’instant page vide :
+    return render(request, 'website/profil.html')
+
+
+@login_required
+def controle_view(request):
     if not request.user.is_superuser:
-        return render(request, 'website/profil.html')
+        return render(request, 'website/controle.html')
 
     esps = StudioESP.objects.prefetch_related(
         Prefetch('studioesprackdevice_set'),
         Prefetch('studioespdisplaydevice_set'),
     )
-    return render(request, 'website/profil.html', {'esps': esps})
+    return render(request, 'website/controle.html', {'esps': esps})
 
 
 
