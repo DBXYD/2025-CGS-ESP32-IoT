@@ -1,10 +1,6 @@
-# Adapted from:
-# https://github.com/github/gitignore/blob/master/KiCad.gitignore
-
-# For PCBs designed using KiCad: http://www.kicad-pcb.org/
-# Format documentation: http://kicad-pcb.org/help/file-formats/
-
-# Temporary files
+# ------------------------
+# KiCad
+# ------------------------
 *.000
 *.bak
 *.bck
@@ -19,28 +15,32 @@ _autosave-*
 *-save.kicad_pcb
 fp-info-cache
 /build
-
-# Netlist files (exported from Eeschema)
 *.net
-
-# Autorouter files (exported from Pcbnew)
 *.dsn
 *.ses
-
-# Footprint association file (exported from Pcbnew)
 *.cmp
-
-# Exported BOM files
 *.xml
 *.csv
 *.tsv
-
-# Misc
 *.log
 *.raw
 .svg2shenzhen-cache
-
-# Ignorer tous les fichiers de verrouillage KiCad (extension .lck, avec un tilde devant)
 ~*.kicad_sch.lck
 ~*.kicad_pcb.lck
 
+# ------------------------
+# Secrets & DB
+# ------------------------
+# Clés de service
+cgs/my-service-account.json
+
+# Base de données SQLite
+db.sqlite3
+
+# ------------------------
+# Virtualenv & caches
+# ------------------------
+env/
+.venv/
+__pycache__/
+*.py[cod]
