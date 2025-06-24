@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Studio, StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News
+from .models import Studio, StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News, Calendar
 
 
 class ESPInline(admin.TabularInline):
@@ -14,12 +14,17 @@ class RackDeviceInline(admin.TabularInline):
     extra = 0
     fields = ("type", "marque", "modele", "esp_output_id")
 
+@admin.register(Calendar)
+class CalendarAdmin(admin.ModelAdmin):
+    list_display = ('name', 'google_id')
+    search_fields = ('name', 'google_id')
 
 @admin.register(Studio)
 class StudioAdmin(admin.ModelAdmin):
     list_display = ("nom", "surface", "etat")
     prepopulated_fields = {"slug": ("nom",)}
     fields = ("nom", "slug", "surface", "panoramic", "vignette", "calendar", "ordre_tri", "etat")
+    list_filter = ('calendar',)
     inlines = (ESPInline,)
     search_fields = ("nom",)
 

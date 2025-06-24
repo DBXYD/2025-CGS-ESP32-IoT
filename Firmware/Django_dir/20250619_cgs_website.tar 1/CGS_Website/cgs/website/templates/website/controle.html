@@ -19,7 +19,10 @@
                  <span id="state-{{ esp.id }}">
                    {% if esp.status == "is_on" %}ON{% else %}OFF{% endif %}
                  </span>
-               — Connexion : {{ esp.connected|yesno:"Connecté,Déconnecté" }}
+               — Connexion : 
+                    <span id="conn-{{ esp.id }}">
+                      {{ esp.is_connected|yesno:"Connecté,Déconnecté" }}
+                    </span>
             </div>
             <button
               id="btn-{{ esp.id }}"
@@ -95,8 +98,9 @@
             && d.last_seen > t0+400;
           if(ack){
             delete pending[id];
-            setBtnState(id,{enabled:true,pending:false,on:desired});
+            setBtnState(id, {enabled:true, pending:false, on:desired});
             document.getElementById(`state-${id}`).textContent = d.state;
+            document.getElementById(`conn-${id}`).textContent  = "Connecté";
           } else if(Date.now()-t0 < timeout) {
             setTimeout(poll,1000);
           } else {
@@ -109,16 +113,23 @@
   }
 
   function refreshAll(){
-    espList.forEach(({id})=>{
-      if(pending[id]) return;
-      fetch(`/api/esp/status/?id=${id}`)
-        .then(r=>r.json())
-        .then(d=>{
-          setBtnState(id,{enabled:d.connected,pending:false,on:d.state==="ON"});
-          document.getElementById(`state-${id}`).textContent = d.state;
+  espList.forEach(({id})=>{
+    if(pending[id]) return;
+    fetch(`/api/esp/status/?id=${id}`)
+      .then(r=>r.json())
+      .then(d=>{
+        setBtnState(id, {
+          enabled : d.connected,
+          pending : false,
+          on      : d.state==="ON"
         });
-    });
-  }
+        // mise à jour de l'état ON/OFF
+        document.getElementById(`state-${id}`).textContent = d.state;
+        // **nouvelle** mise à jour de la connexion
+        document.getElementById(`conn-${id}`).textContent  = d.connected ? "Connecté" : "Déconnecté";
+      });
+  });
+}
 
   espList.forEach(({id})=>{
     document.getElementById(`btn-${id}`)

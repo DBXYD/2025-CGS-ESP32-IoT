@@ -1,0 +1,26 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5" style="padding-top:120px">
+  <h2>Gestion des réservations</h2>
+  <form method="post" class="form-inline">
+    {% csrf_token %}
+    <div class="form-group mr-2">
+      <label for="start">Date de début :</label>
+      <input type="date" id="start" name="start" class="form-control ml-2" required>
+    </div>
+    <div class="form-group mr-2">
+      <label for="end">Date de fin :</label>
+      <input type="date" id="end" name="end" class="form-control ml-2" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Clean Calendar</button>
+  </form>
+
+  {% if messages %}
+      {% for msg in messages %}
+        <div class="alert alert-success mt-3">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endblock %}

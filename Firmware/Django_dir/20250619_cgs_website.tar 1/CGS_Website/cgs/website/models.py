@@ -1,7 +1,7 @@
 # website/models.py
 from django.db import models
 from django.utils import timezone
-from datetime import timedelta
+from django.utils.timezone import now, timedelta
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 
@@ -22,6 +22,38 @@ class News(models.Model):
         return self.title
 
 
+class Calendar(models.Model):
+    """
+    Représente un calendrier (Google ou futur interne).
+    Pour l'instant, on laisse google_id vide et on continue
+    d'utiliser Google Agenda via settings.CALENDAR_ID.
+    À terme, on pourra stocker ici les événements.
+    """
+    name = models.CharField("Nom du calendrier", max_length=100, unique=True)
+    google_id = models.CharField(
+        "Google Calendar ID",
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text="L’ID Google (ex. votre@mail.com)."
+    )
+
+    class Meta:
+        verbose_name = "Calendrier"
+        verbose_name_plural = "Calendriers"
+
+    def __str__(self):
+        return self.name
+
+class Event(models.Model):
+    calendar   = models.ForeignKey(Calendar, on_delete=models.CASCADE)
+    summary    = models.CharField(max_length=255)
+    start_dt   = models.DateTimeField()
+    end_dt     = models.DateTimeField()
+    is_available = models.BooleanField(default=False)
+
+
+
 class EnrollmentUserMusicGroup(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     music_group = models.ForeignKey(MusicGroup, on_delete=models.CASCADE)
@@ -32,7 +64,15 @@ class Studio(models.Model):
     etat = models.CharField(max_length=4, default='free')
     panoramic = models.ImageField(upload_to='360/', blank=True)
     vignette = models.ImageField(upload_to='studios/', blank=True)
-    calendar = models.CharField(max_length=255, blank=True)
+    calendar = models.ForeignKey(
+        Calendar,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="studios",
+        verbose_name="Calendrier associé",
+        help_text="Choisir le calendrier lié à ce studio."
+    )
     ordre_tri = models.SmallIntegerField(default=0)
     slug = models.SlugField(unique=True, blank=True)
 
@@ -47,15 +87,24 @@ class Studio(models.Model):
         return self.nom
     
 
+
+
+
 # models.py
 class StudioESP(models.Model):
     studio = models.ForeignKey(Studio, on_delete=models.SET_NULL, null=True, blank=True)
     role = models.CharField(max_length=30, default='other')
     ip = models.GenericIPAddressField()
     last_seen = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=20, default='is_off')
+    status    = models.CharField(max_length=16, choices=(("is_on","On"),("is_off","Off")))
     name = models.CharField(max_length=50, unique=True, null=True, blank=True)  # ← AJOUT
-    connected = models.BooleanField(default=False)
+    
+    @property
+    def is_connected(self):
+        if not self.last_seen:
+            return False
+        return (now() - self.last_seen) < timedelta(seconds=15)
+    
     def __str__(self):
         return self.name or f"ESP-{self.id}"
 

@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' "/home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/Django_dir/20250619_cgs_website.tar 1/CGS_Website/env/bin/python3" "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from rsa.cli import decrypt
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(decrypt())

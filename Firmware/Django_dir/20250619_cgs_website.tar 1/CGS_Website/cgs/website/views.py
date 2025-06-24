@@ -3,15 +3,19 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.utils import timezone
 from .models import StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News, Studio
 import json
+from django.contrib import messages
 from django.utils.timezone import now, timedelta
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import StudioEspRackDeviceSerializer, StudioEspDisplayDeviceSerializer
 from django.db.models import Prefetch
-
+from django.utils import timezone
+from django.utils.timezone        import now
+from datetime                     import datetime, time, timedelta, timezone as dt_tz
+from zoneinfo                     import ZoneInfo
+from website.calendar_utils       import calendar_service, CALENDAR_ID
 
 def index(request):
     upcoming_news = (
@@ -91,31 +95,25 @@ def control_panel(request):
     })
 
 
-@login_required
-def gestion_reservations(request):
-    # Si vous avez un modèle Reservation lié à l’utilisateur :
-    # reservations = Reservation.objects.filter(user=request.user)
-    # return render(request, 'website/gestion_reservations.html', {'reservations': reservations})
-
-    # Pour l’instant page vide :
-    return render(request, 'website/gestion_reservation.html')
-
 
 @login_required
 def profil_view(request):
-    # Si vous avez un modèle Reservation lié à l’utilisateur :
-    # reservations = Reservation.objects.filter(user=request.user)
-    # return render(request, 'website/gestion_reservations.html', {'reservations': reservations})
 
     # Pour l’instant page vide :
     return render(request, 'website/profil.html')
 
 
-@login_required
-def controle_view(request):
-    if not request.user.is_superuser:
-        return render(request, 'website/controle.html')
+def reset_all_esp_connection_status():
+    cutoff = now() - timedelta(seconds=15)
+    StudioESP.objects.filter(last_seen__lt=cutoff).update(connected=False)
 
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def controle_view(request):
+    # 1) on déconnecte tous les ESP dont le ping date de plus de 15 s
+    reset_all_esp_connection_status()
+
+    # 2) on récupère ensuite les ESP
     esps = StudioESP.objects.prefetch_related(
         Prefetch('studioesprackdevice_set'),
         Prefetch('studioespdisplaydevice_set'),
@@ -167,7 +165,7 @@ def esp_status_api(request):
     except StudioESP.DoesNotExist:
         return JsonResponse({"error": "not found"}, status=404)
     
-    connected = esp.connected
+    connected = esp.is_connected
     # ton champ s'appelle `status`, par exemple 'is_on' ou 'is_off'
     is_on = (esp.status == "is_on")
     return JsonResponse({
@@ -238,9 +236,121 @@ def esp_ping(request):
 
     # 3) mise à jour
     esp.last_seen = timezone.now()
-    esp.connected = True
     if state is not None:
         esp.status = "is_on" if state else "is_off"
 
-    esp.save(update_fields=["last_seen", "connected", "status"])
+    esp.save(update_fields=["last_seen", "status"])
     return JsonResponse({"ok": True})
+
+
+
+####Gestion réservations
+
+PARIS_TZ = ZoneInfo("Europe/Paris")
+UTC      = dt_tz.utc
+
+def parse_iso(dt_str: str) -> datetime:
+    # transforme "2025-06-24T14:00:00Z" en datetime(…, tzinfo=UTC)
+    if dt_str.endswith("Z"):
+        dt_str = dt_str[:-1] + "+00:00"
+    return datetime.fromisoformat(dt_str).astimezone(UTC)
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def gestion_reservations(request):
+    # POST-Redirect-Get pour éviter double exécution au rafraîchissement
+    if request.method == "POST":
+        cleaned = 0
+
+        # 1) Lecture des bornes en heure locale Paris
+        start_local = datetime.fromisoformat(request.POST['start']).replace(tzinfo=PARIS_TZ)
+        end_local = (datetime.fromisoformat(request.POST['end']) + timedelta(days=1)).replace(tzinfo=PARIS_TZ)
+
+        # 2) Conversion en UTC pour l'API
+        start_utc = start_local.astimezone(UTC)
+        end_utc = end_local.astimezone(UTC)
+
+        # 3) Récupération et mise à jour des events existants
+        events = calendar_service.events().list(
+            calendarId=CALENDAR_ID,
+            timeMin=start_utc.isoformat(),
+            timeMax=end_utc.isoformat(),
+            singleEvents=True,
+            orderBy='startTime'
+        ).execute().get('items', [])
+
+        # -> remplacer les "Sans titre" en "Disponible"
+        for ev in events:
+            if not ev.get('summary', '').strip():
+                ev['summary'] = 'Disponible'
+                ev['visibility'] = 'public'
+                ev['transparency'] = 'transparent'
+                ev['reminders'] = {'useDefault': True}
+                calendar_service.events().update(
+                    calendarId=CALENDAR_ID,
+                    eventId=ev['id'],
+                    body=ev
+                ).execute()
+                cleaned += 1
+
+        # 4) Balayage jour par jour pour combler les trous par blocs d'1h
+        current = start_local.date()
+        last = (end_local - timedelta(seconds=1)).date()
+        while current <= last:
+            wd = current.weekday()
+            # définir fenêtre locale selon jour
+            if wd <= 4:  # Lun–Ven 16h→00h
+                loc_start = datetime.combine(current, time(16,0), tzinfo=PARIS_TZ)
+                loc_end = datetime.combine(current+timedelta(days=1), time(0,0), tzinfo=PARIS_TZ)
+            elif wd == 5:  # Samedi 10h→18h
+                loc_start = datetime.combine(current, time(10,0), tzinfo=PARIS_TZ)
+                loc_end = datetime.combine(current, time(18,0), tzinfo=PARIS_TZ)
+            else:  # Dimanche 13h→21h
+                loc_start = datetime.combine(current, time(13,0), tzinfo=PARIS_TZ)
+                loc_end = datetime.combine(current, time(21,0), tzinfo=PARIS_TZ)
+
+            # conversion en UTC
+            window_start = loc_start.astimezone(UTC)
+            window_end = loc_end.astimezone(UTC)
+
+            # events du créneau
+            day_events = [
+                ev for ev in events
+                if 'dateTime' in ev['start']
+                and window_start <= parse_iso(ev['start']['dateTime']) < window_end
+            ]
+            # timeline de base
+            times = [window_start]
+            for ev in sorted(day_events, key=lambda e: parse_iso(e['start']['dateTime'])):
+                times.append(parse_iso(ev['start']['dateTime']))
+                times.append(parse_iso(ev['end']['dateTime']))
+            times.append(window_end)
+
+            # insertion blocs de 1h
+            for a, b in zip(times[::2], times[1::2]):
+                gap = b - a
+                if gap >= timedelta(hours=1):
+                    n_blocks = int(gap / timedelta(hours=1))
+                    for i in range(n_blocks):
+                        bs = a + timedelta(hours=i)
+                        be = bs + timedelta(hours=1)
+                        calendar_service.events().insert(
+                            calendarId=CALENDAR_ID,
+                            body={
+                                'summary': 'Disponible',
+                                'visibility': 'public',
+                                'transparency': 'transparent',
+                                'reminders': {'useDefault': True},
+                                'start': {'dateTime': bs.isoformat()},
+                                'end': {'dateTime': be.isoformat()},
+                            }
+                        ).execute()
+                        cleaned += 1
+            current += timedelta(days=1)
+
+        # message de succès et redirect
+        messages.success(request, f"Calendrier nettoyé de {cleaned} créneaux “Disponible”.")
+        return redirect('gestion_reservations')
+
+    # GET simple
+    return render(request, 'website/gestion_reservations.html')
