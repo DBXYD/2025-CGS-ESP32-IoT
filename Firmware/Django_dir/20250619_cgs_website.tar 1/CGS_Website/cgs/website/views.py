@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News, Studio
+from .models import StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News, Studio, Equipment
 import json
 from django.contrib import messages
 from django.utils.timezone import now, timedelta
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-from .serializers import StudioEspRackDeviceSerializer, StudioEspDisplayDeviceSerializer
+from .serializers import StudioEspRackDeviceSerializer, StudioEspDisplayDeviceSerializer, EquipmentSerializer
 from django.db.models import Prefetch
 from django.utils import timezone
 from django.utils.timezone        import now
@@ -51,13 +51,16 @@ def studio_devices(request, slug):
 
     rack_devices = StudioEspRackDevice.objects.filter(esp__in=esps)
     display_devices = StudioEspDisplayDevice.objects.filter(esp__in=esps)
+    equipments      = Equipment.objects.filter(studio=studio).order_by('order','brand')
 
     rack_serializer = StudioEspRackDeviceSerializer(rack_devices, many=True)
     display_serializer = StudioEspDisplayDeviceSerializer(display_devices, many=True)
+    eq_serializer      = EquipmentSerializer(equipments, many=True)
 
     return Response({
         "rack_devices": rack_serializer.data,
-        "display_devices": display_serializer.data
+        "display_devices": display_serializer.data,
+        "equipments":      eq_serializer.data,
     })
 
 

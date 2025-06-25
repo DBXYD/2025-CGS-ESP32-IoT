@@ -122,10 +122,12 @@ class StudioEspDisplayDevice(models.Model):
 
 class Equipment(models.Model):
     CATEGORY_CHOICES = [
-        ('string', 'Cordes'),
-        ('amp',    'Amplification'),
-        ('drum',   'Percussions'),
-        ('misc',   'Divers'),
+        ('Guitar Cabinet', 'Cabinet Guitare'),
+        ('Bass Cabinet',    'Cabinet Basse'),
+        ('Guitar Amplifier',   'Ampli Guitare'),
+        ('Bass Amplifier',   'Ampli Basse'),
+        ('Guitar Combo Amp',   'Combo Guitare'),
+        ('Drum Kit',   'Batterie'),
     ]
 
     studio      = models.ForeignKey(
@@ -134,17 +136,26 @@ class Equipment(models.Model):
         related_name='equipments',
         verbose_name="Studio"
     )
-    name        = models.CharField("Nom de l’appareil", max_length=100)
+    STATE_CHOICES = [
+        ('New', 'Etat neuf'),
+        ('Excellent Condition',    'Très bon état'),
+        ('Good Condition',   'Bon état'),
+        ('Damaged',   'Abîmé'),
+        ('Out of order',   'Hors service'),
+    ]
+    brand = models.CharField("Marque", max_length=100, default="Inconnu")
     category    = models.CharField("Type", max_length=20, choices=CATEGORY_CHOICES, default='misc')
-    description = models.CharField("Détails / quantité", max_length=200, blank=True)
+    model = models.CharField("Modèle", max_length=200, blank=True)
+    state = models.CharField("Etat", max_length=20, choices=STATE_CHOICES, default='New')
     order       = models.PositiveSmallIntegerField("Ordre d’affichage", default=0)
 
     class Meta:
-        ordering = ['order', 'name']
+        ordering = ['order', 'brand']
         verbose_name = "Appareil"
         verbose_name_plural = "Appareils"
 
     def __str__(self):
-        return f"{self.name} ({self.get_category_display()})"
+        # Attention : champ `brand`, pas `Brand`
+        return f"{self.brand} ({self.get_category_display()})"
 
 

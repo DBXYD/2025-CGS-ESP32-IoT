@@ -56,7 +56,7 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(Equipment)
 class EquipmentAdmin(admin.ModelAdmin):
-    list_display   = ('name', 'studio', 'category', 'description', 'order')
+    list_display   = ('brand', 'studio', 'category', 'model', 'state', 'order')
     list_filter    = ('studio', 'category')
-    search_fields  = ('name', 'description')
-    ordering       = ('studio','order','name')
+    search_fields  = ('brand', 'model')
+    ordering       = ('studio','order','brand')

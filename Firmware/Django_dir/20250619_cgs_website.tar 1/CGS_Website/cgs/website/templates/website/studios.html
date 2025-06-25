@@ -264,19 +264,19 @@
         fetch(`/api/studio/${slug}/devices/`)
 		.then(r => r.json())
 		.then(data => {
-			const rackList = data.rack_devices || [];
-			const ul = document.getElementById('liste-matos');
-			ul.innerHTML = '';
+	    const eqList   = data.equipments || [];
+		const ul = document.getElementById('liste-matos');
+		ul.innerHTML = '';
 
-			if (rackList.length === 0) {
-				ul.innerHTML = "<li><em>Aucun équipement répertorié.</em></li>";
-			} else {
-				rackList.forEach(d => {
-					const label = `<strong>${d.type || "?"}</strong> : ${d.marque || "?"} – ${d.modele || "?"}`;
-					ul.insertAdjacentHTML('beforeend', `<li>${label}</li>`);
-				});
-			}
-		});
+		if (eqList.length === 0) {
+			ul.innerHTML = "<li><em>Aucun équipement répertorié.</em></li>";
+		} else {
+			eqList.forEach(e => {
+				const label = `<strong>${e.category_display}</strong> : ${e.brand} – ${e.model || '—'}`;
+				ul.insertAdjacentHTML('beforeend', `<li>${label}</li>`);
+        	});
+		}
+	});
 
         /* — panorama — */
 		const pano = document.getElementById('panorama');
