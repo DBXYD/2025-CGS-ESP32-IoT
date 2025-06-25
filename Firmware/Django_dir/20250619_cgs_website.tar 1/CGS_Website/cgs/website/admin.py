@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Studio, StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News, Calendar
+from .models import Studio, StudioESP, StudioEspRackDevice, StudioEspDisplayDevice, News, Calendar, Equipment
 
 
 class ESPInline(admin.TabularInline):
@@ -52,3 +52,11 @@ class StudioEspDisplayDeviceAdmin(admin.ModelAdmin):
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ("title", "start_date", "end_date", "price")
+
+
+@admin.register(Equipment)
+class EquipmentAdmin(admin.ModelAdmin):
+    list_display   = ('name', 'studio', 'category', 'description', 'order')
+    list_filter    = ('studio', 'category')
+    search_fields  = ('name', 'description')
+    ordering       = ('studio','order','name')

@@ -87,10 +87,6 @@ class Studio(models.Model):
         return self.nom
     
 
-
-
-
-# models.py
 class StudioESP(models.Model):
     studio = models.ForeignKey(Studio, on_delete=models.SET_NULL, null=True, blank=True)
     role = models.CharField(max_length=30, default='other')
@@ -121,3 +117,34 @@ class StudioEspDisplayDevice(models.Model):
     esp = models.ForeignKey(StudioESP, on_delete=models.SET_NULL, null=True, blank=True)
     type = models.CharField(max_length=20, default='display')
     is_on = models.BooleanField(default=False)  # ← ajouté ici aussi
+
+
+
+class Equipment(models.Model):
+    CATEGORY_CHOICES = [
+        ('string', 'Cordes'),
+        ('amp',    'Amplification'),
+        ('drum',   'Percussions'),
+        ('misc',   'Divers'),
+    ]
+
+    studio      = models.ForeignKey(
+        Studio,
+        on_delete=models.CASCADE,
+        related_name='equipments',
+        verbose_name="Studio"
+    )
+    name        = models.CharField("Nom de l’appareil", max_length=100)
+    category    = models.CharField("Type", max_length=20, choices=CATEGORY_CHOICES, default='misc')
+    description = models.CharField("Détails / quantité", max_length=200, blank=True)
+    order       = models.PositiveSmallIntegerField("Ordre d’affichage", default=0)
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = "Appareil"
+        verbose_name_plural = "Appareils"
+
+    def __str__(self):
+        return f"{self.name} ({self.get_category_display()})"
+
+
