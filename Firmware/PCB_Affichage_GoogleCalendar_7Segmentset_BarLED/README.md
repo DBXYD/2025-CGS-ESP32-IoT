@@ -41,7 +41,7 @@ La barre démarre **entièrement verte** ; au fur et à mesure, les LED passent 
 
 | Élément | Détails |
 |---------|---------|
-| **PCB Afficheur**  | Inclus ESP32 C3 Supermini, condo 10nF, Résistance et LED verte, entrée alim et sortie alim+commande du ruban LED |
+| **PCB Afficheur**  | Inclus ESP32 C3 Supermini, condo 100nF, Résistance et LED verte, entrée alim et sortie alim+commande du ruban LED |
 | 96 × **WS2812B** | par ex. 1 m / 144 LED/m recoupé (3 LEDs/segment, 1/point, 10/barre) |
 | Alim 5 V / ≥ 2 A | commune carte + ruban |
 
