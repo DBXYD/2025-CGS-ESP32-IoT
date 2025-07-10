@@ -563,7 +563,7 @@
       "plot": "../Gerber/PCB_Repetition/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "../3D/Repetition/PCB_Repetition.step",
       "svg": "",
       "vrml": ""
     },

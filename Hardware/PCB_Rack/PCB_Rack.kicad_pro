@@ -548,7 +548,7 @@
       "plot": "../Gerber/PCB_Rack/",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "PCB_Rack.step",
+      "step": "../../../../../../../PCB_Rack.step",
       "svg": "",
       "vrml": ""
     },

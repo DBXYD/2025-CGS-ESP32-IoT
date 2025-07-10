@@ -72,4 +72,46 @@ void api_send_ping(bool current_state)
         http_fetch(PING_URL_FB, "POST", NULL, body, &st);
 }
 
+void api_send_ping_bits(uint8_t bits)
+{
+    char body[128];
+    snprintf(body, sizeof(body),
+             "{\"name\":\"%s\",\"mask\":%u}",  // 0-63
+             STUDIO_NAME, bits);
+
+    int st;
+    http_fetch(PING_URL,    "POST", NULL, body, &st);
+    if (st != 200)
+        http_fetch(PING_URL_FB, "POST", NULL, body, &st);
+}
+
+void api_send_ping_state(bool rack_on)
+{
+    char body[128];
+    snprintf(body, sizeof(body),
+             "{\"name\":\"%s\",\"state\":%s}",
+             STUDIO_NAME,
+             rack_on ? "true":"false");
+
+    int st;
+    http_fetch(PING_URL,    "POST", NULL, body, &st);
+    if (st != 200)
+        http_fetch(PING_URL_FB, "POST", NULL, body, &st);
+}
+
+void api_send_ping_full(bool rack_on, uint8_t mask)
+{
+    char body[160];
+    /*  ➜ un seul JSON avec les deux champs               */
+    snprintf(body,sizeof(body),
+             "{\"name\":\"%s\",\"state\":%s,\"mask\":%u}",
+             STUDIO_NAME,
+             rack_on ? "true":"false",
+             mask);
+
+    int st;
+    http_fetch(PING_URL, "POST", NULL, body, &st);
+    if(st!=200)
+        http_fetch(PING_URL_FB,"POST",NULL,body,&st);
+}
 

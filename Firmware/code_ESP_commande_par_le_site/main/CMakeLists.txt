@@ -12,4 +12,6 @@ idf_component_register(
         led_strip   ## pour controler les neopixels
         api_client
         mdns
+        rack_ctrl  
+        esp_timer
     )

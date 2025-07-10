@@ -1,0 +1,13 @@
+{
+  "idf.port": "/dev/ttyACM0",
+  "idf.openOcdConfigs": [
+    "board/esp32c3-builtin.cfg"
+  ],
+  "idf.flashType": "UART",
+  "idf.espIdfPath": "/home/janus/esp/esp-idf",
+  "idf.toolsPath": "/home/janus/.espressif",
+  "idf.pythonInstallPath": "/home/janus/.espressif/python_env/idf5.4_py3.12_env/bin/python",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32c3"
+  }
+}

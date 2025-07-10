@@ -9285,7 +9285,7 @@
 				)
 			)
 		)
-		(property "Value" "100u"
+		(property "Value" "220u"
 			(at 0 -1.5 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -25876,7 +25876,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "420,75"
+		(gr_text "420.75"
 			(at 271.625 156.98 0)
 			(layer "Dwgs.User")
 			(uuid "17a969a1-f8da-431b-b2db-a8ed852236cb")
@@ -25914,7 +25914,7 @@
 			(extension_offset 0.5)
 			(keep_text_aligned yes)
 		)
-		(gr_text "44,45"
+		(gr_text "44.45"
 			(at 48.81 187.965 90)
 			(layer "Dwgs.User")
 			(uuid "e5b9ee13-9c59-48bf-b469-8843339bc2c1")

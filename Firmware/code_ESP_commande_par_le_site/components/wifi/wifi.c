@@ -122,7 +122,7 @@ void wifi_init(void)
         WIFI_CONNECTED_BIT,
         pdFALSE,
         pdFALSE,
-        pdMS_TO_TICKS(10000)
+        pdMS_TO_TICKS(30000)
     );
     if (bits & WIFI_CONNECTED_BIT) {
         ESP_LOGI(TAG, "Wi-Fi connecté avec succès");

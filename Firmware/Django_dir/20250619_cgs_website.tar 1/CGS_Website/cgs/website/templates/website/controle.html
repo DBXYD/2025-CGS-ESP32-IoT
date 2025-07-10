@@ -36,7 +36,9 @@
 
           {# On affiche toujours la liste des devices de ce ESP #}
           {% with devices=esp.studioesprackdevice_set.all %}
-            <div style="margin-left:1em; margin-top:0.5em; color:#ddd; font-size:0.9em;">
+            <div 
+              id="dev-{{ esp.id }}" 
+              style="margin-left:1em; margin-top:0.5em; color:#ddd; font-size:0.9em;">
               {% if devices %}
                 {% for device in devices %}
                   {{ device.type|capfirst }} : {% if device.is_on %}ON{% else %}OFF{% endif %}
@@ -68,7 +70,7 @@
   function setBtnState(id,{enabled,pending,on}){
     const btn = document.getElementById(`btn-${id}`);
     const lbl = document.getElementById(`lbl-${id}`);
-    btn.disabled = !enabled || pending;
+    btn.disabled = (enabled===false) || pending;
     btn.className = `btn btn-sm ${on?'btn-danger':'btn-success'}`;
     lbl.textContent = pending
       ? (on?'Extinction…':'Allumage…')
@@ -93,6 +95,8 @@
       fetch(`/api/esp/status/?id=${id}`)
         .then(r=>r.json())
         .then(d=>{
+           /* ➊ mise à jour en temps réel des appareils */
+          renderDevices(id, d.devices);
           const ack = d.connected
             && d.state === (desired?'ON':'OFF')
             && d.last_seen > t0+400;
@@ -105,7 +109,7 @@
             setTimeout(poll,1000);
           } else {
             alert("Pas de réponse de l'ESP");
-            delete pending[id];
+            delete pending[id]; 
             setBtnState(id,{enabled:true,pending:false,on:wasOn});
           }
         });
@@ -118,15 +122,24 @@
     fetch(`/api/esp/status/?id=${id}`)
       .then(r=>r.json())
       .then(d=>{
-        setBtnState(id, {
-          enabled : d.connected,
-          pending : false,
-          on      : d.state==="ON"
-        });
-        // mise à jour de l'état ON/OFF
-        document.getElementById(`state-${id}`).textContent = d.state;
-        // **nouvelle** mise à jour de la connexion
-        document.getElementById(`conn-${id}`).textContent  = d.connected ? "Connecté" : "Déconnecté";
+        renderDevices(id, d.devices);                 // maj live des 6 appareils
+
+            /* --- déduction de l’état global --- */
+        const allOn  = d.devices.length && d.devices.every(dev => dev.is_on);
+        const allOff = d.devices.length && d.devices.every(dev => !dev.is_on);
+
+        if(allOn || allOff){      // séquence terminée
+          setBtnState(id, {
+            enabled : d.connected,
+            pending : false,
+            on      : allOn
+          });
+          document.getElementById(`state-${id}`).textContent = allOn ? "ON" : "OFF";
+        }
+
+        // connexion toujours mise à jour
+        document.getElementById(`conn-${id}`).textContent =
+                    (d.connected ?? d.is_connected) ? "Connecté" : "Déconnecté";
       });
   });
 }
@@ -138,5 +151,19 @@
 
   setTimeout(refreshAll,1000);
   setInterval(refreshAll,5000);
+
+  function renderDevices(id, list){
+  const div = document.getElementById(`dev-${id}`);
+  if(!div) return;
+  if(!list.length){
+    div.textContent = "Aucun appareil rack associé";
+    return;
+  }
+  div.textContent = list.map(d =>
+    `${d.type.charAt(0).toUpperCase()+d.type.slice(1)} : ${d.is_on?"ON":"OFF"}`
+  ).join(" | ");
+}
+
+
 </script>
 {% endblock %}

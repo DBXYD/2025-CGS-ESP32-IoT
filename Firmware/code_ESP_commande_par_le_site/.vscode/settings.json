@@ -6,5 +6,8 @@
     "IDF_TARGET": "esp32c3"
   },
   "idf.flashType": "UART",
-  "idf.port": "/dev/ttyACM0"
+  "idf.port": "/dev/ttyACM0",
+  "files.associations": {
+    "rack_ctrl.h": "c"
+  }
 }

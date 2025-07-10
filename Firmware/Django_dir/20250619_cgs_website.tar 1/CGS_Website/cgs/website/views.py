@@ -150,13 +150,8 @@ def toggle_esp_status(request, esp_id):
 
 
 
-
-
-
-
 @csrf_exempt
 def esp_status_api(request):
-    # prise en charge ?id= ou ?name=
     esp_id  = request.GET.get("id")
     name    = request.GET.get("name")
 
@@ -167,16 +162,22 @@ def esp_status_api(request):
         esp = StudioESP.objects.get(pk=esp_id) if esp_id else StudioESP.objects.get(name=name)
     except StudioESP.DoesNotExist:
         return JsonResponse({"error": "not found"}, status=404)
-    
+
+    is_on     = (esp.status == "is_on")
     connected = esp.is_connected
-    # ton champ s'appelle `status`, par exemple 'is_on' ou 'is_off'
-    is_on = (esp.status == "is_on")
+
+    # --- NOUVEAU : liste des devices rack associés ------------------------
+    devices_qs   = StudioEspRackDevice.objects.filter(esp=esp)
+    devices_json = StudioEspRackDeviceSerializer(devices_qs, many=True).data
+    # ----------------------------------------------------------------------
+
     return JsonResponse({
-        "state": "ON" if is_on else "OFF",
-         "connected": connected,
-         "last_seen": int(esp.last_seen.timestamp() * 1000)
-                      if esp.last_seen else None
-     })
+        "state"     : "ON" if is_on else "OFF",
+        "connected" : connected,
+        "last_seen" : int(esp.last_seen.timestamp()*1000) if esp.last_seen else None,
+        "devices"   : devices_json,                # ← AJOUT
+    })
+
 
 
 
@@ -196,9 +197,15 @@ def get_state_api(request):
     esp.save(update_fields=['last_seen'])
 
     is_on = (esp.status == "is_on")
+    connected = esp.is_connected
+    devices_qs   = StudioEspRackDevice.objects.filter(esp=esp)
+    devices_ser  = StudioEspRackDeviceSerializer(devices_qs, many=True)
+
     return JsonResponse({
-        'state': is_on,  # Booléen simple
-        'connected': esp.connected  # propriété booléenne (is_connected)
+        "state":     "ON" if is_on else "OFF",
+        "connected": connected,
+        "last_seen": int(esp.last_seen.timestamp()*1000) if esp.last_seen else None,
+        "devices":   devices_ser.data,          # ← NOUVEAU
     })
 
 
@@ -217,32 +224,81 @@ def reset_all_esp_connection_status():
     StudioESP.objects.filter(last_seen__lt=cutoff).update(last_seen=None)
 
 
-
 @require_POST
 @csrf_exempt
 def esp_ping(request):
     """
-    Body JSON : {"name":"Rainbow", "state": true/false}
-    """
-    data  = json.loads(request.body or "{}")
-    name  = data.get("name")
-    state = data.get("state")  # bool ou None
+    Ping envoyé par l’ESP :
 
+        {
+          "name" : "Rack_Rainbow",   # obligatoire
+          "state": true | false | null,   # allumé / éteint (optionnel)
+          "mask" : 0-63                    # bit-field 6 bits : 1 = ON (optionnel)
+        }
+
+    * Si **mask** est fourni : il décrit l’état réel de chacune des 6 sorties
+      ➜ on met à jour les StudioEspRackDevice correspondants 1 par 1.
+    * Sinon, on se rabat sur **state** (ON / OFF global).
+    * Dans tous les cas on tamponne la nouvelle IP et `last_seen`.
+    """
+    # ------------------------------------------------------------------
+    # 1) Lecture / validation du JSON
+    # ------------------------------------------------------------------
+    try:
+        data = json.loads(request.body or "{}")
+    except ValueError:
+        return JsonResponse({"error": "invalid json"}, status=400)
+
+    name  = data.get("name")
+    state = data.get("state")          # bool | None
+    mask  = data.get("mask")           # int 0-63 | None
+
+    if not name:
+        return JsonResponse({"error": "missing name"}, status=400)
+
+    # ------------------------------------------------------------------
+    # 2) Recherche de l’ESP
+    # ------------------------------------------------------------------
     try:
         esp = StudioESP.objects.get(name=name)
     except StudioESP.DoesNotExist:
         return JsonResponse({"error": "unknown esp"}, status=404)
 
-    # 2) vérification IP
-    if request.META["REMOTE_ADDR"] != esp.ip:
-        return JsonResponse({"error": "ip mismatch"}, status=400)
+    # ------------------------------------------------------------------
+    # 3) IP dynamique : on accepte le changement
+    # ------------------------------------------------------------------
+    sender_ip = request.META.get("REMOTE_ADDR")
+    if sender_ip and sender_ip != esp.ip:
+        esp.ip = sender_ip
+        esp.save(update_fields=["ip"])
 
-    # 3) mise à jour
-    esp.last_seen = timezone.now()
+    # ------------------------------------------------------------------
+    # 4) Mise à jour « global » ON / OFF
+    # ------------------------------------------------------------------
     if state is not None:
         esp.status = "is_on" if state else "is_off"
 
+    # ------------------------------------------------------------------
+    # 5) Mise à jour détaillée des appareils rack
+    # ------------------------------------------------------------------
+    if mask is not None:                                           # ping détaillé
+        devices = list(
+            StudioEspRackDevice.objects.filter(esp=esp).order_by("id")
+        )
+        for i, dev in enumerate(devices):
+            wanted = bool((mask >> i) & 1)                         # bit i
+            if dev.is_on != wanted:
+                dev.is_on = wanted
+                dev.save(update_fields=["is_on"])
+    elif state is not None:                                        # ping global
+        StudioEspRackDevice.objects.filter(esp=esp).update(is_on=state)
+
+    # ------------------------------------------------------------------
+    # 6) Dernière visite et persistance
+    # ------------------------------------------------------------------
+    esp.last_seen = timezone.now()
     esp.save(update_fields=["last_seen", "status"])
+
     return JsonResponse({"ok": True})
 
 
