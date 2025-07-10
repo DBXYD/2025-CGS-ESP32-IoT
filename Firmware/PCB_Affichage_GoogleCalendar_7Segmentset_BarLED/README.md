@@ -53,7 +53,7 @@ ESP32-C3          Ruban WS2812B
 
 5 V   ───────────► 5 V
 GND  ───────────► GND
-GPIO 5 ──330 Ω──► DIN
+GPIO 5 ───────────► DIN
 
 ````
 *(LED 0 = première LED après DIN)*
