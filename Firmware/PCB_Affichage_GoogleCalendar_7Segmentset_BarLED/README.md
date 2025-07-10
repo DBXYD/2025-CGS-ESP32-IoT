@@ -1,4 +1,3 @@
-```markdown
 # 📟 Horloge NeoPixel + Barre de progression Google Calendar (ESP32-C3)
 
 > Projet ESP-IDF v5.4 – 96 LED WS2812B en série
