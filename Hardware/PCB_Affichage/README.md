@@ -23,10 +23,10 @@ Il s'agit d'un PCB permettant de d'afficher l'heure en contrôlant un ruban de L
 
 ## 📷 Captures d’écran KiCad
 
-![Schématique du PCB Rack](./img/SCH_Rackv1.png)
-![Schématique du PCB Rack](./img/SCH_Rackv1_2.png)
-![PCB Rack](./img/PCB_v1.png)
-![PCB Rack](./img/PCB_v1_2.png)
+![Front du PCB Rack](./img/Front.png)
+![Back du PCB Rack](./img/Back.png)
+![3D viewer Rack](./img/3D_Front.png)
+![3D viewer Rack](./img/3D_Back.png)
 ---
 ## 📝 Notes techniques
 
