@@ -42,7 +42,7 @@ static led_strip_handle_t strip;
 #define TOKEN_MARGIN_S     60
 #define TEST_INTERVAL_MIN   1
 /* ------------------------------- */
-
+/* --------------  TÂCHE GCAL  -------------- */
 static void gcal_task(void *arg)
 {
     /*  ✱✱✱  TAILLE DES BUFFERS  ✱✱✱
@@ -75,7 +75,7 @@ static void gcal_task(void *arg)
         {
             vTaskDelay(pdMS_TO_TICKS(5000));   // réessayer dans 5 s
         }
-
+        // Valider le code sur google device pour accèder aux informations du calendar
         ESP_LOGW(TAG,
                  "⚠️  Autorisation requise  ⚠️\n"
                  "Visitez : %s\n"
@@ -231,8 +231,6 @@ static void blink_task(void *arg)
     }
 }
 
-/* --------------  TÂCHE GCAL  -------------- */
-/*  (inchangée – garde ton implémentation existante)  */
 
 /* --------------  APP_MAIN  -------------- */
 void app_main(void)

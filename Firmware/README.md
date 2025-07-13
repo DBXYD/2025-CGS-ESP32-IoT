@@ -18,7 +18,7 @@ Le système repose sur **trois types de cartes électroniques sur mesure**, chac
 - 🚪 **Fonction** : Contrôle des équipements d’environnement dans la salle (prises, lumières, etc.).
 - 🌐 **Connectivité** : ESP32-C3 SuperMini avec accès Wi-Fi pour pilotage distant.
 
-### 🖥️ 3. PCB AFFICHAGE
+### 🖥️ 3. [**PCB AFFICHAGE**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/PCB_Affichage_GoogleCalendar_7Segmentset_BarLED)
 
 - 📺 **Fonction** : Affichage dynamique dans la salle.
 - 💡 **Éléments affichés** :

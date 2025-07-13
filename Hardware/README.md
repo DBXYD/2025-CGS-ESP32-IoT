@@ -1,6 +1,6 @@
 # 🚀 Bienvenue dans la section HARDWARE
 
-Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques (PCB)** et des pièces **imprimées en 3D** permettant d’automatiser et de connecter les salles de musique.
+Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques (PCB)**  permettant d’automatiser et de connecter les salles de musique.
 
 ---
 
@@ -41,8 +41,8 @@ Ce projet a pour objectif de concevoir jusqu’à **trois cartes électroniques 
 ## 📝 Notes techniques
 
 * Toutes les lignes de commande haute‑puissance sont isolées de la logique 3,3 V via les relais bistables et/ou le DRV8428E.
-* Le PCF8575 étend le nombre de GPIO disponibles : il commande à la fois les relais et les canaux d’affichage lumineux.
-* Les boîtiers 3D prévoient la circulation d’air et des points de fixation normalisés type rack 19″.
+* Le PCF8575 étend le nombre de GPIO disponibles : il commande les relais.
+
 
 ---
 
