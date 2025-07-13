@@ -19,7 +19,7 @@ Le système repose sur **trois types de cartes électroniques sur mesure**, chac
 - 🔌 **Contrôle** : Allumage/extinction des amplificateurs et contrôl des couplage entrées sorties XLR via relais.
 - 🌐 **Connectivité** : ESP32-C3 SuperMini avec accès Wi-Fi pour pilotage distant.
 
-### 🖥️ 3. [**PCB AFFICHAGE**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/PCB_Affichage_GoogleCalendar_7Segmentset_BarLED)
+### 🖥️ 3. [**PCB AFFICHAGE**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/firmware_PCB_Affichage)
 
 - 📺 **Fonction** : Affichage dynamique dans la salle.
 - 💡 **Éléments affichés** :
