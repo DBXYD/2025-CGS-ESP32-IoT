@@ -7,13 +7,13 @@ Ce projet vise à automatiser et moderniser l'utilisation des salles de répéti
 
 Le système repose sur **trois types de cartes électroniques sur mesure**, chacune équipée d’un ESP32-C3, pour rendre l’usage des salles de musique plus simple, connecté et automatique.
 
-### 🧠 1. PCB RACK
+### 🧠 1. [**PCB RACK**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/firmware_PCB_Rack)
 
 - 🗄️ **Fonction** : Contrôle des appareils audio installés dans un rack 19" (amplis, table de mixage, processeur, etc.).
 - 🔌 **Contrôle** : Allumage/extinction des appareils via relais.
 - 🌐 **Connectivité** : ESP32-C3 SuperMini connecté au Wi-Fi, commandable via site web ou API.
 
-### 🎚️ 2. PCB RÉPÉTITION (Entrées / Sorties)
+### 🎚️ 2. [**PCB RÉPÉTITION**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/firmware_PCB_Repetition)
 
 - 🚪 **Fonction** : Contrôle des équipements d’environnement dans la salle (prises, lumières, etc.).
 - 🌐 **Connectivité** : ESP32-C3 SuperMini avec accès Wi-Fi pour pilotage distant.
