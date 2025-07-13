@@ -11,32 +11,33 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | Dossier       | Contenu                                                                                                    | Status        |
 | ------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
 | `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`HARDWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware)) | ✅ Terminé |
-| `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.), et amélioration/adaptation du site avec Django   ➡️ voir [`FIRMWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware)                                           | ✅ en cours |
-| `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux                                                        | ✅ en cours    |
+| `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.), et amélioration/adaptation du site avec Django   ➡️ voir [`FIRMWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware)                                           | ✅ Terminé |
+| `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux                                                        | ✅ Terminé    |
 ---
 
 ## 🛠️ Les trois cartes principales
 
 ### 1️⃣ **Rack Power Controller **
 
-* Format **rack 19″ 1 U** ; se visse directement dans le châssis.
+* 3D format **rack 19″ 1 U** ; se visse directement dans le châssis.
 * **ESP32‑C3 SuperMini** connecté au LAN (Wi‑Fi ou Ethernet‑PHY en option).
-* 8 sorties secteur sur relais bistables **RT34F05** (zéro consommation à l’état stable).
+* 1 entrée secteur pour alimenter les appareils.
+* 6 sorties secteur sur relais bistables **RT34F05** (zéro consommation à l’état stable).
 * Bouton **ON/OFF** en façade : enclenche / coupe l’alim avec séquençage chronométré (ex. : table ➜ +3 s ➜ ampli).
-* LED status et anneau **NeoPixel** pour retour visuel.
+* Bouton d'arrêt urgent pour coupé l'alimentation secteur des appareils.
+* LEDs **NeoPixel** pour retour visuel (vert=alimenté; rouge=non alimenté).
 
 ### 2️⃣ **Wall Display & Timer **
 
-* Plaque murale 120 × 80 mm imprimée 3D.
-* Écran TFT 2,4″ + barre **NeoPixel 24 LED**.
-* ESP32‑C3 : récupère l’heure (NTP/API Google) et l’info de réservation ; affiche le temps restant.
-* Mode veille auto + capteur de présence (option).
+* Boitier mural 500 x 280 × 90 mm découpé au laser.
+* afficheur 7 segment et barre fait à partie de ruban de néopixels (96 en tout/boitier).
+* ESP32‑C3 : récupère l’heure (NTP/API Google) et l’info de réservation ; affiche le temps restant avec une barre de 10 néopixels.
 
-### 3️⃣ **Stage Patch Hub **
+### 3️⃣ **Contrôle entrées/sorties**
 
-* Module 2 U destiné à la scène : rassemble console, multipaire et amplis.
-* Relais audio / DRV8428E pour commuter les retours, + prises XLR/TRS en face avant.
-* ESP32‑C3 pour mise sous / hors tension et télémétrie température & courant.
+* Module 2 U destiné à la scène : alimente les trois amplificateurs, et commute les sorties depuis le site web. 
+* Relais signaux / DRV8428E pour commuter les retours, + prises XLR/TRS en face avant.
+* ESP32‑C3 pour mise sous / hors tension et contrôler les sorties.
 
 ---
 
@@ -104,7 +105,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | Mar 08 (J16) | Soudure des PCB afficheur restant, finalisation firmware PCB Rack appliqué au site |
 | Mer 09 (J17) | Soudure des PCB Rack restant   |
 | Jeu 10 (J18) | Finalisation de la 3D du PCB de la salle de répétition   |
-| Ven 11 (J19) |  |
+| Ven 11 (J19) | Rengement, développement firmware PCB repetition, finalisation et assemblage boitier afficheur   |
 
 ---
 
