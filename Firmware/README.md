@@ -15,7 +15,8 @@ Le système repose sur **trois types de cartes électroniques sur mesure**, chac
 
 ### 🎚️ 2. [**PCB RÉPÉTITION**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/firmware_PCB_Repetition)
 
-- 🚪 **Fonction** : Contrôle des équipements d’environnement dans la salle (prises, lumières, etc.).
+- 🚪 **Fonction** : Contrôle des équipements (amplis) et le couplage entré/sorties des signaux audio.
+- 🔌 **Contrôle** : Allumage/extinction des amplificateurs et contrôl des couplage entrées sorties XLR via relais.
 - 🌐 **Connectivité** : ESP32-C3 SuperMini avec accès Wi-Fi pour pilotage distant.
 
 ### 🖥️ 3. [**PCB AFFICHAGE**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/PCB_Affichage_GoogleCalendar_7Segmentset_BarLED)
@@ -26,26 +27,27 @@ Le système repose sur **trois types de cartes électroniques sur mesure**, chac
   - Barre de progression représentant l’avancement de la réservation
 - 🔌 **Alimentation** : 5V (ESP32 + bandeau NeoPixel)
 - 🌐 **Connectivité** :
-  - Connexion Wi-Fi
+  - Connexion Wi-Fi pour obtenir l'heure.
   - Accès à Google Calendar pour synchronisation automatique des horaires
-  - Allumage intelligent des équipements selon les réservations
+
 
 ## 📁 Contenu du dossier `Firmware/`
 
 Firmware/  
-├── pcb_rack/  
-│   └── … (firmware pour les équipements rack)  
-├── pcb_repetition/  
-│   └── … (firmware pour les E/S de la salle)  
-├── pcb_affichage/  
+├── Django_dir/  
+│   └── … (Projets Django)  
+├── firmware_PCB_Affichage/  
 │   └── … (affichage LED + Google Calendar)  
-├── lib/  
-│   └── … (librairies partagées si nécessaires)  
-└── web/  
-    └── … (interface web améliorée avec Jungo)  
+├── firmware_PCB_Rack/  
+│   └── … (firmware pour l'alimentation des équipements rack)  
+├── firmware_PCB_Repetition/  
+│   └── … (firmware pour alimentation et les E/S de la salle)  
+├── Tests_firmware/  
+│   └── … (Projet de test)  
+└──   
 
 
-## 🌐 Interface Web
+## 🌐 [**Interface Web**]()
 
 Une interface web (hébergée localement ou sur le réseau local) permet :  
 - Le contrôle des appareils à distance  
