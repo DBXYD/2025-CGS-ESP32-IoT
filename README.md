@@ -12,7 +12,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | ------------- | ---------------------------------------------------------------------------------------------------------- | ------------- |
 | `hardware/`   | Schémas KiCad, PCB, BOM, README détaillé <br>(➡️ voir [`HARDWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware)) | ✅ Terminé |
 | `firmware/`   | Code ESP32‑C3 (Wi‑Fi, MQTT/HTTP, logique de séquençage, etc.), et amélioration/adaptation du site avec Django   ➡️ voir [`FIRMWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware)                                           | ✅ Terminé |
-| `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux                                                        | ✅ Terminé    |
+| `mechanical/` | Pièces STL/STEP pour montage 19" et boîtiers muraux     ➡️ voir [`FIRMWARE`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Hardware/3D%20et%20Laser)                                                        | ✅ Terminé    |
 ---
 
 ## 🛠️ Les trois cartes principales
