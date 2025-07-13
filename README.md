@@ -17,7 +17,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 
 ## 🛠️ Les trois cartes principales
 
-### 1️⃣ **Rack Power Controller **
+### 1️⃣ **Rack Power Controller**
 
 * 3D format **rack 19″ 1 U** ; se visse directement dans le châssis.
 * **ESP32‑C3 SuperMini** connecté au LAN (Wi‑Fi ou Ethernet‑PHY en option).
@@ -27,7 +27,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 * Bouton d'arrêt urgent pour coupé l'alimentation secteur des appareils.
 * LEDs **NeoPixel** pour retour visuel (vert=alimenté; rouge=non alimenté).
 
-### 2️⃣ **Wall Display & Timer **
+### 2️⃣ **Wall Display & Timer**
 
 * Boitier mural 500 x 280 × 90 mm découpé au laser.
 * afficheur 7 segment et barre fait à partie de ruban de néopixels (96 en tout/boitier).
