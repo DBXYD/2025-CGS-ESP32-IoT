@@ -20,11 +20,11 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 ### 1️⃣ **Rack Power Controller**
 
 * 3D format **rack 19″ 1 U** ; se visse directement dans le châssis.
-* **ESP32‑C3 SuperMini** connecté au LAN (Wi‑Fi ou Ethernet‑PHY en option).
+* **ESP32‑C3 SuperMini** connecté au LAN (Wi‑Fi).
 * 1 entrée secteur pour alimenter les appareils.
 * 6 sorties secteur sur relais bistables **RT34F05** (zéro consommation à l’état stable).
 * Bouton **ON/OFF** en façade : enclenche / coupe l’alim avec séquençage chronométré (ex. : table ➜ +3 s ➜ ampli).
-* Bouton d'arrêt urgent pour coupé l'alimentation secteur des appareils.
+* Bouton d'arrêt urgent pour couper l'alimentation secteur des appareils.
 * LEDs **NeoPixel** pour retour visuel (vert=alimenté; rouge=non alimenté).
 
 ### 2️⃣ **Wall Display & Timer**
@@ -63,7 +63,7 @@ Bienvenue ! Ce dépôt rassemble **tout** le nécessaire — électronique, fi
 | ----------- | ---------------------------------- |
 | Mar 10 (J6) | Finalisation routage du PCB salle de répétition, Début et fin du schématique et routage PCB affichage. Finalisation tableur pour les commandes des composants. |
 | Mer 11 (J7) | Début Code ESP32. Finalisation du code pour connecter au wifi et obtenir l'heure. Passage de 2 couches à 4 couches pour le PCB des salles de répétition |
-| Jeu 12 (J8) | Finalisation du projet [`ESP32-Google_Calendar`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/PCB_Affichage_Google_Calendar). Ajout des pinheaders libres sur les PCB (finalisation V2 des PCB). Ajout et MAJ des README |
+| Jeu 12 (J8) | Finalisation du projet [`ESP32-Google_Calendar`](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/Tests_firmware/PCB_Affichage_Google_Calendar). Ajout des pinheaders libres sur les PCB (finalisation V2 des PCB). Ajout et MAJ des README |
 | Ven 13 (J9) |  Réalistion de la liste des commandes pour les composants, Début code combinant la lecture du Google Calendar avec le contrôl des Néopixels|
 
 
