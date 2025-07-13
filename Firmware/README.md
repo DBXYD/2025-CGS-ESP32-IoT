@@ -47,7 +47,7 @@ Firmware/
 └──   
 
 
-## 🌐 [**Interface Web**]()
+## 🌐 [**Interface Web**](https://github.com/DBXYD/2025-CGS-ESP32-IoT/tree/master/Firmware/Django_dir)
 
 Une interface web (hébergée localement ou sur le réseau local) permet :  
 - Le contrôle des appareils à distance  
