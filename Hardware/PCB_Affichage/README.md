@@ -27,12 +27,7 @@ Il s'agit d'un PCB permettant de d'afficher l'heure en contrôlant un ruban de L
 ![Back du PCB Rack](./img/Back.png)
 ![3D viewer Rack](./img/3D_Front.png)
 ![3D viewer Rack](./img/3D_Back.png)
----
-## 📝 Notes techniques
 
-* Toutes les lignes de commande haute‑puissance sont isolées de la logique 3,3 V via les relais bistables et/ou le DRV8428E.
-* Le PCF8575 étend le nombre de GPIO disponibles : il commande à la fois les relais et les canaux d’affichage lumineux.
-* Les boîtiers 3D prévoient la circulation d’air et des points de fixation normalisés type rack 19″.
 
 ---
 
