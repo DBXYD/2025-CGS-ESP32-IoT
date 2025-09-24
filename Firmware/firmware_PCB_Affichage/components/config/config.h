@@ -2,11 +2,11 @@
 #define CONFIG_H
 
 // Wi-Fi
-// static const char WIFI_SSID[] = "TechTinkerers";
-// static const char WIFI_PASS[] = "NoArduinoZone";
+static const char WIFI_SSID[] = "TechTinkerers";
+static const char WIFI_PASS[] = "NoArduinoZone";
 
-static const char WIFI_SSID[] = "Hackathon2024";
-static const char WIFI_PASS[] = "ilovelinux";
+// static const char WIFI_SSID[] = "Hackathon2024";
+// static const char WIFI_PASS[] = "ilovelinux";
 
 // OAuth2 Google
 static const char GOOGLE_CLIENT_ID[]     = "1758091333-emsbi2bk4gp86ouv2ojbp2csamfgmlao.apps.googleusercontent.com";

@@ -78,12 +78,15 @@ char *http_fetch(const char *url,
 {
     response_t resp = { .body = NULL, .len = 0, .cap = 0 };
     esp_http_client_config_t cfg = {
-        .url = url,
-        .method = (strcmp(method, "POST") == 0) ? HTTP_METHOD_POST : HTTP_METHOD_GET,
-        .event_handler = on_data,
-        .user_data = &resp,
-        .crt_bundle_attach = esp_crt_bundle_attach,
-        .timeout_ms = 10000,
+    .url = url,
+    .method = (strcmp(method, "POST") == 0) ? HTTP_METHOD_POST : HTTP_METHOD_GET,
+    .event_handler = on_data,
+    .user_data = &resp,
+    .crt_bundle_attach = esp_crt_bundle_attach,
+    .timeout_ms = 15000,          // ↑ un peu plus confortable
+    .buffer_size = 4096,          // ↑ important pour gros headers
+    .buffer_size_tx = 2048,       // ↑ si tu as de gros headers/POST
+    // .keep_alive_enable = false, // si présent dans ta version d'IDF
     };
 
     esp_http_client_handle_t client = esp_http_client_init(&cfg);
@@ -94,6 +97,8 @@ char *http_fetch(const char *url,
 
     // En-têtes
     esp_http_client_set_header(client, "Accept-Encoding", "identity");
+    esp_http_client_set_header(client, "Accept", "application/json"); // NEW
+    esp_http_client_set_header(client, "Connection", "close");        // NEW
     if (bearer_token) {
         char hdr[256];
         snprintf(hdr, sizeof(hdr), "Bearer %s", bearer_token);
@@ -106,22 +111,18 @@ char *http_fetch(const char *url,
 
     // Exécution de la requête
     esp_err_t err = esp_http_client_perform(client);
-    int status = esp_http_client_get_status_code(client);  // 👈 seule déclaration
-    if (out_status) {
-        *out_status = status;
+    if (err != ESP_OK) {                            // ← d'abord err
+        ESP_LOGE(TAG, "HTTP perform error: %s", esp_err_to_name(err));
+        esp_http_client_cleanup(client);
+        if (resp.body) free(resp.body);
+        return NULL;
     }
-
+    int status = esp_http_client_get_status_code(client);
+    if (out_status) *out_status = status;
     if (status != 200) {
         ESP_LOGW(TAG, "Code HTTP inattendu : %d", status);
         if (resp.body) free(resp.body);
         esp_http_client_cleanup(client);
-        return NULL;
-    }
-
-    if (err != ESP_OK) {
-        ESP_LOGE(TAG, "HTTP perform error: %s", esp_err_to_name(err));
-        esp_http_client_cleanup(client);
-        if (resp.body) free(resp.body);
         return NULL;
     }
 

@@ -18,8 +18,8 @@ end
 
 # Load bootloader symbols
 set confirm off
-    add-symbol-file /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/bootloader/bootloader.elf
+    add-symbol-file /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/firmware_PCB_Rack/build/bootloader/bootloader.elf
 set confirm on
 
 # Load application symbols
-file /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/code_ESP_commande_par_le_site/build/code_ESP_commande_par_le_site.elf
+file /home/janus/Desktop/ENSEA/Stages/1A/Projet/2025-CGS-ESP32-IoT/Firmware/firmware_PCB_Rack/build/code_ESP_commande_par_le_site.elf

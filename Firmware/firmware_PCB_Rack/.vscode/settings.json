@@ -9,5 +9,8 @@
   "idf.port": "/dev/ttyACM0",
   "files.associations": {
     "rack_ctrl.h": "c"
-  }
+  },
+  "idf.espIdfPath": "/home/janus/esp/esp-idf",
+  "idf.toolsPath": "/home/janus/.espressif",
+  "idf.pythonInstallPath": "/home/janus/.espressif/python_env/idf5.4_py3.12_env/bin/python"
 }
